@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import reducer, {initialState} from "./states/reducer";
+import {StateProvider} from './states/StateProvider';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App/>
-  </React.StrictMode>,
+    <React.StrictMode>
+        <StateProvider initialState={initialState} reducer={reducer}>
+            <App/>
+        </StateProvider>
+    </React.StrictMode>,
   document.getElementById('root')
 );
 

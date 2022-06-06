@@ -1,25 +1,35 @@
-import React from "react";
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
-import './Tab1.css';
+import React from "react"
+import {
+    IonButton,
+    IonCheckbox,
+    IonContent,
+    IonHeader,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonPage,
+    IonTitle,
+    IonToolbar
+} from "@ionic/react"
+import ExploreContainer from "../components/ExploreContainer"
+import '../styles/registration.scss'
 
 const Tab1 = () => {
     return (
-            <IonPage>
-                <IonHeader>
-                    <IonToolbar>
-                        <IonTitle>Tab 1</IonTitle>
-                    </IonToolbar>
-                </IonHeader>
-                <IonContent fullscreen>
-                    <IonHeader collapse="condense">
-                        <IonToolbar>
-                            <IonTitle size="large">Tab 1</IonTitle>
-                        </IonToolbar>
-                    </IonHeader>
-                    <ExploreContainer name="Tab 1 page" />
-                </IonContent>
-            </IonPage>
+        <IonPage>
+            <div className='loginContainer'>
+                <h2>DG-GRUPPE ||||</h2>
+                <p>Mehrwert schaffen. Fur Menschen und Unternehmen</p>
+                <h3>Login</h3>
+                <form>
+                    <input placeholder='Username'/>
+                    <input type="password" placeholder='Password'/>
+                    <button type="submit">
+                        Login
+                    </button>
+                </form>
+            </div>
+        </IonPage>
     )
 }
 
