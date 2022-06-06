@@ -1,8 +1,7 @@
 @import "variables";
 @import "mixin";
 
-.loginContainer {
-
+.formContainer {
   margin: 2rem;
   font-weight: 700;
 
@@ -11,21 +10,31 @@
     font-weight: 600;
     color: grey;
   }
-  p{
+
+  p {
     margin-bottom: 15vh;
     font-size: .7rem;
     color: grey;
   }
+
   h3 {
     font-size: 34px;
     font-weight: 700;
   }
 
   form {
+
+    ion-icon {
+      position: relative;
+      margin: -10px -40px;
+      font-size: 30px;
+    }
+
     input {
       border: 1px solid $borderColor;
       border-radius: 10px;
       width: 100%;
+      color: #180505;
       padding: 1rem;
       margin-bottom: .7rem;
     }

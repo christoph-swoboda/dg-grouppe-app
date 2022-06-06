@@ -32,6 +32,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+@mixin centerHorizontal(){
+    margin: 3vh auto;
+    padding: 10px;
+}
 @mixin centerItemsAbsolute(){
     position: absolute;
     top: 50%;

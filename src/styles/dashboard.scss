@@ -1,0 +1,60 @@
+@import "mixin";
+@import "variables";
+
+.dashboard {
+  padding: 1.2rem;
+  overflow-x: hidden;
+  background-color: $body-bg1;
+  min-height: 100vh;
+
+  .notificationHeader {
+    margin-top: 2vh;
+    @include flexCenter;
+    justify-content: space-between;
+  }
+
+  .header {
+    @include flexCenter;
+    justify-content: space-between;
+
+    .notification {
+      ion-badge {
+        position: absolute;
+        z-index: 100;
+        background-color: black;
+      }
+
+      ion-icon {
+        font-size: 40px;
+      }
+    }
+  }
+
+  .dashboardTitle {
+    margin: 2rem 0 0 0;
+
+    Ion-card-title {
+      font-size: 40px;
+    }
+
+    Ion-card-subtitle {
+      text-transform: capitalize;
+    }
+
+    ion-icon {
+      font-size: 10vh;
+      font-weight: 800;
+      @include centerItemsAbsolute;
+    }
+
+    .requestStatus {
+      text-align: center;
+      @include centerItemsAbsolute;
+      margin-top: 5rem;
+      p{
+        width: 100vw;
+      }
+    }
+  }
+
+}

@@ -234,3 +234,11 @@ http://ionicframework.com/docs/theming/ */
     --ion-card-background: #1e1e1e;
   }
 }
+
+a{
+  color: black;
+}
+.container{
+  min-height: 100vh;
+  overflow: scroll;
+}

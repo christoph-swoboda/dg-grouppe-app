@@ -1,7 +1,4 @@
-import './ExploreContainer.css';
-import React, {useState} from "react";
-import {IonFabButton, IonImg} from "@ionic/react";
-import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import React from "react";
 
 
 const ExploreContainer = ({name}) => {

@@ -1,23 +1,11 @@
 import React from "react"
-import {
-    IonButton,
-    IonCheckbox,
-    IonContent,
-    IonHeader,
-    IonInput,
-    IonItem,
-    IonLabel,
-    IonPage,
-    IonTitle,
-    IonToolbar
-} from "@ionic/react"
-import ExploreContainer from "../components/ExploreContainer"
-import '../styles/registration.scss'
+import {IonPage} from "@ionic/react"
+import '../../styles/registration.scss'
 
-const Tab1 = () => {
+const Login = () => {
     return (
         <IonPage>
-            <div className='loginContainer'>
+            <div className='loginContainer container'>
                 <h2>DG-GRUPPE ||||</h2>
                 <p>Mehrwert schaffen. Fur Menschen und Unternehmen</p>
                 <h3>Login</h3>
@@ -33,4 +21,4 @@ const Tab1 = () => {
     )
 }
 
-export default Tab1
+export default Login
