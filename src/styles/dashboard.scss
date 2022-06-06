@@ -7,20 +7,16 @@
   background-color: $body-bg1;
   min-height: 100vh;
 
-  .notificationHeader {
-    margin-top: 2vh;
-    @include flexCenter;
-    justify-content: space-between;
-  }
-
   .header {
     @include flexCenter;
     justify-content: space-between;
 
     .notification {
       ion-badge {
-        position: absolute;
+        position: relative;
         z-index: 100;
+        margin-bottom: 1.5rem;
+        margin-right: -1.2rem;
         background-color: black;
       }
 
@@ -56,5 +52,12 @@
       }
     }
   }
+}
 
+
+.notificationHeader {
+  margin-top: 2vh;
+  padding: 1rem;
+  @include flexCenter;
+  justify-content: space-between;
 }
