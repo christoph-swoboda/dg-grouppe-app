@@ -1,0 +1,7 @@
+{
+  "name": "DG-gruppe-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
