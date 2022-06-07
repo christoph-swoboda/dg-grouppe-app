@@ -1,0 +1,15 @@
+@import "mixin";
+@import "variables";
+
+.uploadContainer{
+  margin-top: 125%;
+  text-align: center;
+
+  ion-card{
+    padding: 1rem;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 18px;
+    color: black;
+  }
+}

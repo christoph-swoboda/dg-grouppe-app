@@ -1,6 +1,24 @@
 @import "mixin";
 @import "variables";
 
+
+.modal{
+  --background: transparent;
+  .modalHeader{
+    margin: 2vh;
+  }
+}
+.cancelUpload{
+  text-align: center;
+  padding: 1rem;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  color: black;
+  margin-top: -.1rem;
+}
+
+
 .request {
   margin-top: 5vh;
   margin-bottom: -3vh;
