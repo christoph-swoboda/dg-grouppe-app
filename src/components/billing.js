@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Request from "./card/request";
 import '../styles/billingPage.scss';
+import Requests from "../data/requestData";
 
 const Billing = ({header}) => {
 
@@ -17,14 +18,32 @@ const Billing = ({header}) => {
             </div>
             {
                 pending ?
-                    <div>
-                        <Request error pending/>
-                        <Request pending/>
-                    </div>
+                        Requests.map(req=>(
+                            !req.approved &&
+                            <Request
+                                key={req.id}
+                                title={req.title}
+                                period={req.period}
+                                updated={req.updated}
+                                status={req.status}
+                                approved={req.approved}
+                            />
+                        ))
                     :
                     <div>
-                        <Request error/>
-                        <Request error/>
+                        {
+                            Requests.map(req=>(
+                                req.approved &&
+                                <Request
+                                    key={req.id}
+                                    title={req.title}
+                                    period={req.period}
+                                    updated={req.updated}
+                                    status={req.status}
+                                    approved={req.approved}
+                                />
+                            ))
+                        }
                     </div>
             }
 

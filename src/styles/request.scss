@@ -10,14 +10,14 @@
     color: black;
     background-color: white;
     padding: 4px 4px 4px 15px;
-    border-radius: 10px;
+    border-radius: 15px;
     border: 1px solid $borderColor;
   }
 
   .cardError {
     color: black;
     padding: 4px 4px 4px 15px;
-    border-radius: 10px;
+    border-radius: 15px;
     background-color: rgba(255, 0, 0, .1);
     border: 1px solid red;
   }

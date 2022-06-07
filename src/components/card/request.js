@@ -2,21 +2,21 @@ import React from "react";
 import '../../styles/request.scss'
 import {checkmarkCircleOutline, hourglassOutline} from "ionicons/icons";
 
-const Request = ({error,pending}) => {
+const Request = ({title, status, approved, updated, period}) => {
 
     return (
         <div className='request'>
-            <div className={error ? 'card' : 'cardError'}>
+            <div className={approved? 'card' : 'cardError'}>
                 {
-                    pending ?
+                    !approved?
                         <ion-icon icon={hourglassOutline}/>
                         :
                         <ion-icon icon={checkmarkCircleOutline}/>
                 }
-                <h2>Request to upload Internet bills</h2>
-                <h3>Date: Time period 1 of 2022</h3>
-                <p>Updated: 06/01/2022</p>
-                <p>Status: confirmed</p>
+                <h2>{title}</h2>
+                <h3>Date: {period}</h3>
+                <p>Updated: {updated}</p>
+                <p>Status: {status}</p>
             </div>
         </div>
     )

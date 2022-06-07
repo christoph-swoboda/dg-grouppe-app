@@ -10,18 +10,8 @@ import {
     setupIonicReact
 } from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
-import {
-    browsers,
-    car,
-    home,
-    informationCircle,
-    logoChrome,
-    logoWebComponent,
-    phonePortraitSharp,
-    trainSharp, wifi
-} from 'ionicons/icons';
+import {car, home, phonePortraitSharp, trainSharp, wifi} from 'ionicons/icons';
 import Login from './pages/login';
-import Tab3 from './pages/Tab3';
 import Dashboard from "./pages/dashboard";
 
 /* Core CSS required for Ionic components to work properly */
@@ -48,6 +38,7 @@ import Phone from "./pages/phone";
 import Train from "./pages/train";
 import Car from "./pages/car";
 import Internet from "./pages/internet";
+import Information from "./pages/information";
 
 setupIonicReact();
 
@@ -76,8 +67,8 @@ const App = () => {
                         <Route path="/internet">
                             <Internet/>
                         </Route>
-                        <Route path="/info">
-                            <Tab3/>
+                        <Route path="/information">
+                            <Information/>
                         </Route>
                         <Route path="/login">
                             <Login/>

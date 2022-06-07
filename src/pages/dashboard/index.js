@@ -7,10 +7,11 @@ import EmptyDashboard from "../../components/emptyDashboard";
 import {Link} from "react-router-dom";
 import Notification from "../../components/card/notification";
 import Request from "../../components/card/request";
+import Requests from "../../data/requestData";
 
 const Dashboard = () => {
 
-    const notification = 0
+    const notification = 2
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -36,9 +37,9 @@ const Dashboard = () => {
                         </IonAvatar>
                     </Link>
 
-                    <div className='notification' onClick={() => setShowModal(true)}>
-                        <ion-badge color="dark">{notification}</ion-badge>
-                        <ion-icon icon={notificationsOutline}/>
+                    <div className='notification'>
+                        <ion-badge onClick={() => setShowModal(true)} color="dark">{notification}</ion-badge>
+                        <ion-icon onClick={() => setShowModal(true)} icon={notificationsOutline}/>
                         <Link to='/information'>
                             <ion-icon icon={informationCircleOutline}/>
                         </Link>
@@ -49,9 +50,18 @@ const Dashboard = () => {
                         <EmptyDashboard/>
                         :
                         <div>
-                            <Request error={false}/>
-                            <Request error={true}/>
-                            <Request error={true}/>
+                            {
+                                Requests.map(req=>(
+                                    <Request
+                                        key={req.id}
+                                        title={req.title}
+                                        period={req.period}
+                                        updated={req.updated}
+                                        status={req.status}
+                                        approved={req.approved}
+                                    />
+                                ))
+                            }
                         </div>
                 }
             </div>
