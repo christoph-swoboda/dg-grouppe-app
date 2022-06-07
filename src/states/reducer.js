@@ -1,5 +1,7 @@
 export const initialState = {
     user: {},
+    modal:false,
+    filterIds:[],
 };
 const reducer = (state, action) => {
     switch (action.type) {
@@ -7,6 +9,16 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 user: action.item
+            }
+            case "SET_MODAL":
+            return {
+                ...state,
+                modal: action.item
+            }
+            case "SET_NOTIFILTER":
+            return {
+                ...state,
+                filterIds: [...state.filterIds, action.item]
             }
         default:
             return state;

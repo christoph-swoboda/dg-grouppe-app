@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {IonAvatar, IonContent, IonModal, IonPage} from "@ionic/react";
 import '../../styles/dashboard.scss'
 import {close, informationCircleOutline, notificationsOutline} from "ionicons/icons";
@@ -8,28 +8,49 @@ import {Link} from "react-router-dom";
 import Notification from "../../components/card/notification";
 import Request from "../../components/card/request";
 import Requests from "../../data/requestData";
+import Notifications from "../../data/notificationData";
+import {useStateValue} from "../../states/StateProvider";
 
 const Dashboard = () => {
 
-    const notification = 2
     const [showModal, setShowModal] = useState(false);
+    const [data, setData] = useState(Notifications);
+    const [{filterIds}]=useStateValue()
+
+    useEffect(() => {
+        const filterId = filterIds.map(item => item);
+        const itemsToShow = Notifications.filter(item => filterId.indexOf(item.id) === -1);
+        setData(itemsToShow)
+        console.log('filterids',filterIds)
+    }, [filterIds]);
+
 
     return (
-        <IonPage>
+        <IonPage className='container'>
             <IonContent>
                 <IonModal isOpen={showModal}>
                     <div className='notificationHeader'>
                         <h1>Notifications</h1>
-                        <ion-icon icon={close} onClick={() => setShowModal(false)}
-                                  style={{color: 'black', fontSize: '35px'}}
-                        />
+                        <ion-icon icon={close} onClick={() => setShowModal(false)}/>
                     </div>
-                    <Notification pending={false}/>
-                    <Notification pending={true}/>
-                    <Notification pending={false}/>
+                    <div className='notificationContainer'>
+                        {
+                            data.map(not => (
+                                <Notification
+                                    key={not.id}
+                                    id={not.id}
+                                    approved={not.approved}
+                                    title={not.title}
+                                    status={not.status}
+                                    period={not.period}
+                                    updated={not.updated}
+                                />
+                            ))
+                        }
+                    </div>
                 </IonModal>
             </IonContent>
-            <div className='dashboard container'>
+            <div className='dashboard'>
                 <div className='header'>
                     <Link to='/profile'>
                         <IonAvatar>
@@ -38,7 +59,7 @@ const Dashboard = () => {
                     </Link>
 
                     <div className='notification'>
-                        <ion-badge onClick={() => setShowModal(true)} color="dark">{notification}</ion-badge>
+                        <ion-badge onClick={() => setShowModal(true)} color="dark">{data.length}</ion-badge>
                         <ion-icon onClick={() => setShowModal(true)} icon={notificationsOutline}/>
                         <Link to='/information'>
                             <ion-icon icon={informationCircleOutline}/>
@@ -46,12 +67,12 @@ const Dashboard = () => {
                     </div>
                 </div>
                 {
-                    notification === 0 ?
+                    data.length === 0 ?
                         <EmptyDashboard/>
                         :
                         <div>
                             {
-                                Requests.map(req=>(
+                                Requests.map(req => (
                                     <Request
                                         key={req.id}
                                         title={req.title}

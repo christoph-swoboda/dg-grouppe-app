@@ -2,7 +2,8 @@
 @import "variables";
 
 .uploadContainer{
-  margin-top: 125%;
+  overflow-y: scroll;
+  margin-top: 1%;
   text-align: center;
 
   ion-card{
@@ -11,5 +12,16 @@
     font-weight: 600;
     font-size: 18px;
     color: black;
+  }
+  .uploadedImage{
+    height: 30vh;
+    margin-bottom: 5vh;
+  }
+  .hideImageSection{
+    opacity: 0;
+    margin-top: 40vh;
+  }
+  .send{
+    background-color: #27b67f;
   }
 }

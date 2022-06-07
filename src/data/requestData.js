@@ -23,6 +23,14 @@ const Requests = [
         status: 'pending',
         approved: false,
     },
+    {
+        id: 3,
+        title: 'Request to upload Internet bills',
+        period: 'Time period 1 of 2022',
+        updated: '06/01/2022',
+        status: 'pending',
+        approved: false,
+    },
 ]
 
 export default Requests

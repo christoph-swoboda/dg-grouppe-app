@@ -3,7 +3,7 @@ import {IonPage} from "@ionic/react";
 
 const Information = () => {
     return (
-        <IonPage className='ion-padding'>
+        <IonPage className='container'>
             <div>
                 <h2> Frequently Asked Questions</h2>
                 <h5>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's

@@ -39,6 +39,7 @@ import Train from "./pages/train";
 import Car from "./pages/car";
 import Internet from "./pages/internet";
 import Information from "./pages/information";
+import ThankYou from "./components/thankYou";
 
 setupIonicReact();
 
@@ -60,6 +61,9 @@ const App = () => {
                         </Route>
                         <Route path="/train">
                             <Train/>
+                        </Route>
+                        <Route path="/uploaded">
+                            <ThankYou/>
                         </Route>
                         <Route path="/car">
                             <Car/>

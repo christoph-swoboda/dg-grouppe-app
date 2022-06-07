@@ -16,7 +16,7 @@ const UserProfile = () => {
                     <ion-icon icon={cameraOutline}/>
                     <ion-icon class='ion-float-right'
                               icon={close}
-                              style={{padding:'3rem', cursor:'pointer'}}
+                              style={{padding:'3rem 2rem 0 0 ', cursor:'pointer', backgroundColor:'inherit'}}
                               onClick={() => history.goBack()}
                     />
                     <IonAvatar>

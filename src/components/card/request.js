@@ -1,25 +1,37 @@
-import React, {useState} from "react";
+import React from "react";
 import '../../styles/request.scss'
-import {checkmarkCircleOutline, close, hourglassOutline} from "ionicons/icons";
+import {checkmarkCircleOutline, hourglassOutline} from "ionicons/icons";
 import {IonCard, IonContent, IonModal} from "@ionic/react";
-import Notification from "./notification";
 import UploadPopUp from "../UploadPopUp";
+import {useStateValue} from "../../states/StateProvider";
 
 const Request = ({title, status, approved, updated, period}) => {
-    const [showModal, setShowModal] = useState(false);
+
+    const [{modal}, dispatch]= useStateValue()
 
     return (
         <div>
             <IonContent>
-                <IonModal isOpen={showModal} className='modal'>
+                <IonModal isOpen={modal} className='modal'>
                     <UploadPopUp title={title}/>
-                    <IonCard className='cancelUpload' onClick={() => setShowModal(false)}>
+                    <IonCard className='cancelUpload' onClick={() =>
+                        dispatch(
+                            {
+                                type: "SET_MODAL",
+                                item: false,
+                            })
+                    }>
                         Cancel
                     </IonCard>
                 </IonModal>
             </IonContent>
 
-            <div className='request' onClick={() => setShowModal(true)}>
+            <div className='request' onClick={() =>
+                dispatch(
+                {
+                    type: "SET_MODAL",
+                    item: true,
+                })}>
                 <div className={approved ? 'card' : 'cardError'}>
                     {
                         !approved ?

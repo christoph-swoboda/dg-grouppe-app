@@ -1,6 +1,5 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
-
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
@@ -239,6 +238,8 @@ a{
   color: black;
 }
 .container{
-  min-height: 100vh;
   overflow: scroll;
+  padding: 1.4rem;
+  background-color: #eeeeee;
 }
+

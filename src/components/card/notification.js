@@ -1,36 +1,51 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {IonCard} from "@ionic/react";
 import '../../styles/notification.scss'
-import {checkmarkCircleOutline, close, hourglassOutline} from "ionicons/icons";
+import {checkmarkCircleOutline, close, closeCircleOutline, hourglassOutline} from "ionicons/icons";
+import {useStateValue} from "../../states/StateProvider";
 
-const Notification = ({pending}) => {
+const Notification = ({title, status, approved, updated, period, id}) => {
+
+    const [{}, dispatch]=useStateValue()
 
     function toggleText() {
-        const x = document.getElementById("myId");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
+        dispatch(
+            {
+                type: "SET_NOTIFILTER",
+                item: id,
+            })
+        setDeleteId(id)
+        console.log('id', id)
     }
+    const [deleteId,setDeleteId]=useState()
 
     return (
-        <IonCard className='ion-padding notifications' id='myId'>
-            <div className='hourGlass'>
-                {
-                    pending ?
-                        <ion-icon icon={hourglassOutline}/>
-                        :
-                        <ion-icon icon={checkmarkCircleOutline}/>
-                }
+        <div>
+            {
+                deleteId!==id &&
+                <IonCard className={status === 'rejected' ? 'notifications rejected' : 'notifications'} id='myId'>
+                    <div className='hourGlass'>
+                        {
+                            status === 'pending' ?
+                                <ion-icon icon={hourglassOutline}/>
+                                :
+                                status === 'approved' ?
+                                    <ion-icon icon={checkmarkCircleOutline}/>
+                                    :
+                                    <ion-icon icon={closeCircleOutline}/>
+                        }
 
-            </div>
-            <ion-icon onClick={toggleText} className='close' icon={close}/>
-            <div style={{marginLeft: '10vw'}}>
-                <h2>Notification Header</h2>
-                <p>notification body</p>
-            </div>
-        </IonCard>
+                    </div>
+                    <ion-icon onClick={toggleText} className='close' icon={close}/>
+                    <div style={{marginLeft: '10vw'}}>
+                        <h2>{title}</h2>
+                        <h3>Date: {period}</h3>
+                        <p>Updated: {updated}</p>
+                        <p>Status: {status}</p>
+                    </div>
+                </IonCard>
+            }
+        </div>
     )
 }
 
