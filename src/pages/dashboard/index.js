@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {IonAvatar, IonButton, IonContent, IonModal, IonPage} from "@ionic/react";
+import {IonAvatar, IonContent, IonModal, IonPage} from "@ionic/react";
 import '../../styles/dashboard.scss'
 import {close, informationCircleOutline, notificationsOutline} from "ionicons/icons";
 import image from '../../assets/a2.jpg'
@@ -7,11 +7,10 @@ import EmptyDashboard from "../../components/emptyDashboard";
 import {Link} from "react-router-dom";
 import Notification from "../../components/card/notification";
 import Request from "../../components/card/request";
-import UserProfile from "../../components/userProfile";
 
 const Dashboard = () => {
 
-    const notification = 2
+    const notification = 0
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -24,9 +23,9 @@ const Dashboard = () => {
                                   style={{color: 'black', fontSize: '35px'}}
                         />
                     </div>
-                    <Notification/>
-                    <Notification/>
-                    <Notification/>
+                    <Notification pending={false}/>
+                    <Notification pending={true}/>
+                    <Notification pending={false}/>
                 </IonModal>
             </IonContent>
             <div className='dashboard container'>

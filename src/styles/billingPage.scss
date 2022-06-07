@@ -1,0 +1,36 @@
+@import "variables";
+@import "mixin";
+
+.billingContainer {
+  @include container;
+  text-align: center;
+
+  h2 {
+    font-size:25px;
+    font-weight: 600;
+  }
+  .approved{
+    cursor: pointer;
+    padding: .8rem;
+    width: 50%;
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 15px 0 0 15px ;
+  }
+  .pending{
+    cursor: pointer;
+    padding: .8rem;
+    width: 50%;
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 0 15px 15px 0;
+  }
+  .active {
+    background-color: black;
+    color: white;
+  }
+  .inActive {
+    background-color: white;
+    color: black;
+  }
+}

@@ -44,13 +44,17 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import React from "react";
 import UserProfile from "./components/userProfile";
+import Phone from "./pages/phone";
+import Train from "./pages/train";
+import Car from "./pages/car";
+import Internet from "./pages/internet";
 
 setupIonicReact();
 
 const App = () => {
 
     // const user = JSON.parse(localStorage.getItem('user'));
-    const user='user name'
+    const user = 'user name'
 
     return (
         <IonApp>
@@ -58,19 +62,22 @@ const App = () => {
                 <IonTabs>
                     <IonRouterOutlet>
                         <Route exact path="/">
-                            {user? <Redirect to="/dashboard"/> : <Redirect to="/login" />}
+                            {user ? <Redirect to="/dashboard"/> : <Redirect to="/login"/>}
                         </Route>
-                        <Route  path="/phone">
-                            <Dashboard />
+                        <Route path="/phone">
+                            <Phone/>
                         </Route>
-                        <Route  path="/train">
-                            <Tab3 />
+                        <Route path="/train">
+                            <Train/>
                         </Route>
                         <Route path="/car">
-                            <Tab3 />
+                            <Car/>
+                        </Route>
+                        <Route path="/internet">
+                            <Internet/>
                         </Route>
                         <Route path="/info">
-                            <Tab3 />
+                            <Tab3/>
                         </Route>
                         <Route path="/login">
                             <Login/>
@@ -85,23 +92,23 @@ const App = () => {
 
                     <IonTabBar slot="bottom">
                         <IonTabButton tab="dashboard" href="/dashboard">
-                            <IonIcon icon={home} />
+                            <IonIcon icon={home}/>
                             <IonLabel>Dashboard</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab3" href="/info">
-                            <IonIcon icon={wifi} />
+                        <IonTabButton tab="internet" href="/internet">
+                            <IonIcon icon={wifi}/>
                             <IonLabel>Internet </IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab2" href="/mobile">
-                            <IonIcon icon={phonePortraitSharp} />
-                            <IonLabel>Mobile</IonLabel>
+                        <IonTabButton tab="phone" href="/phone">
+                            <IonIcon icon={phonePortraitSharp}/>
+                            <IonLabel>Phone</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab3" href="/car">
-                            <IonIcon icon={car} />
+                        <IonTabButton tab="car" href="/car">
+                            <IonIcon icon={car}/>
                             <IonLabel>Car </IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab3" href="/train">
-                            <IonIcon icon={trainSharp} />
+                        <IonTabButton tab="mobile" href="/train">
+                            <IonIcon icon={trainSharp}/>
                             <IonLabel>Train </IonLabel>
                         </IonTabButton>
                     </IonTabBar>

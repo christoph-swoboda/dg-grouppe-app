@@ -4,9 +4,11 @@
 .request {
   margin-top: 5vh;
   margin-bottom: -3vh;
+  text-align: left;
 
   .card {
     color: black;
+    background-color: white;
     padding: 4px 4px 4px 15px;
     border-radius: 10px;
     border: 1px solid $borderColor;
@@ -14,9 +16,31 @@
 
   .cardError {
     color: black;
-    padding: 10px 10px 10px 15px;
+    padding: 4px 4px 4px 15px;
     border-radius: 10px;
     background-color: rgba(255, 0, 0, .1);
     border: 1px solid red;
+  }
+
+  .card, .cardError {
+    h2{
+      font-size: 19px;
+      width: 100%;
+    }
+    h3{
+      font-size: 16.5px;
+      font-weight: 600;
+    }
+    p{
+      font-size: 15px;
+      font-weight: 600;
+      color: #464646;
+    }
+  }
+
+  ion-icon{
+    font-size: 43px;
+    float: right;
+    padding: 1rem .3rem 0 .3rem;
   }
 }
