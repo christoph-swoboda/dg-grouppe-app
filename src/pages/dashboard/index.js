@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {IonAvatar, IonContent, IonModal, IonPage} from "@ionic/react";
 import '../../styles/dashboard.scss'
+import '../../styles/notification.scss'
 import {close, informationCircleOutline, notificationsOutline} from "ionicons/icons";
 import image from '../../assets/a2.jpg'
 import EmptyDashboard from "../../components/emptyDashboard";
@@ -29,11 +30,11 @@ const Dashboard = () => {
         <IonPage className='container'>
             <IonContent>
                 <IonModal isOpen={showModal}>
+                    <div className='notificationContainer'>
                     <div className='notificationHeader'>
                         <h1>Notifications</h1>
                         <ion-icon icon={close} onClick={() => setShowModal(false)}/>
                     </div>
-                    <div className='notificationContainer'>
                         {
                             data.map(not => (
                                 <Notification

@@ -2,11 +2,6 @@
 @import "variables";
 
 .dashboard {
-  padding: 1.2rem;
-  overflow-x: hidden;
-  background-color: $body-bg1;
-  min-height: 100vh;
-
   .header {
     @include flexCenter;
     justify-content: space-between;
@@ -52,12 +47,4 @@
       }
     }
   }
-}
-
-
-.notificationHeader {
-  margin-top: 2vh;
-  padding: 1rem;
-  @include flexCenter;
-  justify-content: space-between;
 }

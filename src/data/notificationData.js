@@ -31,6 +31,22 @@ const Notifications = [
         status: 'rejected',
         approved: true,
     },
+    {
+        id: 4,
+        title: '1 Picture Was Rejected',
+        period: 'Time period 1 of 2022',
+        updated: '06/01/2022',
+        status: 'rejected',
+        approved: true,
+    },
+    {
+        id: 5,
+        title: '1 Picture Was Rejected',
+        period: 'Time period 1 of 2022',
+        updated: '06/01/2022',
+        status: 'rejected',
+        approved: true,
+    },
 ]
 
 export default Notifications

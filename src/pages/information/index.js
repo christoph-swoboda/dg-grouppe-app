@@ -4,7 +4,6 @@ import {IonPage} from "@ionic/react";
 const Information = () => {
     return (
         <IonPage className='container'>
-            <div>
                 <h2> Frequently Asked Questions</h2>
                 <h5>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
                     standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
@@ -15,7 +14,6 @@ const Information = () => {
                     Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
                     like
                     Aldus PageMaker including versions of Lorem Ipsum.</h5>
-            </div>
         </IonPage>
     )
 }

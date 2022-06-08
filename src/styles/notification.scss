@@ -1,25 +1,39 @@
 @import "variables";
 @import "mixin";
 
-.notifications {
-  background-color: white;
-  border: 1px solid $borderColor;
-  border-radius: 10px;
-  margin-bottom: -5px;
-  color: #2d2d2d;
+.notificationContainer {
+  height: 100vh;
+  overflow: scroll;
 
-  .hourGlass {
-    position: absolute;
-    left: 4%;
-    top: 20%;
 
-    ion-icon {
-      font-size: 35px;
-    }
+  .notificationHeader {
+    margin-top: 2vh;
+    padding: 1rem;
+    @include flexCenter;
+    justify-content: space-between;
   }
 
-  ion-icon {
-    float: right;
-    font-size: 25px;
+  .notifications {
+    background-color: white;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    margin-bottom: -5px;
+    padding: 1rem;
+    color: #2d2d2d;
+
+    .hourGlass {
+      position: absolute;
+      left: 4%;
+      top: 20%;
+
+      ion-icon {
+        font-size: 35px;
+      }
+    }
+
+    ion-icon {
+      float: right;
+      font-size: 25px;
+    }
   }
 }
