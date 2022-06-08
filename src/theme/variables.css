@@ -239,7 +239,22 @@ a{
 }
 .container{
   overflow: scroll;
-  padding: 1.4rem;
+  padding: 1.7rem;
   background-color: #eeeeee;
+}
+
+.containerNoPadding{
+  overflow: scroll;
+  background-color: #eeeeee;
+}
+
+ion-card{
+  box-shadow: none;
+  background-color: #eeeeee;
+  color: black;
+}
+
+body{
+  font-family: Roboto;
 }
 

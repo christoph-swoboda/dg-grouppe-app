@@ -23,7 +23,7 @@ const Notification = ({title, status, approved, updated, period, id}) => {
         <div>
             {
                 deleteId!==id &&
-                <IonCard className={status === 'rejected' ? 'notifications rejected' : 'notifications'} id='myId'>
+                <IonCard className={status === 'rejected' ? 'notifications rejected' : 'notifications'}>
                     <div className='hourGlass'>
                         {
                             status === 'pending' ?

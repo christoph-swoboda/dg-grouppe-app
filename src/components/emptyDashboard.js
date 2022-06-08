@@ -6,7 +6,7 @@ const EmptyDashboard = () => {
     return (
         <div className='dashboardTitle'>
             <IonCardTitle >Hi Yaroslav </IonCardTitle>
-            {/*<p>All is good, you have 0 requests for today </p>*/}
+            <p>All is good, you have 0 requests for today </p>
             <ion-icon icon={checkmarkCircleOutline}/>
             <div className='requestStatus'>
                 <h2 >All Is Good </h2>

@@ -20,10 +20,7 @@
 
 
 .request {
-  margin-top: 5vh;
-  margin-bottom: -3vh;
   text-align: left;
-
   .card {
     color: black;
     background-color: white;
@@ -42,15 +39,16 @@
 
   .card, .cardError {
     h2{
-      font-size: 19px;
+      font-weight: 600;
+      font-size: 16px;
       width: 100%;
     }
     h3{
-      font-size: 16.5px;
+      font-size: 14.5px;
       font-weight: 600;
     }
     p{
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 600;
       color: #464646;
     }

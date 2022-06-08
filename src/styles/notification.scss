@@ -4,6 +4,7 @@
 .notificationContainer {
   height: 100vh;
   overflow: scroll;
+  padding: 1.4rem;
 
 
   .notificationHeader {
@@ -11,13 +12,16 @@
     padding: 1rem;
     @include flexCenter;
     justify-content: space-between;
+
+    ion-icon {
+      font-size: 35px;
+    }
   }
 
   .notifications {
     background-color: white;
     border: 1px solid $borderColor;
     border-radius: 10px;
-    margin-bottom: -5px;
     padding: 1rem;
     color: #2d2d2d;
 
@@ -35,5 +39,16 @@
       float: right;
       font-size: 25px;
     }
+
+    h2{
+      font-size: 20px;
+    }
+    h3{
+      font-size: 18px;
+    }
+  }
+  .rejected{
+    border: 1px solid red;
+    background-color: rgba(255,0,0,.1);
   }
 }

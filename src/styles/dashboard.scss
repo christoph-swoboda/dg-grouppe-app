@@ -2,21 +2,46 @@
 @import "variables";
 
 .dashboard {
+  height: 100vh;
+  overflow: scroll;
   .header {
     @include flexCenter;
     justify-content: space-between;
 
+    .userInfo{
+      @include flexCenter;
+
+      ion-avatar{
+        width: 80px;
+        height: 80px;
+      }
+
+      ion-card{
+        display: flex;
+        flex-direction: column;
+        font-size: 17px;
+      }
+      ion-card-subtitle{
+        font-size: 13px;
+      }
+    }
+
     .notification {
-      ion-badge {
+      .ion-badge {
         position: relative;
         z-index: 100;
-        margin-bottom: 1.5rem;
-        margin-right: -1.2rem;
+        border-radius: 100px;
+        padding: .3em;
+        font-size: 18px;
+        width: fit-content;
+        margin-bottom: -1.2rem;
+        margin-left: 2px;
         background-color: black;
+        color: white;
       }
 
       ion-icon {
-        font-size: 40px;
+        font-size: 45px;
       }
     }
   }

@@ -5,30 +5,38 @@
   @include container;
   text-align: center;
 
-  h2 {
-    font-size:25px;
+  ion-card-title, {
+    font-size: 18px;
+    color: black;
     font-weight: 600;
   }
-  .approved{
+
+  .approved {
     cursor: pointer;
-    padding: .8rem;
+    padding: .7rem;
     width: 50%;
+    font-size: 13px;
     font-weight: 600;
-    font-size: 17px;
-    border-radius: 15px 0 0 15px ;
+    border-radius: 15px 0 0 15px;
   }
-  .pending{
+
+  .pending {
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
     cursor: pointer;
-    padding: .8rem;
     width: 50%;
+    font-size: 13px;
+    padding: .7rem;
     font-weight: 600;
-    font-size: 17px;
     border-radius: 0 15px 15px 0;
   }
+
   .active {
     background-color: black;
     color: white;
   }
+
   .inActive {
     background-color: white;
     color: black;

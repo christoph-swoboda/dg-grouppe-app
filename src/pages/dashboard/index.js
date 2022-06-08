@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {IonAvatar, IonContent, IonModal, IonPage} from "@ionic/react";
+import {IonAvatar, IonCard, IonCardSubtitle, IonCardTitle, IonContent, IonModal, IonPage, IonText} from "@ionic/react";
 import '../../styles/dashboard.scss'
 import '../../styles/notification.scss'
 import {close, informationCircleOutline, notificationsOutline} from "ionicons/icons";
@@ -22,19 +22,65 @@ const Dashboard = () => {
         const filterId = filterIds.map(item => item);
         const itemsToShow = Notifications.filter(item => filterId.indexOf(item.id) === -1);
         setData(itemsToShow)
-        console.log('filterids',filterIds)
     }, [filterIds]);
 
 
     return (
         <IonPage className='container'>
+            <div className='dashboard'>
+                <div className='header'>
+                    <div className='userInfo'>
+                    <Link to='/profile'>
+                        <IonAvatar>
+                            <img src={image} alt='avatar'/>
+                        </IonAvatar>
+                    </Link>
+                        <IonCard>
+                            <IonText>Yaroslav</IonText>
+                            <IonCardSubtitle>Company</IonCardSubtitle>
+                        </IonCard>
+                    </div>
+
+                    <div className='notification'>
+                        <IonCard className='ion-badge' onClick={() => setShowModal(true)} color="dark">{data.length}</IonCard>
+                        <ion-icon onClick={() => setShowModal(true)} icon={notificationsOutline}/>
+                        <Link to='/information'>
+                            <ion-icon icon={informationCircleOutline}/>
+                        </Link>
+                    </div>
+                </div>
+                {
+                    data.length === 0 ?
+                        <EmptyDashboard/>
+                        :
+                        <IonCard>
+                            <IonCardTitle style={{fontSize:'35px'}} >Hi Yaroslav </IonCardTitle>
+                            <IonCardSubtitle>you have {Requests.length} requests for today </IonCardSubtitle>
+                            <hr/>
+                            {
+                                Requests.map(req => (
+                                    <Request
+                                        key={req.id}
+                                        title={req.title}
+                                        period={req.period}
+                                        updated={req.updated}
+                                        status={req.status}
+                                        approved={req.approved}
+                                    />
+                                ))
+                            }
+                        </IonCard>
+                }
+            </div>
+
+            {/*notification modal*/}
             <IonContent>
                 <IonModal isOpen={showModal}>
                     <div className='notificationContainer'>
-                    <div className='notificationHeader'>
-                        <h1>Notifications</h1>
-                        <ion-icon icon={close} onClick={() => setShowModal(false)}/>
-                    </div>
+                        <div className='notificationHeader'>
+                            <h1>Notifications</h1>
+                            <ion-icon icon={close} onClick={() => setShowModal(false)}/>
+                        </div>
                         {
                             data.map(not => (
                                 <Notification
@@ -51,42 +97,7 @@ const Dashboard = () => {
                     </div>
                 </IonModal>
             </IonContent>
-            <div className='dashboard'>
-                <div className='header'>
-                    <Link to='/profile'>
-                        <IonAvatar>
-                            <img src={image} alt='avatar'/>
-                        </IonAvatar>
-                    </Link>
-
-                    <div className='notification'>
-                        <ion-badge onClick={() => setShowModal(true)} color="dark">{data.length}</ion-badge>
-                        <ion-icon onClick={() => setShowModal(true)} icon={notificationsOutline}/>
-                        <Link to='/information'>
-                            <ion-icon icon={informationCircleOutline}/>
-                        </Link>
-                    </div>
-                </div>
-                {
-                    data.length === 0 ?
-                        <EmptyDashboard/>
-                        :
-                        <div>
-                            {
-                                Requests.map(req => (
-                                    <Request
-                                        key={req.id}
-                                        title={req.title}
-                                        period={req.period}
-                                        updated={req.updated}
-                                        status={req.status}
-                                        approved={req.approved}
-                                    />
-                                ))
-                            }
-                        </div>
-                }
-            </div>
+            {/*notification modal*/}
         </IonPage>
     )
 }

@@ -3,7 +3,7 @@
 @mixin container(){
     background-color: $body-bg1;
     min-height: 100vh;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 @mixin flexEvenlyCentered(){
