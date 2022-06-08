@@ -4,7 +4,7 @@ import {checkmarkCircleOutline} from "ionicons/icons";
 
 const EmptyDashboard = () => {
     return (
-        <div className='dashboardTitle'>
+        <div className='dashboardTitle' style={{marginTop:'6rem'}}>
             <IonCardTitle >Hi Yaroslav </IonCardTitle>
             <p>All is good, you have 0 requests for today </p>
             <ion-icon icon={checkmarkCircleOutline}/>

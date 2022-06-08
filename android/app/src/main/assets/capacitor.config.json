@@ -1,0 +1,6 @@
+{
+	"appId": "com.example.app",
+	"appName": "dg-Gruppe",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
