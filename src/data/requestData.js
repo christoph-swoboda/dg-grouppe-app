@@ -30,6 +30,13 @@ const Requests = [
         updated: '06/01/2022',
         status: 'rejected',
         approved: false,
+    },    {
+        id: 4,
+        title: 'Request to upload Internet bills',
+        period: 'Time period 1 of 2022',
+        updated: '06/01/2022',
+        status: 'rejected',
+        approved: false,
     },
 ]
 

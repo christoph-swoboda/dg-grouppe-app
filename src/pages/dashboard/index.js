@@ -53,7 +53,7 @@ const Dashboard = () => {
                     data.length === 0 ?
                         <EmptyDashboard/>
                         :
-                        <IonCard>
+                        <IonCard style={{marginTop:'6rem', position:'relative'}}>
                             <IonCardTitle style={{fontSize:'35px'}} >Hi Yaroslav </IonCardTitle>
                             <IonCardSubtitle>you have {Requests.length} requests for today </IonCardSubtitle>
                             <hr/>
