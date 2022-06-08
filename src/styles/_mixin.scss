@@ -2,9 +2,8 @@
 
 @mixin container(){
     background-color: $body-bg1;
-    height: 100vh;
-    overflow-y: scroll;
-    padding: 1.4rem;
+    min-height: 100vh;
+    padding: 2rem;
 }
 
 @mixin flexEvenlyCentered(){

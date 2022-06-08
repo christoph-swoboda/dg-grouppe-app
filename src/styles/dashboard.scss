@@ -1,12 +1,11 @@
 @import "mixin";
 @import "variables";
 
-.notificationContainer {
-  @include container;
-}
-
 .dashboard {
-  @include container;
+  padding: 1.2rem;
+  overflow-x: hidden;
+  background-color: $body-bg1;
+  min-height: 100vh;
 
   .header {
     @include flexCenter;
@@ -48,8 +47,7 @@
       text-align: center;
       @include centerItemsAbsolute;
       margin-top: 5rem;
-
-      p {
+      p{
         width: 100vw;
       }
     }
@@ -62,9 +60,4 @@
   padding: 1rem;
   @include flexCenter;
   justify-content: space-between;
-
-  ion-icon {
-    color: black;
-    font-size: 35px;
-  }
 }
