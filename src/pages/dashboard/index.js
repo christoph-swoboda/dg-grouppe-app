@@ -17,13 +17,19 @@ const Dashboard = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [data, setData] = useState([]);
+    const [user, setUser] = useState([]);
     const [{filterIds}]=useStateValue()
 
-    useEffect(() => {
-        Api().get('/requests/published').then(res=>{
-            console.log('requests', res.data.open)
+    useEffect(async () => {
+        await Api().get('/requests/published').then(res => {
             setData(res.data.open)
         })
+
+       await Api().get('/employee').then(res => {
+            setUser(res.data)
+        })
+
+        console.log('backendurl', process.env.REACT_APP_BACKEND_URL)
 
         // const filterId = filterIds.map(item => item);
         // const itemsToShow = Notifications.filter(item => filterId.indexOf(item.id) === -1);
@@ -38,12 +44,12 @@ const Dashboard = () => {
                     <div className='userInfo'>
                     <Link to='/profile'>
                         <IonAvatar>
-                            <img src={image} alt='avatar'/>
+                            <img src={`http://127.0.0.1:8000/${user?.employees?.image}`} alt='avatar'/>
                         </IonAvatar>
                     </Link>
                         <IonCard>
-                            <IonText>Yaroslav</IonText>
-                            <IonCardSubtitle>Company</IonCardSubtitle>
+                            <IonText>{user?.employees?.first_name} {user?.employees?.last_name}</IonText>
+                            <IonCardSubtitle>{user?.employees?.company}</IonCardSubtitle>
                         </IonCard>
                     </div>
 
@@ -60,7 +66,7 @@ const Dashboard = () => {
                         <EmptyDashboard/>
                         :
                         <IonCard style={{marginTop:'6rem', position:'relative'}}>
-                            <IonCardTitle style={{fontSize:'35px'}} >Hi Yaroslav </IonCardTitle>
+                            <IonCardTitle style={{fontSize:'35px'}} >Hi {user?.employees?.first_name}</IonCardTitle>
                             <IonCardSubtitle>you have {data.data?.reduce((amount, item) => item.requests.length + amount, 0)} requests for today </IonCardSubtitle>
                             <hr/>
                             {
