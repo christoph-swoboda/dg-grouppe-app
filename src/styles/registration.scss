@@ -1,52 +1,54 @@
 @import "variables";
 @import "mixin";
 
-.formContainer {
-  margin: 2rem;
-  font-weight: 700;
-
-  h2 {
-    font-size: 30px;
-    font-weight: 600;
-    color: grey;
-  }
-
-  p {
-    margin-bottom: 15vh;
-    font-size: .7rem;
-    color: grey;
-  }
-
-  h3 {
-    font-size: 34px;
-    font-weight: 700;
-  }
-
-  form {
-
-    ion-icon {
-      position: relative;
-      margin: -10px -40px;
-      font-size: 30px;
-    }
-
-    input {
-      border: 1px solid $borderColor;
-      border-radius: 10px;
-      width: 100%;
-      color: #180505;
-      padding: 1rem;
-      margin-bottom: .7rem;
-    }
-
-    button {
-      border-radius: 10px;
-      background-color: black;
-      color: white;
-      width: 100%;
-      padding: 1.1rem;
-      font-size: 2vh;
-      margin-bottom: .7rem;
-    }
-  }
+.login {
+    min-height: 100vh;
+    max-height: 200vh;
+    background-color: $body-bg1;
 }
+
+.login-box {
+    @include centerItemsAbsolute();
+    p {
+        font-size: 1.7vh;
+        line-height: 1;
+        color: $theme;
+        margin-left: 7%;
+        margin-bottom: 1vh;
+        width: 90vw;
+    }
+    form{
+        label{
+            color: grey;
+            margin: 0 1rem 0 0;
+            font-size: 1.6vh;
+        }
+        input {
+            display: grid;
+            grid-template-columns: auto;
+            padding: 1rem;
+            margin: 0 0 1.1rem 0;
+            width: 87vw;
+            font-size: 2vh;
+            border-radius: 20px;
+            border: 1px solid black;
+            color: black;
+        }
+
+        .enabled {
+            background-color: #000000;
+            cursor: pointer;
+            color: white;
+            width: 87vw;
+        }
+
+        .disabled {
+            width: 87vw;
+            background-color: #000000;
+            color: white;
+            cursor: none;
+            border: 2px solid black;
+        }
+    }
+}
+

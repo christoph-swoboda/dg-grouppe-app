@@ -11,17 +11,23 @@ import Request from "../../components/card/request";
 import Requests from "../../data/requestData";
 import Notifications from "../../data/notificationData";
 import {useStateValue} from "../../states/StateProvider";
+import Api from "../../api/api";
 
 const Dashboard = () => {
 
     const [showModal, setShowModal] = useState(false);
-    const [data, setData] = useState(Notifications);
+    const [data, setData] = useState([]);
     const [{filterIds}]=useStateValue()
 
     useEffect(() => {
-        const filterId = filterIds.map(item => item);
-        const itemsToShow = Notifications.filter(item => filterId.indexOf(item.id) === -1);
-        setData(itemsToShow)
+        Api().get('/requests/published').then(res=>{
+            console.log('requests', res.data.open)
+            setData(res.data.open)
+        })
+
+        // const filterId = filterIds.map(item => item);
+        // const itemsToShow = Notifications.filter(item => filterId.indexOf(item.id) === -1);
+        // setData(itemsToShow)
     }, [filterIds]);
 
 
@@ -50,23 +56,27 @@ const Dashboard = () => {
                     </div>
                 </div>
                 {
-                    data.length === 0 ?
+                    data.data?.length === 0 ?
                         <EmptyDashboard/>
                         :
                         <IonCard style={{marginTop:'6rem', position:'relative'}}>
                             <IonCardTitle style={{fontSize:'35px'}} >Hi Yaroslav </IonCardTitle>
-                            <IonCardSubtitle>you have {Requests.length} requests for today </IonCardSubtitle>
+                            <IonCardSubtitle>you have {data.data?.reduce((amount, item) => item.requests.length + amount, 0)} requests for today </IonCardSubtitle>
                             <hr/>
                             {
-                                Requests.map(req => (
-                                    <Request
-                                        key={req.id}
-                                        title={req.title}
-                                        period={req.period}
-                                        updated={req.updated}
-                                        status={req.status}
-                                        approved={req.approved}
-                                    />
+                                data?.data?.map((bill, i) => (
+                                    bill.requests?.map(req=>(
+                                        <Request
+                                            key={req.id}
+                                            title={bill.title}
+                                            type={bill?.type[i]?.title}
+                                            month={new Date(bill.created_at).getMonth() + 1}
+                                            year={new Date(bill.created_at).getFullYear()}
+                                            updated={new Date(req.updated_at).toLocaleDateString()}
+                                            status={req?.status}
+                                            approved={bill.approved}
+                                        />
+                                    ))
                                 ))
                             }
                         </IonCard>
@@ -82,7 +92,7 @@ const Dashboard = () => {
                             <ion-icon icon={close} onClick={() => setShowModal(false)}/>
                         </div>
                         {
-                            data.map(not => (
+                            Notifications.map(not => (
                                 <Notification
                                     key={not.id}
                                     id={not.id}
