@@ -5,6 +5,11 @@
     min-height: 100vh;
     max-height: 200vh;
     background-color: $body-bg1;
+    ion-header{
+        margin: 75% 12%;
+        font-size: 2rem;
+        font-weight: 700;
+    }
 }
 
 .login-box {
@@ -17,40 +22,45 @@
         margin-bottom: 1vh;
         width: 90vw;
     }
+
     form{
         label{
             color: grey;
             margin: 0 1rem 0 0;
             font-size: 1.6vh;
         }
-        input {
+        ion-input {
+            text-align:center;
             display: grid;
             grid-template-columns: auto;
-            padding: 1rem;
             margin: 0 1.1rem 1.1rem 0;
             width: 82vw;
             font-size: 2vh;
-            border-radius: 20px;
+            border-radius: 10px;
             border: 1px solid black;
             color: black;
         }
 
-        .enabled {
+        button {
             background-color: #000000;
             cursor: pointer;
             color: white;
             width: 82vw;
+            padding: 1rem;
+            border-radius: 10px;
             margin: 0 1.1rem 1.1rem 0;
         }
-
-        .disabled {
-            width: 82vw;
-            background-color: #000000;
-            color: white;
-            cursor: none;
-            margin: 0 1.1rem 1.1rem 0;
-            border: 2px solid black;
-        }
+        //
+        //.disabled {
+        //    width: 82vw;
+        //    background-color: #000000;
+        //    color: white;
+        //    cursor: none;
+        //    padding: 10px;
+        //    border-radius: 10px;
+        //    margin: 0 1.1rem 1.1rem 0;
+        //    border: 2px solid black;
+        //}
     }
 }
 

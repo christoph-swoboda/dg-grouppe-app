@@ -7,7 +7,6 @@ import EmptyDashboard from "../../components/emptyDashboard";
 import {Link} from "react-router-dom";
 import Notification from "../../components/card/notification";
 import Request from "../../components/card/request";
-import {useStateValue} from "../../states/StateProvider";
 import Api from "../../api/api";
 import qs from "qs"
 import {BeatLoader} from "react-spinners";
@@ -22,7 +21,6 @@ const Dashboard = () => {
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loadingUser, setLoadingUser] = useState(false);
-    const [{filterIds}] = useStateValue()
     const backend = process.env.REACT_APP_BACKEND_URL
     const [filter, setFilter] = useState({page: 1})
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
