@@ -13,7 +13,9 @@ const Request = ({title, status, approved, updated, month, year, type}) => {
 
     useEffect(() => {
         setPeriod(getPeriod(month, year))
-    }, []);
+
+        console.log('type', type)
+    }, [type]);
 
     return (
         <IonCard style={{marginLeft: 'auto'}}>

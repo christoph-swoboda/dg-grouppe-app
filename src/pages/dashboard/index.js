@@ -9,6 +9,7 @@ import Notification from "../../components/card/notification";
 import Request from "../../components/card/request";
 import {useStateValue} from "../../states/StateProvider";
 import Api from "../../api/api";
+import qs from "qs"
 import {BeatLoader} from "react-spinners";
 
 const Dashboard = () => {
@@ -17,30 +18,32 @@ const Dashboard = () => {
     const [requests, setRequests] = useState([]);
     const [user, setUser] = useState([]);
     const [total, setTotal] = useState(0);
+    const [lastPage, setLastPage] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [loadingUser, setLoadingUser] = useState(false);
     const [{filterIds}] = useStateValue()
     const backend = process.env.REACT_APP_BACKEND_URL
+    const [filter, setFilter] = useState({page: 1})
+    const query = qs.stringify(filter, {encode: false, skipNulls: true})
 
     useEffect(async () => {
         setLoading(true)
-        await Api().get(`/requests/published`).then(res => {
-            // filter.page===1?res.data.open:[...requests, ...res.data.open]
-            setRequests(res.data.open)
-            console.log('req', requests)
-            setTotal(res.data.open?.reduce((amount, index) => index.requests?.length + amount, 0))
-        })
-        await Api().get('/employee').then(res => {
-            setUser(res.data)
+        await Api().get(`/requests/published?${query}`).then(res => {
+            console.log('requests', res.data.open)
+            setRequests(filter.page === 1 ? res.data.open.data : [...requests, ...res.data.open.data])
+            setTotal(res.data.open.total)
             setLoading(false)
+            setLastPage(res.data.open.last_page)
         })
-
-        // const filterId = filterIds.map(item => item);
-        // const itemsToShow = Notifications.filter(item => filterId.indexOf(item.id) === -1);
-        // setData(itemsToShow)
-    }, [filterIds]);
+    }, [filter]);
 
     useEffect(async () => {
+        setLoadingUser(true)
+        Api().get('/employee').then(res => {
+            setUser(res.data)
+            setLoadingUser(false)
+        })
         await Api().get('/notifications').then(res => {
             console.log('noti', res.data)
             setNotifications(res.data)
@@ -59,7 +62,7 @@ const Dashboard = () => {
                         </Link>
                         <IonCard>
                             {
-                                loading ?
+                                loadingUser && filter.page === 1 ?
                                     <BeatLoader size={8} color={'#000000'}/>
                                     :
                                     <IonText>{user?.employees?.first_name}</IonText>
@@ -79,7 +82,7 @@ const Dashboard = () => {
                     </div>
                 </IonCard>
                 {
-                    requests?.length === 0 && !loading?
+                    requests?.length === 0 && !loading ?
                         <EmptyDashboard name={user?.employees?.first_name}/>
                         :
                         <IonCard style={{marginTop: '9rem', position: 'relative'}}>
@@ -89,26 +92,26 @@ const Dashboard = () => {
                                 for today </IonCardSubtitle>
                             <hr/>
                             {
-                                loading ?
+                                loading && filter.page === 1 ?
                                     <BeatLoader size={12} color={'#000000'}/>
                                     :
-                                    requests?.map((bill, i) => (
-                                        bill.requests?.map(req => (
-                                            <Request
-                                                key={req.id}
-                                                title={bill.title}
-                                                type={bill?.type[i]?.title}
-                                                month={new Date(bill.created_at).getMonth() + 1}
-                                                year={new Date(bill.created_at).getFullYear()}
-                                                updated={new Date(req.updated_at).toLocaleDateString()}
-                                                status={req?.status}
-                                                approved={bill.approved}
-                                            />
-                                        ))
+                                    requests?.map((req, i) => (
+                                        <Request
+                                            key={req.id}
+                                            title={req.bill?.title}
+                                            type={req.type?.title}
+                                            month={new Date(req.bill?.created_at).getMonth() + 1}
+                                            year={new Date(req.bill?.created_at).getFullYear()}
+                                            updated={new Date(req.updated_at).toLocaleDateString()}
+                                            status={req?.status}
+                                        />
                                     ))
                             }
                         </IonCard>
                 }
+                <button hidden={lastPage <= filter.page}
+                        onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
+                </button>
             </div>
 
             {/*notification modal*/}
