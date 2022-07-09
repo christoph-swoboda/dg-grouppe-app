@@ -17,8 +17,10 @@ const Dashboard = () => {
     const [showModal, setShowModal] = useState(false);
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
+    const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(false);
     const [{filterIds}] = useStateValue()
+    const backend=process.env.REACT_APP_BACKEND_URL
 
     useEffect(async () => {
         setLoading(true)
@@ -29,7 +31,10 @@ const Dashboard = () => {
             setUser(res.data)
             setLoading(false)
         })
-        console.log('backendurl', process.env.REACT_APP_BACKEND_URL)
+        await Api().get('/notifications').then(res => {
+            console.log('noti', res.data)
+            setNotifications(res.data)
+        })
         // const filterId = filterIds.map(item => item);
         // const itemsToShow = Notifications.filter(item => filterId.indexOf(item.id) === -1);
         // setData(itemsToShow)
@@ -43,7 +48,7 @@ const Dashboard = () => {
                     <div className='userInfo'>
                         <Link to='/profile'>
                             <IonAvatar>
-                                <img src={`http://127.0.0.1:8000/${user?.employees?.image}`} alt='avatar'/>
+                                <img src={`${backend}/${user?.employees?.image}`} alt='avatar'/>
                             </IonAvatar>
                         </Link>
                         <IonCard>
@@ -60,7 +65,7 @@ const Dashboard = () => {
 
                     <div className='notification'>
                         <IonCard className='ion-badge' onClick={() => setShowModal(true)}
-                                 color="dark">{data.data?.length}</IonCard>
+                                 color="dark">{notifications?.length}</IonCard>
                         <ion-icon onClick={() => setShowModal(true)} icon={notificationsOutline}/>
                         <Link to='/information'>
                             <ion-icon icon={informationCircleOutline}/>
@@ -109,15 +114,16 @@ const Dashboard = () => {
                             <ion-icon icon={close} onClick={() => setShowModal(false)}/>
                         </div>
                         {
-                            Notifications.map(not => (
+                            notifications?.map((not,i) => (
                                 <Notification
                                     key={not.id}
                                     id={not.id}
-                                    approved={not.approved}
-                                    title={not.title}
-                                    status={not.status}
-                                    period={not.period}
-                                    updated={not.updated}
+                                    type={not.response?.request?.bill?.type[i]?.title}
+                                    title={not.response.message}
+                                    status={not.response?.request?.status}
+                                    month={new Date(not.response?.request?.bill?.created_at).getMonth() + 1}
+                                    year={new Date(not.response?.request?.bill?.created_at).getFullYear()}
+                                    updated={new Date(not.response?.updated_at).toLocaleDateString()}
                                 />
                             ))
                         }

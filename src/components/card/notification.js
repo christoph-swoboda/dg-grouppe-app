@@ -3,10 +3,16 @@ import {IonCard} from "@ionic/react";
 import '../../styles/notification.scss'
 import {checkmarkCircleOutline, close, closeCircleOutline, hourglassOutline} from "ionicons/icons";
 import {useStateValue} from "../../states/StateProvider";
+import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
 
-const Notification = ({title, status, approved, updated, period, id}) => {
+const Notification = ({title, status, type, updated,  month, year, id}) => {
 
     const [{}, dispatch]=useStateValue()
+    const [period,setPeriod]= useState('')
+
+    useEffect(() => {
+        setPeriod(getPeriod(month, year))
+    }, []);
 
     function toggleText() {
         dispatch(
@@ -38,10 +44,10 @@ const Notification = ({title, status, approved, updated, period, id}) => {
                     </div>
                     <ion-icon onClick={toggleText} className='close' icon={close}/>
                     <div style={{marginLeft: '10vw'}}>
-                        <h2>{title}</h2>
-                        <h3>Date: {period}</h3>
+                        <h2 style={{color:status==='1'?'black': status==='2'?'green':'red'}}>{title}</h2>
+                        <h3>Period: {period}</h3>
+                        <p>Type: {type}</p>
                         <p>Updated: {updated}</p>
-                        <p>Status: {status}</p>
                     </div>
                 </IonCard>
             }
