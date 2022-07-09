@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router'
 import '../../styles/registration.scss'
-import authApi from "../../api/auth"
 import {toast} from "react-toastify"
 import {useForm} from "react-hook-form"
-import {IonPage} from "@ionic/react";
+import {IonCard, IonPage} from "@ionic/react";
 import Api from "../../api/api";
 
 const Login = () => {
@@ -56,18 +55,17 @@ const Login = () => {
         let user = JSON.parse(window.localStorage.getItem('user'))
         if (user) {
             setErrors(user?.errors)
-            if (user?.role === '1') {
+            if (user?.role === '2') {
                 window.location.replace('/dashboard')
-
             } else {
-                history.push('/')
+               toast.error('No Access')
             }
         }
     };
 
     return (
         <IonPage className='login'>
-            <div className='login-box'>
+            <IonCard className='login-box'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <label>Email *</label>
                     <input placeholder='Username'
@@ -96,7 +94,7 @@ const Login = () => {
                         value={(!loading) ? 'Log In' : 'Verifying...'}
                     />
                 </form>
-            </div>
+            </IonCard>
         </IonPage>
     )
 }

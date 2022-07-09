@@ -27,8 +27,8 @@
             display: grid;
             grid-template-columns: auto;
             padding: 1rem;
-            margin: 0 0 1.1rem 0;
-            width: 87vw;
+            margin: 0 1.1rem 1.1rem 0;
+            width: 82vw;
             font-size: 2vh;
             border-radius: 20px;
             border: 1px solid black;
@@ -39,14 +39,16 @@
             background-color: #000000;
             cursor: pointer;
             color: white;
-            width: 87vw;
+            width: 82vw;
+            margin: 0 1.1rem 1.1rem 0;
         }
 
         .disabled {
-            width: 87vw;
+            width: 82vw;
             background-color: #000000;
             color: white;
             cursor: none;
+            margin: 0 1.1rem 1.1rem 0;
             border: 2px solid black;
         }
     }

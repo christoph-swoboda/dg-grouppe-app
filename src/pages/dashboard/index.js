@@ -7,7 +7,6 @@ import EmptyDashboard from "../../components/emptyDashboard";
 import {Link} from "react-router-dom";
 import Notification from "../../components/card/notification";
 import Request from "../../components/card/request";
-import Notifications from "../../data/notificationData";
 import {useStateValue} from "../../states/StateProvider";
 import Api from "../../api/api";
 import {BeatLoader} from "react-spinners";
@@ -15,31 +14,38 @@ import {BeatLoader} from "react-spinners";
 const Dashboard = () => {
 
     const [showModal, setShowModal] = useState(false);
-    const [data, setData] = useState([]);
+    const [requests, setRequests] = useState([]);
     const [user, setUser] = useState([]);
+    const [total, setTotal] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(false);
     const [{filterIds}] = useStateValue()
-    const backend=process.env.REACT_APP_BACKEND_URL
+    const backend = process.env.REACT_APP_BACKEND_URL
 
     useEffect(async () => {
         setLoading(true)
-        await Api().get('/requests/published').then(res => {
-            setData(res.data.open)
+        await Api().get(`/requests/published`).then(res => {
+            // filter.page===1?res.data.open:[...requests, ...res.data.open]
+            setRequests(res.data.open)
+            console.log('req', requests)
+            setTotal(res.data.open?.reduce((amount, index) => index.requests?.length + amount, 0))
         })
         await Api().get('/employee').then(res => {
             setUser(res.data)
             setLoading(false)
         })
-        await Api().get('/notifications').then(res => {
-            console.log('noti', res.data)
-            setNotifications(res.data)
-        })
+
         // const filterId = filterIds.map(item => item);
         // const itemsToShow = Notifications.filter(item => filterId.indexOf(item.id) === -1);
         // setData(itemsToShow)
     }, [filterIds]);
 
+    useEffect(async () => {
+        await Api().get('/notifications').then(res => {
+            console.log('noti', res.data)
+            setNotifications(res.data)
+        })
+    }, []);
 
     return (
         <IonPage className='container'>
@@ -73,20 +79,20 @@ const Dashboard = () => {
                     </div>
                 </IonCard>
                 {
-                    data.data?.length === 0 ?
-                        <EmptyDashboard/>
+                    requests?.length === 0 && !loading?
+                        <EmptyDashboard name={user?.employees?.first_name}/>
                         :
                         <IonCard style={{marginTop: '9rem', position: 'relative'}}>
                             <IonCardTitle style={{fontSize: '35px'}}>Hi {user?.employees?.first_name}</IonCardTitle>
                             <IonCardSubtitle>you
-                                have {data.data?.reduce((amount, item) => item.requests.length + amount, 0)} requests
+                                have {total} requests
                                 for today </IonCardSubtitle>
                             <hr/>
                             {
                                 loading ?
                                     <BeatLoader size={12} color={'#000000'}/>
                                     :
-                                    data?.data?.map((bill, i) => (
+                                    requests?.map((bill, i) => (
                                         bill.requests?.map(req => (
                                             <Request
                                                 key={req.id}
@@ -114,7 +120,7 @@ const Dashboard = () => {
                             <ion-icon icon={close} onClick={() => setShowModal(false)}/>
                         </div>
                         {
-                            notifications?.map((not,i) => (
+                            notifications?.map((not, i) => (
                                 <Notification
                                     key={not.id}
                                     id={not.id}

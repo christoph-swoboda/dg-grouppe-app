@@ -45,8 +45,7 @@ setupIonicReact();
 
 const App = () => {
 
-    // const user = JSON.parse(localStorage.getItem('user'));
-    const user = 'user name'
+    const user = JSON.parse(localStorage.getItem('user'));
 
     return (
         <IonApp>
