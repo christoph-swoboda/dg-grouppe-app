@@ -16,7 +16,7 @@ const UploadPopUp = ({title, responseId}) => {
     const history = useHistory()
     const hiddenFileInput = React.useRef(null);
   
-    const handleClick = event => {
+    const auToClickHander = () => {
       hiddenFileInput.current.click();
     };
 
@@ -61,8 +61,6 @@ const UploadPopUp = ({title, responseId}) => {
         data.append('image', url)
         data.append('id', responseId)
 
-        console.log('sent', data)
-
         await Api().post('/response', data).then(res=>{
             if(res.status===200){
                 dispatch({type: "SET_MODAL", item: false})
@@ -84,7 +82,7 @@ const UploadPopUp = ({title, responseId}) => {
             <IonCard onClick={() => takePicture()}>Kamera</IonCard>
             <IonCard onClick={() => uploadPicture()}>Foto-und Videomediathek</IonCard>
             <input type="file" ref={hiddenFileInput} hidden onChange={fileInput}/>
-            <IonCard onClick={handleClick}>Dokument</IonCard>
+            <IonCard onClick={auToClickHander}>Dokument</IonCard>
         </div>
     )
 }
