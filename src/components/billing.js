@@ -1,14 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Request from "./card/request";
 import '../styles/billingPage.scss';
-import Requests from "../data/requestData";
 import {IonCard, IonCardTitle, IonText} from "@ionic/react";
 import Api from "../api/api";
 import {useLocation} from "react-router";
 import qs from "qs";
 import {BeatLoader} from "react-spinners";
 
-const Billing = ({header}) => {
+const Billing = ({header, data}) => {
 
     const [pending, setPending] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -33,12 +32,12 @@ const Billing = ({header}) => {
         })
     }, [filter]);
 
-    function approved(e) {
+    function approved() {
         setFilter({...filter, status: '2'})
         setPending(false)
     }
 
-    function rejected(e) {
+    function rejected() {
         setFilter({...filter, status: '1'})
         setPending(true)
     }
@@ -62,6 +61,7 @@ const Billing = ({header}) => {
                             req.type &&
                             <Request
                                 key={req.id}
+                                responseId={req.response?.id}
                                 title={req.bill?.title}
                                 type={req.type?.title}
                                 period={req.period}

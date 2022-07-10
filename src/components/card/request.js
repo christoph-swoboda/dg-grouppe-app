@@ -6,22 +6,20 @@ import UploadPopUp from "../UploadPopUp";
 import {useStateValue} from "../../states/StateProvider";
 import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
 
-const Request = ({title, status, approved, updated, month, year, type}) => {
+const Request = ({title, status, responseId, updated, month, year, type}) => {
 
     const [{modal}, dispatch] = useStateValue()
     const [period,setPeriod]= useState('')
 
     useEffect(() => {
         setPeriod(getPeriod(month, year))
-
-        console.log('type', type)
     }, [type]);
 
     return (
         <IonCard style={{marginLeft: 'auto'}}>
             <IonContent>
                 <IonModal isOpen={modal} className='modal'>
-                    <UploadPopUp title={title}/>
+                    <UploadPopUp title={title} responseId={responseId}/>
                     <IonCard className='cancelUpload' onClick={() =>
                         dispatch(
                             {

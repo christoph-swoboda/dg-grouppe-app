@@ -29,12 +29,13 @@
             margin: 0 1rem 0 0;
             font-size: 1.6vh;
         }
-        ion-input {
+        input {
             text-align:center;
             display: grid;
             grid-template-columns: auto;
             margin: 0 1.1rem 1.1rem 0;
             width: 82vw;
+            padding: 1rem;
             font-size: 2vh;
             border-radius: 10px;
             border: 1px solid black;

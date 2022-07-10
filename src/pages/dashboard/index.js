@@ -28,9 +28,9 @@ const Dashboard = () => {
     useEffect(async () => {
         setLoading(true)
         await Api().get(`/requests/published?${query}`).then(res => {
-            console.log('requests', res.data.open)
             setRequests(filter.page === 1 ? res.data.open.data : [...requests, ...res.data.open.data])
             setTotal(res.data.open.total)
+            console.log('requests', res.data.open.data)
             setLoading(false)
             setLastPage(res.data.open.last_page)
         })
@@ -96,6 +96,7 @@ const Dashboard = () => {
                                     requests?.map((req, i) => (
                                         <Request
                                             key={req.id}
+                                            responseId={req.response?.id}
                                             title={req.bill?.title}
                                             type={req.type?.title}
                                             month={new Date(req.bill?.created_at).getMonth() + 1}
@@ -125,12 +126,12 @@ const Dashboard = () => {
                                 <Notification
                                     key={not.id}
                                     id={not.id}
-                                    type={not.response?.request?.bill?.type[i]?.title}
-                                    title={not.response.message}
-                                    status={not.response?.request?.status}
-                                    month={new Date(not.response?.request?.bill?.created_at).getMonth() + 1}
-                                    year={new Date(not.response?.request?.bill?.created_at).getFullYear()}
-                                    updated={new Date(not.response?.updated_at).toLocaleDateString()}
+                                    type={not?.request?.bill?.type[i]?.title}
+                                    title={not?.request?.response.message}
+                                    status={not.request?.status}
+                                    month={new Date(not.request?.bill?.created_at).getMonth() + 1}
+                                    year={new Date(not.request?.bill?.created_at).getFullYear()}
+                                    updated={new Date(not.request?.response?.updated_at).toLocaleDateString()}
                                 />
                             ))
                         }

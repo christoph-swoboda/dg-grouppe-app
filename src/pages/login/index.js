@@ -1,18 +1,15 @@
 import React, {useState} from 'react'
-import {useHistory} from 'react-router'
 import '../../styles/registration.scss'
 import {toast} from "react-toastify"
 import {useForm} from "react-hook-form"
-import {IonCard, IonHeader, IonPage} from "@ionic/react";
+import {IonCard, IonContent, IonHeader, IonPage} from "@ionic/react";
 import Api from "../../api/api";
 
 const Login = () => {
 
-    const history = useHistory();
     const [Errors, setErrors] = useState([]);
     const [notFound, setNotFound] = useState('');
     const [loading, setLoading] = useState(false)
-    let keys = ''
     const {
         register, getValues, setValue, handleSubmit, formState, reset, formState: {errors, touchedFields},
         control
@@ -46,11 +43,6 @@ const Login = () => {
                 toast.error(e)
             })
 
-        // await Api().get(`/test`)
-        //     .then((res) => {
-        //         console.log('res test', res.data)
-        //     })
-
         let user = JSON.parse(window.localStorage.getItem('user'))
         if (user) {
             setErrors(user?.errors)
@@ -63,11 +55,12 @@ const Login = () => {
     };
 
     return (
-        <IonPage className='login'>
-            <IonHeader>Log In</IonHeader>
+        <IonPage>
+            <IonContent className='login'>
+                <IonHeader>Log In</IonHeader>
             <IonCard className='login-box'>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <ion-input placeholder='Username'
+                    <input placeholder='Username'
                                {...register('email', {
                                    required: 'Email is required',
                                    pattern: {
@@ -80,7 +73,7 @@ const Login = () => {
                                style={{border: errors.email && '1px solid red'}}
                     />
                     {errors.email && touchedFields && <p>{errors.email.message}</p>}
-                    <ion-input placeholder='Password'
+                    <input placeholder='Password'
                                type='password'
                                {...register('password', {required: 'your password is required'})}
                                style={{border: errors.password && '1px solid red'}}
@@ -91,6 +84,7 @@ const Login = () => {
                     </button>
                 </form>
             </IonCard>
+            </IonContent>
         </IonPage>
     )
 }

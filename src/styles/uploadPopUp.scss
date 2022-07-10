@@ -6,12 +6,16 @@
   margin-top: 1%;
   text-align: center;
 
-  ion-card {
+  ion-card ,input{
     padding: 1rem;
     border-radius: 15px;
     font-weight: 600;
     font-size: 18px;
     color: black;
+  }
+
+  input{
+    background-color: white;
   }
 
   .uploadedImage {
