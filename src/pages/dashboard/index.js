@@ -30,7 +30,6 @@ const Dashboard = () => {
         await Api().get(`/requests/published?${query}`).then(res => {
             setRequests(filter.page === 1 ? res.data.open.data : [...requests, ...res.data.open.data])
             setTotal(res.data.open.total)
-            console.log('requests', res.data.open.data)
             setLoading(false)
             setLastPage(res.data.open.last_page)
         })
@@ -71,7 +70,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className='notification'>
-                        <IonCard className='ion-badge' onClick={() => setShowModal(true)}
+                        <IonCard hidden={notifications?.length<1} className='ion-badge' onClick={() => setShowModal(true)}
                                  color="dark">{notifications?.length}</IonCard>
                         <ion-icon onClick={() => setShowModal(true)} icon={notificationsOutline}/>
                         <Link to='/information'>
@@ -98,6 +97,7 @@ const Dashboard = () => {
                                             key={req.id}
                                             responseId={req.response?.id}
                                             title={req.bill?.title}
+                                            message={req?.response?.message}
                                             type={req.type?.title}
                                             month={new Date(req.bill?.created_at).getMonth() + 1}
                                             year={new Date(req.bill?.created_at).getFullYear()}
@@ -106,11 +106,11 @@ const Dashboard = () => {
                                         />
                                     ))
                             }
+                            <IonText className='loadMore' hidden={lastPage <= filter.page}
+                                    onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
+                            </IonText>
                         </IonCard>
                 }
-                <button hidden={lastPage <= filter.page}
-                        onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
-                </button>
             </div>
 
             {/*notification modal*/}
@@ -126,8 +126,8 @@ const Dashboard = () => {
                                 <Notification
                                     key={not.id}
                                     id={not.id}
-                                    type={not?.request?.bill?.type[i]?.title}
-                                    title={not?.request?.response.message}
+                                    type={not?.request?.type?.title}
+                                    title={not?.request?.response?.message}
                                     status={not.request?.status}
                                     month={new Date(not.request?.bill?.created_at).getMonth() + 1}
                                     year={new Date(not.request?.bill?.created_at).getFullYear()}

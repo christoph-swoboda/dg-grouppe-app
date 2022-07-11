@@ -7,20 +7,23 @@ import {useParams} from "react-router";
 import qs from "qs";
 import {BeatLoader} from "react-spinners";
 
-const Billing = ({header, data}) => {
+const Billing = ({header}) => {
 
     const [pending, setPending] = useState(true)
     const [loading, setLoading] = useState(false)
     const [requests, setRequests] = useState([])
-    const params= useParams()
-    const [filter, setFilter] = useState({page: params.page, status: 1})
+    const params = useParams()
+    const [filter, setFilter] = useState({type: params.page, status: 1, page: 1})
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
+    const [lastPage, setLastPage] = useState(0);
 
-    const getRequests= useCallback(
+    const getRequests = useCallback(
         async () => {
             setLoading(true)
             Api().get(`/requests/categorized?${query}`).then(res => {
-                setRequests(res.data)
+                console.log('req', res.data)
+                setRequests(filter.page === 1 ? res.data.data.filter(req => req.type !== null) : [...requests, ...res.data.data.filter(req => req.type !== null)])
+                setLastPage(res.data.last_page)
                 setLoading(false)
             })
         },
@@ -28,17 +31,17 @@ const Billing = ({header, data}) => {
     );
 
     useEffect(() => {
-        getRequests().then(r => r)
+        getRequests().then(r => console.log('r', r))
     }, [getRequests]);
 
     function approved() {
-        setFilter({...filter, status: 2})
+        setFilter({...filter, status: 2, page: 1})
         setRequests([])
         setPending(false)
     }
 
     function rejected() {
-        setFilter({...filter, status: 1})
+        setFilter({...filter, status: 1, page: 1})
         setRequests([])
         setPending(true)
     }
@@ -53,29 +56,32 @@ const Billing = ({header, data}) => {
                          onClick={rejected}>Pending Uploads</IonText>
             </IonCard>
             <IonCard className='requestsContainer'>
-            {
+                {
 
-                loading ?
-                    <BeatLoader size={10} color={'#000000'}/>
-                    :
-                    requests.length ===0?
-                        'No Data Under This Filter'
+                    loading && filter.page === 1 ?
+                        <BeatLoader size={10} color={'#000000'}/>
                         :
-
-                        requests?.map(req => (
-                            <Request
-                                key={req.id}
-                                responseId={req.response?.id}
-                                title={req.bill?.title}
-                                type={req.type?.title}
-                                period={req.period}
-                                month={new Date(req.bill?.created_at).getMonth() + 1}
-                                year={new Date(req.bill?.created_at).getFullYear()}
-                                updated={new Date(req.bill?.updated_at).toLocaleDateString()}
-                                status={req.status}
-                            />
-                        ))
-            }
+                        requests.length === 0 ?
+                            'No Data Under This Filter'
+                            :
+                            requests?.map(req => (
+                                <Request
+                                    key={req.id}
+                                    responseId={req.response?.id}
+                                    title={req.bill?.title}
+                                    type={req.type?.title}
+                                    period={req.period}
+                                    message={req.response?.message}
+                                    month={new Date(req.bill?.created_at).getMonth() + 1}
+                                    year={new Date(req.bill?.created_at).getFullYear()}
+                                    updated={new Date(req.bill?.updated_at).toLocaleDateString()}
+                                    status={req.status}
+                                />
+                            ))
+                }
+                <button hidden={lastPage <= filter.page}
+                        onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
+                </button>
             </IonCard>
         </IonCard>
     )

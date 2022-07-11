@@ -4,6 +4,11 @@
 .dashboard {
   height: 100vh;
   overflow: scroll;
+
+  .loadMore {
+    margin: auto 35%;
+  }
+
   .header {
     @include flexCenter;
     position: fixed;
@@ -13,23 +18,25 @@
     width: 85%;
     justify-content: space-between;
 
-    .userInfo{
+    .userInfo {
       @include flexCenter;
 
-      ion-avatar{
+      ion-avatar {
         width: 80px;
         height: 80px;
       }
 
-      ion-card{
+      ion-card {
         display: flex;
         flex-direction: column;
         font-size: 17px;
       }
-      ion-text{
+
+      ion-text {
         max-width: 140px;
       }
-      ion-card-subtitle{
+
+      ion-card-subtitle {
         font-size: 13px;
       }
     }
@@ -75,7 +82,8 @@
       text-align: center;
       @include centerItemsAbsolute;
       margin-top: 5rem;
-      p{
+
+      p {
         width: 100vw;
       }
     }
