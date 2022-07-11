@@ -4,6 +4,13 @@
 .billingContainer {
   @include container;
   text-align: center;
+  overflow-y: scroll;
+  padding: 1rem 0;
+  max-height: max-content;
+
+  .requestsContainer {
+    margin-bottom: 4rem;
+  }
 
   ion-card-title, {
     font-size: 18px;

@@ -55,26 +55,26 @@ const App = () => {
                         <Route exact path="/">
                             {user ? <Redirect to="/dashboard"/> : <Redirect to="/login"/>}
                         </Route>
-                        <Route path="/phone">
+                        <Route path="/phone/:page">
                             <Phone/>
                         </Route>
-                        <Route path="/train">
+                        <Route path="/train/:page">
                             <Train/>
                         </Route>
                         <Route path="/uploaded">
                             <ThankYou/>
                         </Route>
-                        <Route path="/car">
+                        <Route path="/car/:page">
                             <Car/>
                         </Route>
-                        <Route path="/internet">
+                        <Route path="/internet/:page">
                             <Internet/>
                         </Route>
                         <Route path="/information">
                             <Information/>
                         </Route>
                         <Route path="/login">
-                            <Login/>
+                            {user ? <Redirect to="/dashboard"/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/dashboard">
                             <Dashboard/>
@@ -89,19 +89,19 @@ const App = () => {
                             <IonIcon icon={home}/>
                             <IonLabel>Dashboard</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="internet" href="/internet">
+                        <IonTabButton tab="internet" href="/internet/internet">
                             <IonIcon icon={wifi}/>
                             <IonLabel>Internet </IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="phone" href="/phone">
+                        <IonTabButton tab="phone" href="/phone/phone">
                             <IonIcon icon={phonePortraitSharp}/>
                             <IonLabel>Phone</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="car" href="/car">
+                        <IonTabButton tab="car" href="/car/car">
                             <IonIcon icon={car}/>
                             <IonLabel>Car </IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="mobile" href="/train">
+                        <IonTabButton tab="mobile" href="/train/train">
                             <IonIcon icon={trainSharp}/>
                             <IonLabel>Train </IonLabel>
                         </IonTabButton>
