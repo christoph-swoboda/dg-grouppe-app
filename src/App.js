@@ -41,6 +41,7 @@ import Internet from "./pages/internet";
 import Information from "./pages/information";
 import ThankYou from "./components/thankYou";
 import {ToastContainer} from "react-toastify";
+import UserProfile from "./pages/profile";
 
 setupIonicReact();
 
@@ -57,31 +58,31 @@ const App = () => {
                             {user ? <Redirect to="/dashboard"/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/phone/:page">
-                            <Phone/>
+                            {user ? <Phone/>: <Redirect to="/login"/>}
                         </Route>
                         <Route path="/train/:page">
-                            <Train/>
+                            {user ? <Train/>: <Redirect to="/login"/>}
                         </Route>
                         <Route path="/uploaded">
-                            <ThankYou/>
+                            {user ? <ThankYou/>: <Redirect to="/login"/>}
                         </Route>
                         <Route path="/car/:page">
-                            <Car/>
+                            {user ? <Car/>: <Redirect to="/login"/>}
                         </Route>
                         <Route path="/internet/:page">
-                            <Internet/>
+                            {user ? <Internet/>: <Redirect to="/login"/>}
                         </Route>
                         <Route path="/information">
-                            <Information/>
+                            {user ?  <Information/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/login">
                             {!user ? <Login/> : <Redirect to="/dashboard"/>}
                         </Route>
                         <Route path="/dashboard">
-                            <Dashboard/>
+                            {user ?  <Dashboard/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/profile">
-                            <Index/>
+                            {user ?  <UserProfile/> : <Redirect to="/login"/>}
                         </Route>
                     </IonRouterOutlet>
 
