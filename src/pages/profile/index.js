@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react"
 import '../../styles/userProfile.scss'
-import {IonAvatar, IonCard, IonPage} from "@ionic/react";
+import {IonAvatar, IonPage} from "@ionic/react";
 import image from "../../assets/a2.jpg";
-import {arrowForward, cameraOutline, close} from "ionicons/icons";
+import {cameraOutline, close} from "ionicons/icons";
 import {useHistory} from "react-router-dom";
 import {Camera, CameraResultType} from "@capacitor/camera";
 import {Controller, useForm} from "react-hook-form";
@@ -17,12 +17,12 @@ const UserProfile = () => {
     const [url, setUrl] = useState('')
     const [user, setUser] = useState([])
     const [Errors, setErrors] = useState('')
-    const [notFound, setNotFound] = useState('')
     const [loading, setLoading] = useState(false)
     const [loadingLogout, setLoadingLogOut] = useState(false)
     const [showPass, setShowPass] = useState(true)
     const [showNumber, setShowNumber] = useState(true)
     let keys = ''
+    const backend=process.env.REACT_APP_BACKEND_URL
     const {
         register, getValues, setValue, handleSubmit, formState, reset, formState: {errors, touchedFields},
         control
@@ -34,8 +34,9 @@ const UserProfile = () => {
         if(data.password!==data.repeat_password){
             setErrors('Passwords didnt match')
         }
-        // setLoading(true)
+        setLoading(true)
         console.log('data', data)
+        setLoading(false)
     };
 
     useEffect(() => {
@@ -59,6 +60,17 @@ const UserProfile = () => {
         });
         const imageUrl = photo.dataUrl;
         setUrl(imageUrl)
+
+        let data=new FormData()
+        data.append('image', imageUrl)
+        Api().post(`/employee/profileImage/${user?.employees?.id}`, data).then(res=>{
+            if(res.status===201){
+                alert('Profile Image Updated')
+            }
+            else{
+                alert('Something went wrong')
+            }
+        })
     }
 
     async function logout() {
@@ -82,7 +94,7 @@ const UserProfile = () => {
                               onClick={() => history.push('/dashboard')}
                     />
                     <IonAvatar onClick={() => takePicture()}>
-                        <img src={url ? url : image} alt='avatar'/>
+                        <img src={ url? url : `${backend}/${user?.employees?.image}`} alt='avatar'/>
                     </IonAvatar>
                 </div>
                 <div className='userName'>

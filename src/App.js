@@ -40,6 +40,7 @@ import Car from "./pages/car";
 import Internet from "./pages/internet";
 import Information from "./pages/information";
 import ThankYou from "./components/thankYou";
+import {ToastContainer} from "react-toastify";
 
 setupIonicReact();
 
@@ -74,10 +75,7 @@ const App = () => {
                             <Information/>
                         </Route>
                         <Route path="/login">
-                            {user ? <Redirect to="/dashboard"/> : <Redirect to="/login"/>}
-                        </Route>
-                        <Route path="/login">
-                            <Login/>
+                            {!user ? <Login/> : <Redirect to="/dashboard"/>}
                         </Route>
                         <Route path="/dashboard">
                             <Dashboard/>
@@ -112,6 +110,7 @@ const App = () => {
 
                 </IonTabs>
             </IonReactRouter>
+            <ToastContainer/>
         </IonApp>
     )
 }
