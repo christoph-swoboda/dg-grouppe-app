@@ -33,7 +33,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import React from "react";
-import UserProfile from "./components/userProfile";
+import Index from "./pages/profile";
 import Phone from "./pages/phone";
 import Train from "./pages/train";
 import Car from "./pages/car";
@@ -76,11 +76,14 @@ const App = () => {
                         <Route path="/login">
                             {user ? <Redirect to="/dashboard"/> : <Redirect to="/login"/>}
                         </Route>
+                        <Route path="/login">
+                            <Login/>
+                        </Route>
                         <Route path="/dashboard">
                             <Dashboard/>
                         </Route>
                         <Route path="/profile">
-                            <UserProfile/>
+                            <Index/>
                         </Route>
                     </IonRouterOutlet>
 

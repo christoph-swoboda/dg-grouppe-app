@@ -9,35 +9,28 @@ import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
 const Request = ({title, status, responseId, updated, month, year, type, message}) => {
 
     const [{modal}, dispatch] = useStateValue()
-    const [period,setPeriod]= useState('')
+    const [period, setPeriod] = useState('')
 
     useEffect(() => {
         setPeriod(getPeriod(month, year))
     }, [type]);
 
     return (
-        <IonCard style={{marginLeft: 'auto'}}>
+        <IonCard style={{margin: '10px auto'}}>
             <IonContent>
                 <IonModal isOpen={modal} className='modal'>
                     <UploadPopUp title={title} responseId={responseId}/>
-                    <IonCard className='cancelUpload' onClick={() =>
-                        dispatch(
-                            {
-                                type: "SET_MODAL",
-                                item: false,
-                            })
-                    }>
+                    <IonCard className='cancelUpload'
+                             onClick={() => dispatch({type: "SET_MODAL", item: false})}
+                    >
                         Cancel
                     </IonCard>
                 </IonModal>
             </IonContent>
 
-            <div className='request' onClick={() =>
-                dispatch(
-                    {
-                        type: "SET_MODAL",
-                        item: true,
-                    })}>
+            <div className='request'
+                 onClick={() => dispatch({type: "SET_MODAL", item: true})}
+            >
                 <div className={status !== '3' ? 'card' : 'cardError'}>
                     {/*<div className='card' >*/}
                     {
@@ -54,7 +47,7 @@ const Request = ({title, status, responseId, updated, month, year, type, message
                     <h3>Period: {period}</h3>
                     <p hidden={status !== '3'}>Reason: {message}</p>
                     <p>Updated: {updated}</p>
-                    <p>Status: {status==='1'?'Pending':status==='2'?'Approved':'Rejected'}</p>
+                    <p>Status: {status === '1' ? 'Pending' : status === '2' ? 'Approved' : 'Rejected'}</p>
                 </div>
             </div>
         </IonCard>

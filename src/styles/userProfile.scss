@@ -36,3 +36,30 @@
     margin-top: -.5rem;
   }
 }
+
+.profile {
+  @include centerItemsAbsolute();
+  padding: 2rem;
+
+  p {
+    font-size: 1.7vh;
+    line-height: 1;
+    color: $theme;
+    margin-bottom: 1vh;
+    width: 90vw;
+  }
+
+  form {
+    @include formStyle(82vw, .7rem);
+    margin-left: 2rem;
+    .update {
+      background-color: white;
+      cursor: pointer;
+      color: black;
+      width: 82vw;
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 0 1.1rem 1.1rem 0;
+    }
+  }
+}

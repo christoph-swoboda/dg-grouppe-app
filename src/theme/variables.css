@@ -258,3 +258,7 @@ body{
   font-family: Roboto;
 }
 
+input{
+  outline: none;
+}
+
