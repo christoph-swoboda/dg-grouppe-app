@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "725487638878",
+    "project_id": "dg-gruppe-f66cb",
+    "storage_bucket": "dg-gruppe-f66cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725487638878:android:9cf1c77a8742443fe897cf",
+        "android_client_info": {
+          "package_name": "DG.gruppe.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725487638878-joptl6jb0q2nve4arskccjhumqdqbkkt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0QUUvYzpGUIC_lP6546JxwhUiLkwuG4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725487638878-joptl6jb0q2nve4arskccjhumqdqbkkt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

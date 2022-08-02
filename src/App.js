@@ -12,7 +12,7 @@ import {
 import {IonReactRouter} from '@ionic/react-router';
 import {car, home, phonePortraitSharp, trainSharp, wifi} from 'ionicons/icons';
 import Login from './pages/login';
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/dashboard/index";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,8 +32,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import React from "react";
-import Index from "./pages/profile";
+import React, {useEffect} from "react";
 import Phone from "./pages/phone";
 import Train from "./pages/train";
 import Car from "./pages/car";
@@ -42,12 +41,52 @@ import Information from "./pages/information";
 import ThankYou from "./components/thankYou";
 import {ToastContainer} from "react-toastify";
 import UserProfile from "./pages/profile";
+import {PushNotifications} from "@capacitor/push-notifications";
+import {useStateValue} from "./states/StateProvider";
 
 setupIonicReact();
 
 const App = () => {
 
     const user = JSON.parse(localStorage.getItem('user'));
+    // const user = 'aa'
+    const [{deviceID}, dispatch] = useStateValue()
+    console.log('env', process.env.REACT_APP_BACKEND_URL)
+
+    useEffect(() => {
+        PushNotifications.checkPermissions().then(async (res) => {
+            if (res.receive !== 'granted') {
+                PushNotifications.requestPermissions().then(async (res) => {
+                    if (res.receive === 'denied') {
+                        window.alert('Push Notification permission denied');
+                    } else {
+                        window.alert('Push Notification permission granted');
+                        await register();
+                    }
+                });
+            } else {
+                await register();
+            }
+        });
+    }, [])
+
+    const register = async () => {
+
+        // Register with Apple / Google to receive push via APNS/FCM
+        await PushNotifications.register();
+
+        // On success, we should be able to receive notifications
+        await PushNotifications.addListener('registration', token => {
+            dispatch({type: "SET_DEVICEID", item: token.value})
+        });
+
+        // Some issue with our setup and push will not work
+        await PushNotifications.addListener('registrationError',
+            (error) => {
+                window.alert('Error on registration: ' + JSON.stringify(error));
+            }
+        );
+    }
 
     return (
         <IonApp>
@@ -58,31 +97,31 @@ const App = () => {
                             {user ? <Redirect to="/dashboard"/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/phone/:page">
-                            {user ? <Phone/>: <Redirect to="/login"/>}
+                            {user ? <Phone/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/train/:page">
-                            {user ? <Train/>: <Redirect to="/login"/>}
+                            {user ? <Train/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/uploaded">
-                            {user ? <ThankYou/>: <Redirect to="/login"/>}
+                            {user ? <ThankYou/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/car/:page">
-                            {user ? <Car/>: <Redirect to="/login"/>}
+                            {user ? <Car/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/internet/:page">
-                            {user ? <Internet/>: <Redirect to="/login"/>}
+                            {user ? <Internet/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/information">
-                            {user ?  <Information/> : <Redirect to="/login"/>}
+                            {user ? <Information/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/login">
                             {!user ? <Login/> : <Redirect to="/dashboard"/>}
                         </Route>
                         <Route path="/dashboard">
-                            {user ?  <Dashboard/> : <Redirect to="/login"/>}
+                            {user ? <Dashboard/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/profile">
-                            {user ?  <UserProfile/> : <Redirect to="/login"/>}
+                            {user ? <UserProfile/> : <Redirect to="/login"/>}
                         </Route>
                     </IonRouterOutlet>
 

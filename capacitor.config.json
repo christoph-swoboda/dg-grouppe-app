@@ -1,6 +1,12 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "DG-gruppe-app",
+	"appId": "DG.gruppe.app",
+	"appName": "DG.gruppe.app",
 	"webDir": "build",
+	"plugins": {
+		"PushNotifications": {
+			"presentationOptions": ["badge", "sound", "alert"]
+		}
+	},
 	"bundledWebRuntime": false
 }
+

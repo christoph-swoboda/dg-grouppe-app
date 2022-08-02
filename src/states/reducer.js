@@ -1,6 +1,7 @@
 export const initialState = {
     user: {},
     modal:false,
+    deviceID:null,
     filterIds:[],
 };
 const reducer = (state, action) => {
@@ -14,6 +15,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 modal: action.item
+            }
+            case "SET_DEVICEID":
+            return {
+                ...state,
+                deviceID: action.item
             }
             case "SET_NOTIFILTER":
             return {
