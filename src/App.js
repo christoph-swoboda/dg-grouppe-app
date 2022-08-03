@@ -94,6 +94,13 @@ const App = () => {
         );
     }
 
+    useEffect(() => {
+        Api().post(`/save-device-id/${deviceID}`).then(res=>{
+            console.log('res', res)
+        })
+    }, [deviceID]);
+
+
     return (
         <IonApp>
             <IonReactRouter>
