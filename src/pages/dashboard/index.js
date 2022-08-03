@@ -10,10 +10,12 @@ import Request from "../../components/card/request";
 import Api from "../../api/api";
 import qs from "qs"
 import {BeatLoader} from "react-spinners";
+import {useStateValue} from "../../states/StateProvider";
 
 const Dashboard = () => {
 
     const [showModal, setShowModal] = useState(false);
+    const [{filterIds}] = useStateValue()
     const [requests, setRequests] = useState([]);
     const [user, setUser] = useState([]);
     const [total, setTotal] = useState(0);
@@ -41,11 +43,17 @@ const Dashboard = () => {
             setUser(res.data)
             setLoadingUser(false)
         })
+    }, []);
+
+    useEffect(async () => {
         await Api().get('/notifications').then(res => {
-            console.log('noti', res.data)
             setNotifications(res.data)
         })
-    }, []);
+    }, [filterIds]);
+
+    async function closeModal() {
+        setShowModal(false)
+    }
 
     return (
         <IonPage className='container'>
@@ -70,7 +78,8 @@ const Dashboard = () => {
                     </div>
 
                     <div className='notification'>
-                        <IonCard hidden={notifications?.length<1} className='ion-badge' onClick={() => setShowModal(true)}
+                        <IonCard hidden={notifications?.length < 1} className='ion-badge'
+                                 onClick={() => setShowModal(true)}
                                  color="dark">{notifications?.length}</IonCard>
                         <ion-icon onClick={() => setShowModal(true)} icon={notificationsOutline}/>
                         <Link to='/information'>
@@ -107,7 +116,7 @@ const Dashboard = () => {
                                     ))
                             }
                             <IonText className='loadMore' hidden={lastPage <= filter.page}
-                                    onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
+                                     onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
                             </IonText>
                         </IonCard>
                 }
@@ -119,7 +128,7 @@ const Dashboard = () => {
                     <div className='notificationContainer'>
                         <div className='notificationHeader'>
                             <h1>Notifications</h1>
-                            <ion-icon icon={close} onClick={() => setShowModal(false)}/>
+                            <ion-icon icon={close} onClick={() => closeModal()}/>
                         </div>
                         {
                             notifications?.map((not, i) => (

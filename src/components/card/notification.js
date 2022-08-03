@@ -4,11 +4,13 @@ import '../../styles/notification.scss'
 import {checkmarkCircleOutline, close, closeCircleOutline, hourglassOutline} from "ionicons/icons";
 import {useStateValue} from "../../states/StateProvider";
 import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
+import Api from "../../api/api";
 
 const Notification = ({title, status, type, updated,  month, year, id}) => {
 
-    const [{}, dispatch]=useStateValue()
+    const [{filterIds}, dispatch]=useStateValue()
     const [period,setPeriod]= useState('')
+    const [deleteId,setDeleteId]=useState()
 
     useEffect(() => {
         setPeriod(getPeriod(month, year))
@@ -22,8 +24,11 @@ const Notification = ({title, status, type, updated,  month, year, id}) => {
             })
         setDeleteId(id)
         console.log('id', id)
+
+        Api().post(`/notifications/seen/${id}`).then(res => {
+            console.log('res', res)
+        })
     }
-    const [deleteId,setDeleteId]=useState()
 
     return (
         <div>
@@ -32,10 +37,10 @@ const Notification = ({title, status, type, updated,  month, year, id}) => {
                 <IonCard className={status === 'rejected' ? 'notifications rejected' : 'notifications'}>
                     <div className='hourGlass'>
                         {
-                            status === 'pending' ?
+                            status === '1' ?
                                 <ion-icon icon={hourglassOutline}/>
                                 :
-                                status === 'approved' ?
+                                status === '2' ?
                                     <ion-icon icon={checkmarkCircleOutline}/>
                                     :
                                     <ion-icon icon={closeCircleOutline}/>
