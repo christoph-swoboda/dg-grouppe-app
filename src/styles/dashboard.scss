@@ -15,6 +15,7 @@
     z-index: 1111;
     background-color: $body-bg1;
     height: 6rem;
+    margin-top: -1rem;
     width: 85%;
     justify-content: space-between;
 
@@ -73,6 +74,7 @@
     }
 
     ion-icon {
+      margin-top: 5rem;
       font-size: 10vh;
       font-weight: 800;
       @include centerItemsAbsolute;
@@ -81,7 +83,7 @@
     .requestStatus {
       text-align: center;
       @include centerItemsAbsolute;
-      margin-top: 5rem;
+      margin-top: 10rem;
 
       p {
         width: 100vw;

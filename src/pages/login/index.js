@@ -30,17 +30,14 @@ const Login = () => {
                         localStorage.setItem('token', token)
                         localStorage.setItem('user', JSON.stringify(user))
                     } else {
-                        toast.error('something_went_wrong')
+                        window.alert('something_went_wrong')
                     }
 
                 }
             })
             .catch(e => {
-                if (!e) {
-                    setNotFound(e)
-                }
-                setErrors(e)
-                toast.error(e)
+                window.alert(e.response?.data.message)
+                setLoading(false)
             })
 
         let user = JSON.parse(window.localStorage.getItem('user'))

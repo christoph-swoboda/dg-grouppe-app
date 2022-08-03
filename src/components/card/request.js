@@ -16,7 +16,7 @@ const Request = ({title, status, responseId, updated, month, year, type, message
     }, [type]);
 
     return (
-        <IonCard style={{margin: '10px auto'}}>
+        <IonCard style={{margin: '15px auto'}}>
             <IonContent>
                 <IonModal isOpen={modal} className='modal'>
                     <UploadPopUp title={title} responseId={responseId}/>

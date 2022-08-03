@@ -43,6 +43,7 @@ import {ToastContainer} from "react-toastify";
 import UserProfile from "./pages/profile";
 import {PushNotifications} from "@capacitor/push-notifications";
 import {useStateValue} from "./states/StateProvider";
+import Api from "./api/api";
 
 setupIonicReact();
 
@@ -69,6 +70,11 @@ const App = () => {
             }
         });
     }, [])
+
+    // useEffect(() => {
+    //     Api().get('/send-notification').then(res=>console.log('res',res))
+    // }, []);
+
 
     const register = async () => {
 

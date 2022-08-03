@@ -13,7 +13,6 @@ let BaseApi = axios.create({
     },
 });
 
-
 let Api = function() {
 
     const token=localStorage.getItem('token');

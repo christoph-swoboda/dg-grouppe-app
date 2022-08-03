@@ -82,7 +82,7 @@ const Dashboard = () => {
                     requests?.length === 0 && !loading ?
                         <EmptyDashboard name={user?.employees?.first_name}/>
                         :
-                        <IonCard style={{marginTop: '9rem', position: 'relative'}}>
+                        <IonCard style={{marginTop: '7rem', position: 'relative'}}>
                             <IonCardTitle style={{fontSize: '35px'}}>Hi {user?.employees?.first_name}</IonCardTitle>
                             <IonCardSubtitle>you
                                 have {total} requests

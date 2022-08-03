@@ -79,7 +79,7 @@ const Billing = ({header}) => {
                                 />
                             ))
                 }
-                <button hidden={lastPage <= filter.page}
+                <button hidden={lastPage <= filter.page || requests.length === 0}
                         onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
                 </button>
             </IonCard>

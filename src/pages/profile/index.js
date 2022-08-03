@@ -9,7 +9,6 @@ import {Controller, useForm} from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css'
 import Api from "../../api/api";
-import {toast} from "react-toastify";
 
 const UserProfile = () => {
 
@@ -17,12 +16,13 @@ const UserProfile = () => {
     const [url, setUrl] = useState('')
     const [user, setUser] = useState([])
     const [Errors, setErrors] = useState('')
+    const [loadingData, setLoadingData] = useState(false)
     const [loading, setLoading] = useState(false)
     const [loadingLogout, setLoadingLogOut] = useState(false)
     const [showPass, setShowPass] = useState(true)
     const [showNumber, setShowNumber] = useState(true)
     let keys = ''
-    const backend=process.env.REACT_APP_BACKEND_URL
+    const backend = process.env.REACT_APP_BACKEND_URL
     // const backend='http://localhost:8000'
     const {
         register, getValues, setValue, handleSubmit, formState, reset, formState: {errors, touchedFields},
@@ -31,18 +31,27 @@ const UserProfile = () => {
     const {isValid} = formState;
 
     const onSubmit = async (data) => {
+
         setErrors('')
-        if(data.password!==data.repeat_password){
+        if (data.newPassword !== data.repeatPassword) {
             setErrors('Passwords didnt match')
+        } else {
+            setLoading(true)
+            Api().post('/user/update', data).then(res => {
+                window.alert('Information Updated Successfully')
+                setLoading(false)
+            }).catch(err => {
+                window.alert('Something Went Wrong!')
+                setLoading(false)
+            })
         }
-        setLoading(true)
-        console.log('data', data)
-        setLoading(false)
     };
 
     useEffect(() => {
+        setLoadingData(true)
         Api().get('/employee').then(res => {
             setUser(res.data)
+            setLoadingData(false)
         })
     }, []);
 
@@ -62,13 +71,12 @@ const UserProfile = () => {
         const imageUrl = photo.dataUrl;
         setUrl(imageUrl)
 
-        let data=new FormData()
+        let data = new FormData()
         data.append('image', imageUrl)
-        Api().post(`/employee/profileImage/${user?.employees?.id}`, data).then(res=>{
-            if(res.status===201){
+        Api().post(`/employee/profileImage/${user?.employees?.id}`, data).then(res => {
+            if (res.status === 201) {
                 alert('Profile Image Updated')
-            }
-            else{
+            } else {
                 alert('Something went wrong')
             }
         })
@@ -84,6 +92,12 @@ const UserProfile = () => {
             })
     }
 
+    async function resetStates(){
+        history.push('/dashboard')
+        setShowNumber(true)
+        setShowPass(true)
+    }
+
     return (
         <IonPage className='containerNoPadding'>
             <div className='profile'>
@@ -91,11 +105,11 @@ const UserProfile = () => {
                     <ion-icon icon={cameraOutline} onClick={() => takePicture()}/>
                     <ion-icon class='ion-float-right'
                               icon={close}
-                              style={{padding: '1.5rem 2rem 0 0 ', cursor: 'pointer', backgroundColor: 'inherit'}}
-                              onClick={() => history.push('/dashboard')}
+                              style={{padding: '4rem 2rem 0 0 ', cursor: 'pointer', backgroundColor: 'inherit'}}
+                              onClick={() => resetStates()}
                     />
                     <IonAvatar onClick={() => takePicture()}>
-                        <img src={ url? url : `${backend}/${user?.employees?.image}`} alt='avatar'/>
+                        <img src={url ? url : `${backend}/${user?.employees?.image}`} alt='avatar'/>
                     </IonAvatar>
                 </div>
                 <div className='userName'>
@@ -148,21 +162,29 @@ const UserProfile = () => {
                            onClick={() => setShowPass(false)}
                            hidden={!showPass}
                     />
+                    <input placeholder='Enter Old Password'
+                           hidden={showPass}
+                           type='password'
+                           autoFocus
+                           {...register('currentPassword', {required: !showPass})}
+                           style={{border: errors.currentPassword && '1px solid red'}}
+                    />
+                    {errors.currentPassword && touchedFields && <p>{errors.currentPassword.message}</p>}
                     <input placeholder='Enter New Password'
                            hidden={showPass}
                            type='password'
                            autoFocus
-                           {...register('password', {required: !showPass})}
-                           style={{border: errors.password && '1px solid red'}}
+                           {...register('newPassword', {required: !showPass})}
+                           style={{border: errors.newPassword && '1px solid red'}}
                     />
-                    {errors.password && touchedFields && <p>{errors.password.message}</p>}
-                    <input placeholder='Repeat Password'
+                    {errors.newPassword && touchedFields && <p>{errors.newPassword.message}</p>}
+                    <input placeholder='Repeat New Password'
                            hidden={showPass}
                            type='password'
-                           {...register('repeat_password', {required: !showPass})}
-                           style={{border: errors.password && '1px solid red'}}
+                           {...register('repeatPassword', {required: !showPass})}
+                           style={{border: errors.repeatPassword && '1px solid red'}}
                     />
-                    {errors.repeat_password && touchedFields && <p>{errors.repeat_password.message}</p>}
+                    {errors.repeatPassword && touchedFields && <p>{errors.repeatPassword.message}</p>}
                     <p>{Errors}</p>
                     <button hidden={showPass && showNumber} className='update' onClick={handleSubmit(onSubmit)}>
                         {(!loading) ? 'Change' : 'Updating...'}

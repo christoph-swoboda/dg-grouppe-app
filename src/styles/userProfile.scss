@@ -7,12 +7,13 @@
 
   ion-avatar {
     @include centerHorizontal;
-    width: 130px;
-    height: 130px;
+    width: 120px;
+    height: 120px;
+    margin-top: 2rem;
   }
 
   ion-icon {
-    font-size: 55px;
+    font-size: 45px;
     position: relative;
     margin-bottom: -9rem;
     margin-left: 5rem;
