@@ -239,7 +239,7 @@ a{
 }
 .container{
   overflow: scroll;
-  padding: 1.7rem;
+  padding: 1.2rem 1.7rem;
   background-color: #eeeeee;
 }
 
@@ -254,6 +254,13 @@ ion-card{
   color: black;
 }
 
+ion-refresher{
+  background-color: #eeeeee;
+  color: black;
+  box-shadow: none;
+  display: none;
+}
+
 body{
   font-family: Roboto;
 }
@@ -261,4 +268,6 @@ body{
 input{
   outline: none;
 }
-
+.bg-white-custom{
+  background: red;
+}

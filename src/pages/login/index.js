@@ -8,7 +8,6 @@ import Api from "../../api/api";
 const Login = () => {
 
     const [Errors, setErrors] = useState([]);
-    const [notFound, setNotFound] = useState('');
     const [loading, setLoading] = useState(false)
     const {
         register, getValues, setValue, handleSubmit, formState, reset, formState: {errors, touchedFields},
@@ -36,7 +35,13 @@ const Login = () => {
                 }
             })
             .catch(e => {
-                window.alert(e.response?.data.message)
+                if(e.response.status===401){
+                    window.alert(e.response?.data?.message)
+                }
+                else{
+                    console.log('e', e)
+                    window.alert('something went wrong!!')
+                }
                 setLoading(false)
             })
 
@@ -54,8 +59,8 @@ const Login = () => {
     return (
         <IonPage>
             <IonContent className='login'>
-                <IonHeader>Log In</IonHeader>
             <IonCard className='login-box'>
+                <IonHeader>Login</IonHeader>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input placeholder='Username'
                                {...register('email', {
@@ -69,13 +74,13 @@ const Login = () => {
                                required
                                style={{border: errors.email && '1px solid red'}}
                     />
-                    {errors.email && touchedFields && <p>{errors.email.message}</p>}
+                    {errors.email && touchedFields && <p>{errors.email?.message}</p>}
                     <input placeholder='Password'
                                type='password'
                                {...register('password', {required: 'your password is required'})}
                                style={{border: errors.password && '1px solid red'}}
                     />
-                    {errors.password && touchedFields && <p>{errors.password.message}</p>}
+                    {errors.password && touchedFields && <p>{errors.password?.message}</p>}
                     <button className='enabled'>
                         {(!loading) ? 'Log In' : 'Verifying...'}
                     </button>

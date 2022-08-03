@@ -1,11 +1,12 @@
 import React, {useCallback, useEffect, useState} from "react";
 import Request from "./card/request";
 import '../styles/billingPage.scss';
-import {IonCard, IonCardTitle, IonText} from "@ionic/react";
+import {IonCard, IonCardTitle, IonContent, IonRefresher, IonRefresherContent, IonText} from "@ionic/react";
 import Api from "../api/api";
 import {useParams} from "react-router";
 import qs from "qs";
 import {BeatLoader} from "react-spinners";
+import {chevronDownCircleOutline} from "ionicons/icons";
 
 const Billing = ({header}) => {
 
@@ -31,7 +32,7 @@ const Billing = ({header}) => {
     );
 
     useEffect(() => {
-        getRequests().then(r => console.log('r', r))
+        getRequests().then(r => r)
     }, [getRequests]);
 
     function approved() {
@@ -46,44 +47,61 @@ const Billing = ({header}) => {
         setPending(true)
     }
 
-    return (
-        <IonCard className='billingContainer'>
-            <IonCardTitle>{header}</IonCardTitle>
-            <IonCard style={{display: 'flex'}}>
-                <IonText className={pending ? 'approved inActive' : 'active approved'}
-                         onClick={approved}>Approved Uploads</IonText>
-                <IonText className={pending ? 'active pending' : 'inActive pending'}
-                         onClick={rejected}>Pending Uploads</IonText>
-            </IonCard>
-            <IonCard className='requestsContainer'>
-                {
+    function doRefresh(event) {
+        getRequests().then(r => r)
+        event.detail.complete();
 
-                    loading && filter.page === 1 ?
-                        <BeatLoader size={10} color={'#000000'}/>
-                        :
-                        requests.length === 0 ?
-                            'No Data Under This Filter'
+    }
+
+    return (
+        <IonContent>
+            <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+                <IonRefresherContent
+                    pullingIcon={chevronDownCircleOutline}
+                    pullingText="Pull to refresh"
+                    refreshingSpinner="circles"
+                >
+                </IonRefresherContent>
+            </IonRefresher>
+
+            <IonCard className='billingContainer'>
+                <IonCardTitle>{header}</IonCardTitle>
+                <IonCard style={{display: 'flex'}}>
+                    <IonText className={pending ? 'approved inActive' : 'active approved'}
+                             onClick={approved}>Approved Uploads</IonText>
+                    <IonText className={pending ? 'active pending' : 'inActive pending'}
+                             onClick={rejected}>Pending Uploads</IonText>
+                </IonCard>
+                <IonCard className='requestsContainer'>
+                    {
+
+                        loading && filter.page === 1 ?
+                            <BeatLoader size={10} color={'#000000'}/>
                             :
-                            requests?.map(req => (
-                                <Request
-                                    key={req.id}
-                                    responseId={req.response?.id}
-                                    title={req.bill?.title}
-                                    type={req.type?.title}
-                                    period={req.period}
-                                    message={req.response?.message}
-                                    month={new Date(req.bill?.created_at).getMonth() + 1}
-                                    year={new Date(req.bill?.created_at).getFullYear()}
-                                    updated={new Date(req.bill?.updated_at).toLocaleDateString()}
-                                    status={req.status}
-                                />
-                            ))
-                }
-                <button hidden={lastPage <= filter.page || requests.length === 0}
-                        onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
-                </button>
+                            requests.length === 0 ?
+                                'No Data Under This Filter'
+                                :
+                                requests?.map(req => (
+                                    <Request
+                                        key={req.id}
+                                        responseId={req.response?.id}
+                                        title={req.bill?.title}
+                                        type={req.type?.title}
+                                        period={req.period}
+                                        message={req.response?.message}
+                                        month={new Date(req.bill?.created_at).getMonth() + 1}
+                                        year={new Date(req.bill?.created_at).getFullYear()}
+                                        updated={new Date(req.bill?.updated_at).toLocaleDateString()}
+                                        status={req.status}
+                                    />
+                                ))
+                    }
+                    <button hidden={lastPage <= filter.page || requests.length === 0}
+                            onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
+                    </button>
+                </IonCard>
             </IonCard>
-        </IonCard>
+        </IonContent>
     )
 }
 

@@ -2,7 +2,6 @@
 @import "variables";
 
 .dashboard {
-  height: 100vh;
   overflow: scroll;
 
   .loadMore {
@@ -13,10 +12,10 @@
     @include flexCenter;
     position: fixed;
     z-index: 1111;
+    width: 88vw;
     background-color: $body-bg1;
     height: 6rem;
     margin-top: -1rem;
-    width: 85%;
     justify-content: space-between;
 
     .userInfo {
