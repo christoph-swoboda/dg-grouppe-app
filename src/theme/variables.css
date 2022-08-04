@@ -254,6 +254,12 @@ ion-card{
   color: black;
 }
 
+ion-loading{
+  box-shadow: none;
+  background-color: transparent;
+  color: black;
+}
+
 ion-refresher{
   background-color: #eeeeee;
   color: black;
@@ -268,6 +274,5 @@ body{
 input{
   outline: none;
 }
-.bg-white-custom{
-  background: red;
-}
+
+

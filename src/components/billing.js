@@ -1,7 +1,18 @@
 import React, {useCallback, useEffect, useState} from "react";
 import Request from "./card/request";
 import '../styles/billingPage.scss';
-import {IonCard, IonCardTitle, IonContent, IonRefresher, IonRefresherContent, IonText} from "@ionic/react";
+import {
+    IonCard,
+    IonCardTitle,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonRefresher,
+    IonRefresherContent,
+    IonText,
+    IonLoading
+} from "@ionic/react";
 import Api from "../api/api";
 import {useParams} from "react-router";
 import qs from "qs";
@@ -17,15 +28,19 @@ const Billing = ({header}) => {
     const [filter, setFilter] = useState({type: params.page, status: 1, page: 1})
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
     const [lastPage, setLastPage] = useState(0);
+    const [total, setTotal] = useState(0);
 
     const getRequests = useCallback(
         async () => {
             setLoading(true)
             Api().get(`/requests/categorized?${query}`).then(res => {
-                console.log('req', res.data)
+                console.log('req', res.data?.total)
                 setRequests(filter.page === 1 ? res.data.data.filter(req => req.type !== null) : [...requests, ...res.data.data.filter(req => req.type !== null)])
                 setLastPage(res.data.last_page)
+                setTotal(res.data?.total)
                 setLoading(false)
+            }).catch(e=>{
+                console.log('err', e)
             })
         },
         [filter]
@@ -50,8 +65,14 @@ const Billing = ({header}) => {
     function doRefresh(event) {
         getRequests().then(r => r)
         event.detail.complete();
-
     }
+
+    // useEffect(() => {
+    //     Api().get('/todos').then(res=>{
+    //         console.log('res', res)
+    //     })
+    // }, []);
+
 
     return (
         <IonContent>
@@ -76,14 +97,23 @@ const Billing = ({header}) => {
                     {
 
                         loading && filter.page === 1 ?
-                            <BeatLoader size={10} color={'#000000'}/>
+                            <IonContent>
+                                <IonLoading
+                                    isOpen={loading}
+                                />
+                            </IonContent>
                             :
                             requests.length === 0 ?
-                                'No Data Under This Filter'
+                                <IonHeader>
+                                    <IonToolbar>
+                                        <IonTitle>No Data Found</IonTitle>
+                                    </IonToolbar>
+                                </IonHeader>
                                 :
                                 requests?.map(req => (
                                     <Request
                                         key={req.id}
+                                        len={total}
                                         responseId={req.response?.id}
                                         title={req.bill?.title}
                                         type={req.type?.title}

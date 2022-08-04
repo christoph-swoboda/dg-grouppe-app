@@ -10,6 +10,11 @@
 			]
 		}
 	},
+	"server": {
+		"allowNavigation": [
+			"https://dg-gruppe-app.christoph-swoboda.com/api"
+		]
+	},
 	"webDir": "build",
 	"bundledWebRuntime": false
 }

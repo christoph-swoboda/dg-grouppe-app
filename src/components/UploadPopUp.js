@@ -1,23 +1,24 @@
 import React, {useEffect, useState} from "react"
 import '../styles/uploadPopUp.scss'
-import {IonCard, IonContent, IonImg, IonModal, IonText} from "@ionic/react";
+import {IonButton, IonCard, IonContent, IonImg, IonModal, IonText} from "@ionic/react";
 import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 import {useStateValue} from "../states/StateProvider";
 import {useHistory} from "react-router-dom";
 import {checkmarkCircleOutline} from "ionicons/icons";
 import Api from "../api/api";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 
 const UploadPopUp = ({title, responseId}) => {
 
     const [url, setUrl] = useState('')
     const [image, setImage] = useState('')
+    const [loading, setLoading] = useState(false)
     const [{uploaded}, dispatch] = useStateValue()
     const history = useHistory()
     const hiddenFileInput = React.useRef(null);
-  
+
     const auToClickHander = () => {
-      hiddenFileInput.current.click();
+        hiddenFileInput.current.click();
     };
 
     async function takePicture() {
@@ -56,17 +57,18 @@ const UploadPopUp = ({title, responseId}) => {
     }
 
     async function send() {
-
+        setLoading(true)
         let data=new FormData()
         data.append('image', url)
         data.append('id', responseId)
 
-        await Api().post('/response', data).then(res=>{
-            if(res.status===200){
+        await Api().post('/response', data).then(res => {
+            console.log('res', res)
+            if (res.status === 200) {
+                setLoading(false)
                 dispatch({type: "SET_MODAL", item: false})
                 history.push('/uploaded')
-            }
-            else{
+            } else {
                 toast.error('Something Went Wrong')
             }
         })
@@ -77,7 +79,7 @@ const UploadPopUp = ({title, responseId}) => {
             <IonImg className={url ? 'uploadedImage' : 'hideImageSection'} src={url}/>
             {
                 url &&
-                <IonCard className='send' onClick={send}>send</IonCard>
+                <IonButton className='send' onClick={send}>{loading ? 'Sending' : 'Send'}</IonButton>
             }
             <IonCard onClick={() => takePicture()}>Kamera</IonCard>
             <IonCard onClick={() => uploadPicture()}>Foto-und Videomediathek</IonCard>

@@ -8,6 +8,12 @@ const config: CapacitorConfig = {
       presentationOptions: ["badge", "sound", "alert"],
     },
   },
+  server: {
+    // androidScheme: "http",
+    allowNavigation: [
+      "https://dg-gruppe-app.christoph-swoboda.com/api"
+    ]
+  },
   webDir: 'build',
   bundledWebRuntime: false
 };

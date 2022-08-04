@@ -51,8 +51,8 @@ const App = () => {
 
     const user = JSON.parse(localStorage.getItem('user'));
     // const user = 'aa'
-    const [{deviceID}, dispatch] = useStateValue()
-    console.log('env', process.env.REACT_APP_BACKEND_URL)
+    const [{}, dispatch] = useStateValue()
+    const deviceID=localStorage.DEVICEID
 
     useEffect(() => {
         PushNotifications.checkPermissions().then(async (res) => {
@@ -82,8 +82,9 @@ const App = () => {
         await PushNotifications.register();
 
         // On success, we should be able to receive notifications
-        await PushNotifications.addListener('registration', token => {
-            dispatch({type: "SET_DEVICEID", item: token.value})
+        await PushNotifications.addListener('registration',  token => {
+            // dispatch({type: "SET_DEVICEID", item: token.value})
+            localStorage.setItem('DEVICEID', token.value)
         });
 
         // Some issue with our setup and push will not work
@@ -95,11 +96,12 @@ const App = () => {
     }
 
     useEffect(() => {
-        Api().post(`/save-device-id/${deviceID}`).then(res=>{
-            console.log('res', res)
-        })
+        if(deviceID){
+            Api().post(`/save-device-id/${deviceID}`).then(res => {
+                console.log('devIdSaved', deviceID)
+            })
+        }
     }, [deviceID]);
-
 
     return (
         <IonApp>

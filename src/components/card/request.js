@@ -1,12 +1,22 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/request.scss'
 import {checkmarkCircleOutline, hourglassOutline, warningOutline} from "ionicons/icons";
-import {IonCard, IonContent, IonModal} from "@ionic/react";
+import {
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonContent,
+    IonHeader,
+    IonItem,
+    IonLabel,
+    IonModal,
+    IonToolbar
+} from "@ionic/react";
 import UploadPopUp from "../UploadPopUp";
 import {useStateValue} from "../../states/StateProvider";
 import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
 
-const Request = ({title, status, responseId, updated, month, year, type, message}) => {
+const Request = ({title, status, responseId, updated, month, year, type, message,len}) => {
 
     const [{modal}, dispatch] = useStateValue()
     const [period, setPeriod] = useState('')
@@ -16,7 +26,7 @@ const Request = ({title, status, responseId, updated, month, year, type, message
     }, [type]);
 
     return (
-        <IonCard style={{margin: '15px auto'}}>
+        <IonCard style={{minHeight:len<2 && '100vh'}}>
             <IonContent>
                 <IonModal isOpen={modal} className='modal'>
                     <UploadPopUp title={title} responseId={responseId}/>
@@ -28,10 +38,10 @@ const Request = ({title, status, responseId, updated, month, year, type, message
                 </IonModal>
             </IonContent>
 
-            <div className='request'
+            <IonHeader className='request'
                  onClick={() => dispatch({type: "SET_MODAL", item: true})}
             >
-                <div className={status !== '3' ? 'card' : 'cardError'}>
+                <IonToolbar className={status !== '3' ? 'card' : 'cardError'}>
                     {/*<div className='card' >*/}
                     {
                         status === '1' ?
@@ -48,8 +58,8 @@ const Request = ({title, status, responseId, updated, month, year, type, message
                     <p hidden={status !== '3'}>Reason: {message}</p>
                     <p>Updated: {updated}</p>
                     <p>Status: {status === '1' ? 'Pending' : status === '2' ? 'Approved' : 'Rejected'}</p>
-                </div>
-            </div>
+                </IonToolbar>
+            </IonHeader>
         </IonCard>
     )
 }

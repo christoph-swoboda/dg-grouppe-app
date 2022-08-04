@@ -7,6 +7,11 @@
 			"presentationOptions": ["badge", "sound", "alert"]
 		}
 	},
+	"server": {
+		"allowNavigation": [
+			"https://dg-gruppe-app.christoph-swoboda.com/"
+		]
+	},
 	"bundledWebRuntime": false
 }
 

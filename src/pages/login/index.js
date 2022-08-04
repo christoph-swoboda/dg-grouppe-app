@@ -4,11 +4,14 @@ import {toast} from "react-toastify"
 import {useForm} from "react-hook-form"
 import {IonCard, IonContent, IonHeader, IonPage} from "@ionic/react";
 import Api from "../../api/api";
+import {useStateValue} from "../../states/StateProvider";
+import {useHistory} from "react-router-dom";
 
 const Login = () => {
 
     const [Errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(false)
+    const history=useHistory()
     const {
         register, getValues, setValue, handleSubmit, formState, reset, formState: {errors, touchedFields},
         control
@@ -18,9 +21,10 @@ const Login = () => {
     const onSubmit = async (data) => {
         setLoading(true)
         await Api().post('/login', data)
-            .then((res) => {
+            .then(async (res) => {
+                console.log('res', res)
                 const Data = res.data
-                const role = Data.user.role
+                const role = Data.user?.role
 
                 if (role === '2') {
                     if (Data.access_token) {
@@ -35,11 +39,12 @@ const Login = () => {
                 }
             })
             .catch(e => {
-                if(e.response.status===401){
+                console.log('e', e)
+                console.log('eres', e.response)
+                if(e.response?.status===401){
                     window.alert(e.response?.data?.message)
                 }
                 else{
-                    console.log('e', e)
                     window.alert('something went wrong!!')
                 }
                 setLoading(false)

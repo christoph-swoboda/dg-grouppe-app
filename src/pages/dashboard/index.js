@@ -4,7 +4,7 @@ import {
     IonCard,
     IonCardSubtitle,
     IonCardTitle,
-    IonContent,
+    IonContent, IonLoading,
     IonModal,
     IonPage, IonRefresher,
     IonRefresherContent,
@@ -132,9 +132,13 @@ const Dashboard = () => {
                         <IonCard>
                             {
                                 loadingUser && filter.page === 1 ?
-                                    <BeatLoader size={8} color={'#000000'}/>
+                                    <IonContent>
+                                        <IonLoading
+                                            isOpen={loading}
+                                        />
+                                    </IonContent>
                                     :
-                                    <IonText>{user?.employees?.first_name}</IonText>
+                                    <IonText className={'ion-text-xl-left'}>{user?.employees?.first_name}</IonText>
                             }
                             <IonCardSubtitle>{user?.employees?.company}</IonCardSubtitle>
 
@@ -156,7 +160,7 @@ const Dashboard = () => {
                     requests?.length === 0 && !loading ?
                         <EmptyDashboard name={user?.employees?.first_name}/>
                         :
-                        <div style={{paddingTop: '6rem',backgroundColor:'#eeeeee', minHeight: '1300px', overflow: 'scroll'}}>
+                        <div style={{paddingTop: '6rem',backgroundColor:'#eeeeee', minHeight: '90vh'}}>
                             <IonCardTitle style={{fontSize: '35px'}}>
                                 Hi {user?.employees?.first_name}
                             </IonCardTitle>
@@ -166,11 +170,16 @@ const Dashboard = () => {
                             <hr/>
                             {
                                 loading && filter.page === 1 ?
-                                    <BeatLoader size={12} color={'#000000'}/>
+                                    <IonContent>
+                                        <IonLoading
+                                            isOpen={loading}
+                                        />
+                                    </IonContent>
                                     :
                                     requests?.map((req, i) => (
                                         <Request
                                             key={req.id}
+                                            len={total}
                                             responseId={req.response?.id}
                                             title={req.bill?.title}
                                             message={req?.response?.message}
