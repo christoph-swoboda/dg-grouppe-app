@@ -1,17 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/request.scss'
 import {checkmarkCircleOutline, hourglassOutline, warningOutline} from "ionicons/icons";
-import {
-    IonButton,
-    IonCard,
-    IonCardContent,
-    IonContent,
-    IonHeader,
-    IonItem,
-    IonLabel,
-    IonModal,
-    IonToolbar
-} from "@ionic/react";
+import {IonCard, IonContent, IonHeader, IonModal, IonToolbar} from "@ionic/react";
 import UploadPopUp from "../UploadPopUp";
 import {useStateValue} from "../../states/StateProvider";
 import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
