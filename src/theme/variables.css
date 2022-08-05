@@ -285,10 +285,13 @@ input {
 .imageSection {
     height: 80%;
 }
-.sendOrCancelImage{
-}
 .sendOrCancelImage > ion-button {
     font-size: 2.5vh;
+}
+
+.customLoader{
+    --background:red;
+    --spinner-color:black;
 }
 
 

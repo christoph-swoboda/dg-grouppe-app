@@ -32,11 +32,10 @@ const UserProfile = () => {
     const {isValid} = formState;
 
     const onSubmit = async (data) => {
-
         setErrors('')
-        if (data.newPassword && data.newPassword !== data.repeatPassword) {
+        if (data.newPassword !== data.repeatPassword) {
             setErrors('Passwords didnt match')
-        } else if (data.newPassword) {
+        } else {
             setLoading(true)
             Api().post('/user/update', data).then(res => {
                 window.alert('Information Updated Successfully')

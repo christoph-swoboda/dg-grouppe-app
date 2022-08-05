@@ -132,16 +132,11 @@ const Dashboard = () => {
                         <IonCard>
                             {
                                 loadingUser && filter.page === 1 ?
-                                    <IonContent>
-                                        <IonLoading
-                                            isOpen={loading}
-                                        />
-                                    </IonContent>
+                                    <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                                     :
                                     <IonText className={'ion-text-xl-left'}>{user?.employees?.first_name}</IonText>
                             }
                             <IonCardSubtitle>{user?.employees?.company}</IonCardSubtitle>
-
                         </IonCard>
                     </div>
 
@@ -170,11 +165,7 @@ const Dashboard = () => {
                             <hr/>
                             {
                                 loading && filter.page === 1 ?
-                                    <IonContent>
-                                        <IonLoading
-                                            isOpen={loading}
-                                        />
-                                    </IonContent>
+                                    <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                                     :
                                     requests?.map((req, i) => (
                                         <Request

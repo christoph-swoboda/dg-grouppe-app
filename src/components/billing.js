@@ -39,7 +39,7 @@ const Billing = ({header}) => {
                 setLastPage(res.data.last_page)
                 setTotal(res.data?.total)
                 setLoading(false)
-            }).catch(e=>{
+            }).catch(e => {
                 console.log('err', e)
             })
         },
@@ -97,11 +97,7 @@ const Billing = ({header}) => {
                     {
 
                         loading && filter.page === 1 ?
-                            <IonContent>
-                                <IonLoading
-                                    isOpen={loading}
-                                />
-                            </IonContent>
+                            <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                             :
                             requests.length === 0 ?
                                 <IonHeader>
