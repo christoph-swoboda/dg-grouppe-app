@@ -21,11 +21,12 @@ import Api from "../../api/api";
 import qs from "qs"
 import {BeatLoader} from "react-spinners";
 import {useStateValue} from "../../states/StateProvider";
+import Notifications from "../notifications/index";
 
 const Dashboard = () => {
 
-    const [showModal, setShowModal] = useState(false);
-    const [{filterIds}] = useStateValue()
+    // const [showModal, setShowModal] = useState(false);
+    const [{filterIds,showModal, img}, dispatch] = useStateValue()
     const [requests, setRequests] = useState([]);
     const [user, setUser] = useState([]);
     const [total, setTotal] = useState(0);
@@ -72,22 +73,23 @@ const Dashboard = () => {
 
     useEffect(async () => {
         await getNotifications()
-    }, [filterIds]);
+    }, [filterIds, showModal, img]);
 
-    async function closeModal() {
-        setShowModal(false)
-    }
+    // async function closeModal() {
+    //     dispatch({type: "SET_SHOWMODAL", item: false})
+    // }
 
     async function doRefresh(e) {
         await getNotifications()
         await getRequests()
         await getEmployee()
+        dispatch({type: "SET_SHOWMODAL", item: false})
         e.detail.complete();
     }
 
     return (
         <IonPage className='container dashboard'>
-            <IonContent >
+            <IonContent>
                 <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
                     <IonRefresherContent
                         pullingIcon={chevronDownCircleOutline}
@@ -97,26 +99,7 @@ const Dashboard = () => {
                     {/*notification modal*/}
                     <IonContent>
                         <IonModal isOpen={showModal}>
-                            <div className='notificationContainer'>
-                                <div className='notificationHeader'>
-                                    <h1>Notifications</h1>
-                                    <ion-icon icon={close} onClick={() => closeModal()}/>
-                                </div>
-                                {
-                                    notifications?.map((not, i) => (
-                                        <Notification
-                                            key={not.id}
-                                            id={not.id}
-                                            type={not?.request?.type?.title}
-                                            title={not?.request?.response?.message}
-                                            status={not.request?.status}
-                                            month={new Date(not.request?.bill?.created_at).getMonth() + 1}
-                                            year={new Date(not.request?.bill?.created_at).getFullYear()}
-                                            updated={new Date(not.request?.response?.updated_at).toLocaleDateString()}
-                                        />
-                                    ))
-                                }
-                            </div>
+                            <Notifications notifications={notifications}/>
                         </IonModal>
                     </IonContent>
                     {/*notification modal*/}
@@ -129,7 +112,7 @@ const Dashboard = () => {
                                 <img src={`${backend}/${user?.employees?.image}`} alt='avatar'/>
                             </IonAvatar>
                         </Link>
-                        <IonToolbar style={{paddingLeft:'10px'}}>
+                        <IonToolbar style={{paddingLeft: '10px'}}>
                             {
                                 loadingUser && filter.page === 1 ?
                                     <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
@@ -142,20 +125,19 @@ const Dashboard = () => {
 
                     <div className='notification'>
                         <IonCard hidden={notifications?.length < 1} className='ion-badge'
-                                 onClick={() => setShowModal(true)}
+                                 onClick={() =>dispatch({type: "SET_SHOWMODAL", item: true})}
                                  color="dark">{notifications?.length}</IonCard>
-                        <ion-icon onClick={() => setShowModal(true)} icon={notificationsOutline}/>
+                        <ion-icon onClick={() => dispatch({type: "SET_SHOWMODAL", item: true})} icon={notificationsOutline}/>
                         <Link to='/information'>
                             <ion-icon icon={informationCircleOutline}/>
                         </Link>
                     </div>
                 </div>
-
                 {
                     requests?.length === 0 && !loading ?
                         <EmptyDashboard name={user?.employees?.first_name}/>
                         :
-                        <div style={{paddingTop: '6rem',backgroundColor:'#eeeeee', minHeight: '90vh'}}>
+                        <div style={{paddingTop: '6rem', backgroundColor: '#eeeeee', minHeight: '90vh'}}>
                             <IonCardTitle style={{fontSize: '35px'}}>
                                 Hi {user?.employees?.first_name}
                             </IonCardTitle>

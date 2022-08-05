@@ -103,7 +103,7 @@
   label {
     color: grey;
     margin: 0 1rem 0 0;
-    font-size: 1.6vh;
+    font-size: 2vh;
   }
   ion-input, input {
     text-align: center;
@@ -116,6 +116,11 @@
     border-radius: 10px;
     border: 1px solid black;
     color: black;
+    --color:black;
+    --placeholder-color: black;
+    --placeholder-opacity: 1;
+    --padding-bottom: -1px;
+    --placeholder-font-weight:bold;
   }
 
   ion-button, button {
@@ -123,10 +128,10 @@
     cursor: pointer;
     color: white;
     width: 82vw;
-    padding: 1rem;
     font-size: 2.6vh;
     border-radius: 10px;
     margin: 0 1.1rem 1.1rem 0;
+    padding: 1.2rem;
   }
   //
   //.disabled {
@@ -140,5 +145,7 @@
   //    border: 2px solid black;
   //}
 }
+
+
 
 

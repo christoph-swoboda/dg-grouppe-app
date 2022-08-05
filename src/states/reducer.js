@@ -4,6 +4,7 @@ export const initialState = {
     deviceID:null,
     img:'',
     resId:'',
+    showModal:false,
     filterIds:[],
 };
 const reducer = (state, action) => {
@@ -27,6 +28,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 resId: action.item
+            }
+            case "SET_SHOWMODAL":
+            return {
+                ...state,
+                showModal: action.item
             }
             case "SET_DEVICEID":
             return {

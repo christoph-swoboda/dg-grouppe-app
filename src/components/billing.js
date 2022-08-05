@@ -67,15 +67,8 @@ const Billing = ({header}) => {
         event.detail.complete();
     }
 
-    // useEffect(() => {
-    //     Api().get('/todos').then(res=>{
-    //         console.log('res', res)
-    //     })
-    // }, []);
-
-
     return (
-        <IonContent>
+        <IonContent className='billingContainer'>
             <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
                 <IonRefresherContent
                     pullingIcon={chevronDownCircleOutline}
@@ -85,7 +78,7 @@ const Billing = ({header}) => {
                 </IonRefresherContent>
             </IonRefresher>
 
-            <IonCard className='billingContainer'>
+            <IonCard >
                 <IonCardTitle>{header}</IonCardTitle>
                 <IonCard style={{display: 'flex'}}>
                     <IonText className={pending ? 'approved inActive' : 'active approved'}

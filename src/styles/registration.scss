@@ -2,32 +2,46 @@
 @import "mixin";
 
 .login {
-    min-height: 100vh;
-    max-height: 200vh;
-    background-color: $body-bg1;
-    ion-card-title{
-        position: relative;
-        margin: 6% 1%;
-        font-size: 2rem;
-        font-weight: 700;
-    }
+  min-height: 100vh;
+  max-height: 200vh;
+  background-color: $body-bg1;
+
+  ion-img{
+    position: absolute;
+    width: 300px;
+    height: 76px;
+    left: 53px;
+    top: 100px;
+  }
+
+  ion-card-title {
+    position: relative;
+    margin: 6% 1%;
+    font-size: 2rem;
+    font-weight: 700;
+  }
 }
 
 .login-box {
-    @include centerItemsAbsolute();
-    background-color: white;
-    p {
-        font-size: 1.7vh;
-        line-height: 1;
-        color: $theme;
-        margin-left: 7%;
-        margin-bottom: 1vh;
-        width: 90vw;
-    }
+  @include centerItemsAbsolute();
+  background-color: white;
 
-    form{
-        @include formStyle(82vw, 1rem);
-    }
+  ion-card-title {
+    background-color: white;
+  }
+
+  p {
+    font-size: 1.7vh;
+    line-height: 1;
+    color: $theme;
+    margin-left: 7%;
+    margin-bottom: 1vh;
+    width: 90vw;
+  }
+
+  form {
+    @include formStyle(82vw, 0);
+  }
 
 }
 

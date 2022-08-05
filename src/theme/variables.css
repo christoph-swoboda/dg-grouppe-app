@@ -275,7 +275,9 @@ ion-refresher {
 }
 
 body {
-    font-family: Roboto;
+    font-family: Roboto, serif;
+    --ion-background-color:'#eeeeee';
+    /*--ion-backdrop-color:'white';*/
 }
 
 input {
@@ -288,10 +290,8 @@ input {
 .sendOrCancelImage > ion-button {
     font-size: 2.5vh;
 }
-
-.customLoader{
-    --background:red;
-    --spinner-color:black;
+.ion-modal{
+    background-color: #eeeeee;
 }
 
 

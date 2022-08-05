@@ -1,16 +1,6 @@
-import {Redirect, Route} from 'react-router-dom';
-import {
-    IonApp,
-    IonIcon,
-    IonLabel,
-    IonRouterOutlet,
-    IonTabBar,
-    IonTabButton,
-    IonTabs,
-    setupIonicReact
-} from '@ionic/react';
+import {Redirect, Route, useLocation} from 'react-router-dom';
+import {IonApp, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact} from '@ionic/react';
 import {IonReactRouter} from '@ionic/react-router';
-import {car, home, phonePortraitSharp, trainSharp, wifi} from 'ionicons/icons';
 import Login from './pages/login';
 import Dashboard from "./pages/dashboard/index";
 
@@ -42,18 +32,20 @@ import ThankYou from "./components/thankYou";
 import {ToastContainer} from "react-toastify";
 import UserProfile from "./pages/profile";
 import {PushNotifications} from "@capacitor/push-notifications";
-import {useStateValue} from "./states/StateProvider";
 import Api from "./api/api";
 import Preview from "./components/preview";
+import CarIcon from "./assets/icons/carIcon";
+import DashboardIcon from "./assets/icons/dashboardIcon";
+import InternetIcon from "./assets/icons/internetIcon";
+import PhoneIcon from "./assets/icons/phoneIcon";
+import TrainIcon from "./assets/icons/trainIcon";
 
 setupIonicReact();
 
 const App = () => {
 
     const user = JSON.parse(localStorage.getItem('user'));
-    // const user = 'aa'
-    const [{}, dispatch] = useStateValue()
-    const deviceID=localStorage.DEVICEID
+    const deviceID = localStorage.DEVICEID
 
     useEffect(() => {
         PushNotifications.checkPermissions().then(async (res) => {
@@ -72,18 +64,13 @@ const App = () => {
         });
     }, [])
 
-    // useEffect(() => {
-    //     Api().get('/send-notification').then(res=>console.log('res',res))
-    // }, []);
-
-
     const register = async () => {
 
         // Register with Apple / Google to receive push via APNS/FCM
         await PushNotifications.register();
 
         // On success, we should be able to receive notifications
-        await PushNotifications.addListener('registration',  token => {
+        await PushNotifications.addListener('registration', token => {
             // dispatch({type: "SET_DEVICEID", item: token.value})
             localStorage.setItem('DEVICEID', token.value)
         });
@@ -97,7 +84,7 @@ const App = () => {
     }
 
     useEffect(() => {
-        if(deviceID){
+        if (deviceID) {
             Api().post(`/save-device-id/${deviceID}`).then(res => {
                 console.log('devIdSaved', deviceID)
             })
@@ -146,23 +133,23 @@ const App = () => {
 
                     <IonTabBar slot="bottom">
                         <IonTabButton tab="dashboard" href="/dashboard">
-                            <IonIcon icon={home}/>
+                            <DashboardIcon />
                             <IonLabel>Dashboard</IonLabel>
                         </IonTabButton>
                         <IonTabButton tab="internet" href="/internet/internet">
-                            <IonIcon icon={wifi}/>
+                            <InternetIcon/>
                             <IonLabel>Internet </IonLabel>
                         </IonTabButton>
                         <IonTabButton tab="phone" href="/phone/phone">
-                            <IonIcon icon={phonePortraitSharp}/>
+                            <PhoneIcon />
                             <IonLabel>Phone</IonLabel>
                         </IonTabButton>
                         <IonTabButton tab="car" href="/car/car">
-                            <IonIcon icon={car}/>
+                            <CarIcon />
                             <IonLabel>Car </IonLabel>
                         </IonTabButton>
                         <IonTabButton tab="mobile" href="/train/train">
-                            <IonIcon icon={trainSharp}/>
+                            <TrainIcon />
                             <IonLabel>Train </IonLabel>
                         </IonTabButton>
                     </IonTabBar>

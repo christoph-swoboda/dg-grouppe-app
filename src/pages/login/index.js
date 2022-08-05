@@ -2,20 +2,11 @@ import React, {useState} from 'react'
 import '../../styles/registration.scss'
 import {toast} from "react-toastify"
 import {useForm} from "react-hook-form"
-import {
-    IonButton,
-    IonCard,
-    IonCardTitle,
-    IonContent,
-    IonHeader,
-    IonInput, IonItem,
-    IonPage,
-    IonTitle,
-    IonToolbar
-} from "@ionic/react";
+
+import {IonButton, IonCard, IonCardTitle, IonContent, IonImg, IonInput, IonPage} from "@ionic/react";
 import Api from "../../api/api";
-import {useStateValue} from "../../states/StateProvider";
 import {useHistory} from "react-router-dom";
+import image from '../../assets/bg.png';
 
 const Login = () => {
 
@@ -71,29 +62,30 @@ const Login = () => {
     return (
         <IonPage>
             <IonContent className='login'>
+                <IonImg src={image}/>
                 <IonCard className='login-box'>
                     <IonCardTitle>Login</IonCardTitle>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <IonInput placeholder='Username'
-                                  {...register('email', {
-                                      required: 'Email is required',
-                                      pattern: {
-                                          value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                          message: 'Please enter a valid email',
-                                      },
-                                  })}
-                                  type="email"
-                                  required
-                                  style={{border: errors.email && '1px solid red'}}
+                               {...register('email', {
+                                   required: 'Email is required',
+                                   pattern: {
+                                       value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                       message: 'Please enter a valid email',
+                                   },
+                               })}
+                               type="email"
+                               required
+                               style={{border: errors.email && '1px solid red'}}
                         />
                         {errors.email && touchedFields && <p>{errors.email?.message}</p>}
                         <IonInput placeholder='Password'
-                                  type='password'
-                                  {...register('password', {required: 'your password is required'})}
-                                  style={{border: errors.password && '1px solid red'}}
+                               type='password'
+                               {...register('password', {required: 'your password is required'})}
+                               style={{border: errors.password && '1px solid red'}}
                         />
                         {errors.password && touchedFields && <p>{errors.password?.message}</p>}
-                        <IonButton type="submit" color={'dark'} style={{padding: '0'}} className='enabled'>
+                        <IonButton color={'black'} style={{padding:'0'}} type="submit">
                             {(!loading) ? 'Log In' : 'Verifying...'}
                         </IonButton>
                     </form>

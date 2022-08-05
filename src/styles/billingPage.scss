@@ -4,12 +4,14 @@
 .billingContainer {
   @include container;
   text-align: center;
-  overflow-y: scroll;
+  overflow: hidden;
+  min-height: 100vh;
   padding: 1rem 0;
-  max-height: max-content;
 
   .requestsContainer {
     margin-bottom: 5rem;
+    max-height: 73vh;
+    overflow-y: scroll;
   }
 
   ion-card-title, {
@@ -24,6 +26,9 @@
     width: 50%;
     font-size: 14px;
     font-weight: 600;
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
     border-radius: 15px 0 0 15px;
   }
 

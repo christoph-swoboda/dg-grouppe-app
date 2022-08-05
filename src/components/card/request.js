@@ -16,7 +16,7 @@ const Request = ({title, status, responseId, updated, month, year, type, message
     }, [type]);
 
     return (
-        <IonCard style={{minHeight: len < 2 && '100vh'}}>
+        <IonCard>
             <IonContent>
                 <IonModal isOpen={modal} className='modal'>
                     <UploadPopUp title={title} responseId={responseId}/>
@@ -46,7 +46,7 @@ const Request = ({title, status, responseId, updated, month, year, type, message
                     <h2>{title} {type} Bill</h2>
                     <h3>Period: {period}</h3>
                     {/*<p hidden={status !== '3'}>Reason: {message}</p>*/}
-                    <p>Updated: {updated}</p>
+                    <p>{status!=='1' && 'Updated: '+ updated}</p>
                     <p>Status: {status === '1' ? 'Pending' : status === '2' ? 'Approved' : 'Rejected'}</p>
                 </IonToolbar>
             </IonHeader>
