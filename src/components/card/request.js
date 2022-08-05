@@ -16,7 +16,7 @@ import UploadPopUp from "../UploadPopUp";
 import {useStateValue} from "../../states/StateProvider";
 import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
 
-const Request = ({title, status, responseId, updated, month, year, type, message,len}) => {
+const Request = ({title, status, responseId, updated, month, year, type, message, len}) => {
 
     const [{modal}, dispatch] = useStateValue()
     const [period, setPeriod] = useState('')
@@ -26,7 +26,7 @@ const Request = ({title, status, responseId, updated, month, year, type, message
     }, [type]);
 
     return (
-        <IonCard style={{minHeight:len<2 && '100vh'}}>
+        <IonCard style={{minHeight: len < 2 && '100vh'}}>
             <IonContent>
                 <IonModal isOpen={modal} className='modal'>
                     <UploadPopUp title={title} responseId={responseId}/>
@@ -39,7 +39,7 @@ const Request = ({title, status, responseId, updated, month, year, type, message
             </IonContent>
 
             <IonHeader className='request'
-                 onClick={() => dispatch({type: "SET_MODAL", item: true})}
+                       onClick={() => status !== '2' && dispatch({type: "SET_MODAL", item: true})}
             >
                 <IonToolbar className={status !== '3' ? 'card' : 'cardError'}>
                     {/*<div className='card' >*/}

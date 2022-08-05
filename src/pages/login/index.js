@@ -2,7 +2,17 @@ import React, {useState} from 'react'
 import '../../styles/registration.scss'
 import {toast} from "react-toastify"
 import {useForm} from "react-hook-form"
-import {IonCard, IonContent, IonHeader, IonPage} from "@ionic/react";
+import {
+    IonButton,
+    IonCard,
+    IonCardTitle,
+    IonContent,
+    IonHeader,
+    IonInput, IonItem,
+    IonPage,
+    IonTitle,
+    IonToolbar
+} from "@ionic/react";
 import Api from "../../api/api";
 import {useStateValue} from "../../states/StateProvider";
 import {useHistory} from "react-router-dom";
@@ -11,7 +21,7 @@ const Login = () => {
 
     const [Errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(false)
-    const history=useHistory()
+    const history = useHistory()
     const {
         register, getValues, setValue, handleSubmit, formState, reset, formState: {errors, touchedFields},
         control
@@ -39,12 +49,9 @@ const Login = () => {
                 }
             })
             .catch(e => {
-                console.log('e', e)
-                console.log('eres', e.response)
-                if(e.response?.status===401){
+                if (e.response?.status === 401) {
                     window.alert(e.response?.data?.message)
-                }
-                else{
+                } else {
                     window.alert('something went wrong!!')
                 }
                 setLoading(false)
@@ -64,33 +71,33 @@ const Login = () => {
     return (
         <IonPage>
             <IonContent className='login'>
-            <IonCard className='login-box'>
-                <IonHeader>Login</IonHeader>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <input placeholder='Username'
-                               {...register('email', {
-                                   required: 'Email is required',
-                                   pattern: {
-                                       value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                       message: 'Please enter a valid email',
-                                   },
-                               })}
-                               type="email"
-                               required
-                               style={{border: errors.email && '1px solid red'}}
-                    />
-                    {errors.email && touchedFields && <p>{errors.email?.message}</p>}
-                    <input placeholder='Password'
-                               type='password'
-                               {...register('password', {required: 'your password is required'})}
-                               style={{border: errors.password && '1px solid red'}}
-                    />
-                    {errors.password && touchedFields && <p>{errors.password?.message}</p>}
-                    <button className='enabled'>
-                        {(!loading) ? 'Log In' : 'Verifying...'}
-                    </button>
-                </form>
-            </IonCard>
+                <IonCard className='login-box'>
+                    <IonCardTitle>Login</IonCardTitle>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <IonInput placeholder='Username'
+                                  {...register('email', {
+                                      required: 'Email is required',
+                                      pattern: {
+                                          value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                          message: 'Please enter a valid email',
+                                      },
+                                  })}
+                                  type="email"
+                                  required
+                                  style={{border: errors.email && '1px solid red'}}
+                        />
+                        {errors.email && touchedFields && <p>{errors.email?.message}</p>}
+                        <IonInput placeholder='Password'
+                                  type='password'
+                                  {...register('password', {required: 'your password is required'})}
+                                  style={{border: errors.password && '1px solid red'}}
+                        />
+                        {errors.password && touchedFields && <p>{errors.password?.message}</p>}
+                        <IonButton type="submit" color={'dark'} style={{padding: '0'}} className='enabled'>
+                            {(!loading) ? 'Log In' : 'Verifying...'}
+                        </IonButton>
+                    </form>
+                </IonCard>
             </IonContent>
         </IonPage>
     )

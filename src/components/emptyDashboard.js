@@ -12,7 +12,6 @@ const EmptyDashboard = ({name}) => {
                 <h2 >All Is Good </h2>
                 <p >You Dont Have Any Requests </p>
             </div>
-
         </div>
     )
 }

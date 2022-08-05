@@ -3,7 +3,7 @@ import '../../styles/userProfile.scss'
 import {IonAvatar, IonPage} from "@ionic/react";
 import image from "../../assets/a2.jpg";
 import {cameraOutline, close} from "ionicons/icons";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {Camera, CameraResultType} from "@capacitor/camera";
 import {Controller, useForm} from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
@@ -22,8 +22,9 @@ const UserProfile = () => {
     const [showPass, setShowPass] = useState(true)
     const [showNumber, setShowNumber] = useState(true)
     let keys = ''
+    const location = useLocation()
     const backend = process.env.REACT_APP_BACKEND_URL
-    // const backend='http://localhost:8000'
+
     const {
         register, getValues, setValue, handleSubmit, formState, reset, formState: {errors, touchedFields},
         control
@@ -33,9 +34,9 @@ const UserProfile = () => {
     const onSubmit = async (data) => {
 
         setErrors('')
-        if (data.newPassword !== data.repeatPassword) {
+        if (data.newPassword && data.newPassword !== data.repeatPassword) {
             setErrors('Passwords didnt match')
-        } else {
+        } else if (data.newPassword) {
             setLoading(true)
             Api().post('/user/update', data).then(res => {
                 window.alert('Information Updated Successfully')
@@ -92,11 +93,17 @@ const UserProfile = () => {
             })
     }
 
-    async function resetStates(){
+    async function resetStates() {
         history.push('/dashboard')
         setShowNumber(true)
         setShowPass(true)
     }
+
+    useEffect(() => {
+        setShowNumber(true)
+        setShowPass(true)
+    }, [location]);
+
 
     return (
         <IonPage className='containerNoPadding'>
@@ -105,7 +112,7 @@ const UserProfile = () => {
                     <ion-icon icon={cameraOutline} onClick={() => takePicture()}/>
                     <ion-icon class='ion-float-right'
                               icon={close}
-                              style={{padding: '4rem 2rem 0 0 ', cursor: 'pointer', backgroundColor: 'inherit'}}
+                              style={{padding: '6rem 2rem 0 0 ', cursor: 'pointer', backgroundColor: 'inherit'}}
                               onClick={() => resetStates()}
                     />
                     <IonAvatar onClick={() => takePicture()}>
@@ -119,16 +126,16 @@ const UserProfile = () => {
                 <br/>
                 <br/>
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <input placeholder='Name'
-                           disabled
-                           type='text'
-                           {...register('name')}
-                    />
-                    <input placeholder='Company'
-                           disabled
-                           type='text'
-                           {...register('company')}
-                    />
+                    {/*<input placeholder='Name'*/}
+                    {/*       disabled*/}
+                    {/*       type='text'*/}
+                    {/*       {...register('name')}*/}
+                    {/*/>*/}
+                    {/*<input placeholder='Company'*/}
+                    {/*       disabled*/}
+                    {/*       type='text'*/}
+                    {/*       {...register('company')}*/}
+                    {/*/>*/}
                     <input placeholder='Change Email'
                            {...register('email')}
                            disabled

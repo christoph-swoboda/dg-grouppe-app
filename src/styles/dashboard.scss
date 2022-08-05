@@ -3,6 +3,7 @@
 
 .dashboard {
   overflow: scroll;
+  --ion-background-color:'#eeeeee';
 
   .loadMore {
     margin: auto 35%;
@@ -63,6 +64,7 @@
 
   .dashboardTitle {
     margin: 2rem 0 0 0;
+
 
     Ion-card-title {
       font-size: 40px;

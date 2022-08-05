@@ -44,6 +44,7 @@ import UserProfile from "./pages/profile";
 import {PushNotifications} from "@capacitor/push-notifications";
 import {useStateValue} from "./states/StateProvider";
 import Api from "./api/api";
+import Preview from "./components/preview";
 
 setupIonicReact();
 
@@ -119,6 +120,9 @@ const App = () => {
                         </Route>
                         <Route path="/uploaded">
                             {user ? <ThankYou/> : <Redirect to="/login"/>}
+                        </Route>
+                        <Route path="/preview">
+                            {user ? <Preview/> : <Redirect to="/login"/>}
                         </Route>
                         <Route path="/car/:page">
                             {user ? <Car/> : <Redirect to="/login"/>}

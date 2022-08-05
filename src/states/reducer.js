@@ -2,6 +2,8 @@ export const initialState = {
     user: {},
     modal:false,
     deviceID:null,
+    img:'',
+    resId:'',
     filterIds:[],
 };
 const reducer = (state, action) => {
@@ -15,6 +17,16 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 modal: action.item
+            }
+            case "SET_IMG":
+            return {
+                ...state,
+                img: action.item
+            }
+            case "SET_RESID":
+            return {
+                ...state,
+                resId: action.item
             }
             case "SET_DEVICEID":
             return {

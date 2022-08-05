@@ -3,8 +3,8 @@
 
 .uploadContainer {
   overflow-y: scroll;
-  margin-top: 1%;
   text-align: center;
+  margin-top: 50vh;
 
   ion-card ,input{
     padding: 1rem;
@@ -14,21 +14,15 @@
     color: black;
   }
 
+  ion-button{
+    padding: 0;
+  }
+
   input{
     background-color: white;
   }
-
-  .uploadedImage {
-    height: 30vh;
-    margin-bottom: 5vh;
-  }
-
-  .hideImageSection {
-    opacity: 0;
-    margin-top: 40vh;
-  }
-
   .send {
-    background-color: #27b67f;
+    background-color: black;
+    padding: 0;
   }
 }

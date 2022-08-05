@@ -10,10 +10,8 @@ import {toast} from "react-toastify";
 
 const UploadPopUp = ({title, responseId}) => {
 
-    const [url, setUrl] = useState('')
     const [image, setImage] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [{uploaded}, dispatch] = useStateValue()
+    const [{}, dispatch] = useStateValue()
     const history = useHistory()
     const hiddenFileInput = React.useRef(null);
 
@@ -28,7 +26,10 @@ const UploadPopUp = ({title, responseId}) => {
             quality: 100,
         });
         const imageUrl = photo.dataUrl;
-        setUrl(imageUrl)
+        dispatch({type: "SET_MODAL", item: false})
+        history.push('/preview')
+        dispatch({type: "SET_IMG", item: imageUrl})
+        dispatch({type: "SET_RESID", item: responseId})
     }
 
     async function uploadPicture() {
@@ -38,7 +39,11 @@ const UploadPopUp = ({title, responseId}) => {
             quality: 100,
         });
         const imageUrl = photo.dataUrl;
-        setUrl(imageUrl)
+        dispatch({type: "SET_MODAL", item: false})
+        history.push('/preview')
+        dispatch({type: "SET_IMG", item: imageUrl})
+        dispatch({type: "SET_RESID", item: responseId})
+
     }
 
     async function fileInput(e) {
@@ -47,44 +52,24 @@ const UploadPopUp = ({title, responseId}) => {
             let reader = new FileReader();
             await setImage(file);
             reader.onloadend = () => {
-                setUrl(reader.result);
+                dispatch({type: "SET_MODAL", item: false})
+                history.push('/preview')
+                dispatch({type: "SET_IMG", item: reader.result})
+                dispatch({type: "SET_RESID", item: responseId})
             };
 
             reader.readAsDataURL(file);
         } else {
-            setImage(null);
+            window.alert('Something Went Wrong!');
         }
-    }
-
-    async function send() {
-        setLoading(true)
-        let data=new FormData()
-        data.append('image', url)
-        data.append('id', responseId)
-
-        await Api().post('/response', data).then(res => {
-            console.log('res', res)
-            if (res.status === 200) {
-                setLoading(false)
-                dispatch({type: "SET_MODAL", item: false})
-                history.push('/uploaded')
-            } else {
-                toast.error('Something Went Wrong')
-            }
-        })
     }
 
     return (
         <div className='uploadContainer'>
-            <IonImg className={url ? 'uploadedImage' : 'hideImageSection'} src={url}/>
-            {
-                url &&
-                <IonButton className='send' onClick={send}>{loading ? 'Sending' : 'Send'}</IonButton>
-            }
-            <IonCard onClick={() => takePicture()}>Kamera</IonCard>
-            <IonCard onClick={() => uploadPicture()}>Foto-und Videomediathek</IonCard>
+            <IonButton color={'light'} onClick={() => takePicture()}>Kamera</IonButton>
+            <IonButton color={'light'} onClick={() => uploadPicture()}>Foto-und Videomediathek</IonButton>
             <input type="file" ref={hiddenFileInput} hidden onChange={fileInput}/>
-            <IonCard onClick={auToClickHander}>Dokument</IonCard>
+            <IonButton color={'light'} onClick={auToClickHander}>Dokument</IonButton>
         </div>
     )
 }

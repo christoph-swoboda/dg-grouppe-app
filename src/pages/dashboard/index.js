@@ -81,7 +81,7 @@ const Dashboard = () => {
     async function doRefresh(e) {
         await getNotifications()
         await getRequests()
-        // await getEmployee()
+        await getEmployee()
         e.detail.complete();
     }
 

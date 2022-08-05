@@ -105,25 +105,26 @@
     margin: 0 1rem 0 0;
     font-size: 1.6vh;
   }
-  input {
+  ion-input, input {
     text-align: center;
     display: grid;
     grid-template-columns: auto;
     margin: 0 1.1rem 1.1rem 0;
     width: $width;
     padding: $padding;
-    font-size: 2vh;
+    font-size: 2.5vh;
     border-radius: 10px;
     border: 1px solid black;
     color: black;
   }
 
-  button {
+  ion-button, button {
     background-color: #000000;
     cursor: pointer;
     color: white;
     width: 82vw;
     padding: 1rem;
+    font-size: 2.6vh;
     border-radius: 10px;
     margin: 0 1.1rem 1.1rem 0;
   }
