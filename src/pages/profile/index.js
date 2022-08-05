@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import '../../styles/userProfile.scss'
-import {IonAvatar, IonPage} from "@ionic/react";
+import {IonAlert, IonAvatar, IonPage} from "@ionic/react";
 import image from "../../assets/a2.jpg";
 import {cameraOutline, close} from "ionicons/icons";
 import {useHistory, useLocation} from "react-router-dom";
@@ -16,6 +16,7 @@ const UserProfile = () => {
     const [url, setUrl] = useState('')
     const [user, setUser] = useState([])
     const [Errors, setErrors] = useState('')
+    const [showAlert, setShowAlert] = useState(false)
     const [loadingData, setLoadingData] = useState(false)
     const [loading, setLoading] = useState(false)
     const [loadingLogout, setLoadingLogOut] = useState(false)
@@ -38,9 +39,13 @@ const UserProfile = () => {
         } else {
             setLoading(true)
             Api().post('/user/update', data).then(res => {
+                setShowAlert(true)
+                setShowNumber(true)
+                setShowPass(true)
                 window.alert('Information Updated Successfully')
                 setLoading(false)
             }).catch(err => {
+                setShowAlert(true)
                 window.alert('Something Went Wrong!')
                 setLoading(false)
             })
@@ -106,6 +111,14 @@ const UserProfile = () => {
 
     return (
         <IonPage className='containerNoPadding'>
+            {/*<IonAlert*/}
+            {/*    isOpen={showAlert}*/}
+            {/*    onDidDismiss={() => setShowAlert(false)}*/}
+            {/*    header={'Alert'}*/}
+            {/*    subHeader={'Subtitle'}*/}
+            {/*    message={'This is an alert message'}*/}
+            {/*    buttons={['OK']}*/}
+            {/*/>*/}
             <div className='profile'>
                 <div className='profileContainer'>
                     <ion-icon icon={cameraOutline} onClick={() => takePicture()}/>
