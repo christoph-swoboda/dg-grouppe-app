@@ -8,7 +8,7 @@ import {
     IonModal,
     IonPage, IonRefresher,
     IonRefresherContent,
-    IonText
+    IonText, IonToolbar
 } from "@ionic/react";
 import '../../styles/dashboard.scss'
 import '../../styles/notification.scss'
@@ -129,7 +129,7 @@ const Dashboard = () => {
                                 <img src={`${backend}/${user?.employees?.image}`} alt='avatar'/>
                             </IonAvatar>
                         </Link>
-                        <IonCard>
+                        <IonToolbar style={{paddingLeft:'10px'}}>
                             {
                                 loadingUser && filter.page === 1 ?
                                     <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
@@ -137,7 +137,7 @@ const Dashboard = () => {
                                     <IonText className={'ion-text-xl-left'}>{user?.employees?.first_name}</IonText>
                             }
                             <IonCardSubtitle>{user?.employees?.company}</IonCardSubtitle>
-                        </IonCard>
+                        </IonToolbar>
                     </div>
 
                     <div className='notification'>

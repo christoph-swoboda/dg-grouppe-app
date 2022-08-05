@@ -55,7 +55,7 @@ const Request = ({title, status, responseId, updated, month, year, type, message
                     }
                     <h2>{title} {type} Bill</h2>
                     <h3>Period: {period}</h3>
-                    <p hidden={status !== '3'}>Reason: {message}</p>
+                    {/*<p hidden={status !== '3'}>Reason: {message}</p>*/}
                     <p>Updated: {updated}</p>
                     <p>Status: {status === '1' ? 'Pending' : status === '2' ? 'Approved' : 'Rejected'}</p>
                 </IonToolbar>
