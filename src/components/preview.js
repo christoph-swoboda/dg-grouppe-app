@@ -1,16 +1,24 @@
-import React, {useState} from "react";
-import {IonButton, IonHeader, IonImg, IonItem, IonPage, IonToolbar} from "@ionic/react";
-import {checkmarkCircleOutline} from "ionicons/icons";
-import {Link, useHistory} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {IonButton, IonImg, IonItem, IonPage} from "@ionic/react";
+import {useHistory} from "react-router-dom";
 import '../styles/thankYou.scss';
 import {useStateValue} from "../states/StateProvider";
 import Api from "../api/api";
-import {toast} from "react-toastify";
 
 const Preview = () => {
     const [{img, resId}, dispatch] = useStateValue()
     const [loading, setLoading] = useState(false)
+    const [imageSize, setImageSize] = useState(0)
     const history = useHistory()
+
+    // async function getImageSize(url) {
+    //     const stringLength = url.length - 'data:image/png;base64,'.length;
+    //     const sizeInBytes = 4 * Math.ceil((stringLength / 3)) * 0.5624896334383812;
+    //     const sizeInKb = sizeInBytes / 1000;
+    //     let size = Math.floor(sizeInKb)
+    //     console.log('size', size)
+    //     setImageSize(size)
+    // }
 
     async function send() {
         setLoading(true)
@@ -18,23 +26,36 @@ const Preview = () => {
         data.append('image', img)
         data.append('id', resId)
 
+        // if(imageSize>1025){
+        //     window.alert('Select an image under 1 MB')
+        //     setLoading(false)
+        //     history.push('/')
+        // }
+        // else{
         await Api().post('/response', data).then(res => {
             if (res.status === 200) {
                 setLoading(false)
-                dispatch({type: "SET_IMG", item: ''})
+                dispatch({type: "SET_IMG", item: null})
                 history.push('/uploaded')
             } else {
-                toast.error('Something Went Wrong')
+                window.alert('Something Went Wrong')
             }
+            setImageSize(0)
         })
+        // }
     }
 
+    // useEffect(async () => {
+    //     await getImageSize(img)
+    // }, [img]);
+
+
     return (
-        <IonPage >
+        <IonPage className='container'>
             <IonImg src={img} className={'imageSection'}/>
             <IonItem className={'sendOrCancelImage'}>
-                    <IonButton color={'tertiary'}  onClick={send}>{loading ? 'Sending...' : 'Send'}</IonButton>
-                    <IonButton color={'dark'} onClick={() => history.push('/')}>Cancel</IonButton>
+                <IonButton color={'tertiary'} onClick={send}>{loading ? 'Sending...' : 'Send'}</IonButton>
+                <IonButton color={'dark'} onClick={() => history.push('/')}>Cancel</IonButton>
             </IonItem>
         </IonPage>
     )

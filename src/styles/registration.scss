@@ -2,9 +2,10 @@
 @import "mixin";
 
 .login {
-  min-height: 100vh;
-  max-height: 200vh;
-  background-color: $body-bg1;
+  //min-height: 100vh;
+  //max-height: 300vh;
+  //overflow-y: scroll;
+  //background-color: $body-bg1;
 
   ion-img{
     position: absolute;
@@ -24,11 +25,7 @@
 
 .login-box {
   @include centerItemsAbsolute();
-  background-color: white;
 
-  ion-card-title {
-    background-color: white;
-  }
 
   p {
     font-size: 1.7vh;

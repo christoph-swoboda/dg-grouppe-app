@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../../styles/request.scss'
 import {checkmarkCircleOutline, hourglassOutline, warningOutline} from "ionicons/icons";
-import {IonCard, IonContent, IonHeader, IonModal, IonToolbar} from "@ionic/react";
+import {IonButton, IonCard, IonContent, IonHeader, IonModal, IonToolbar} from "@ionic/react";
 import UploadPopUp from "../UploadPopUp";
 import {useStateValue} from "../../states/StateProvider";
 import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
@@ -16,15 +16,15 @@ const Request = ({title, status, responseId, updated, month, year, type, message
     }, [type]);
 
     return (
-        <IonCard>
+        <IonCard className='ion-no-margin' style={{marginBottom:'10px'}}>
             <IonContent>
                 <IonModal isOpen={modal} className='modal'>
                     <UploadPopUp title={title} responseId={responseId}/>
-                    <IonCard className='cancelUpload'
+                    <IonButton color={'light'} style={{padding:0}} className='cancelUpload'
                              onClick={() => dispatch({type: "SET_MODAL", item: false})}
                     >
                         Cancel
-                    </IonCard>
+                    </IonButton>
                 </IonModal>
             </IonContent>
 

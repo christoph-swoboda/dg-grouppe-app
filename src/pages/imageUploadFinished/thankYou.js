@@ -2,7 +2,7 @@ import React from "react";
 import {IonPage} from "@ionic/react";
 import {checkmarkCircleOutline} from "ionicons/icons";
 import {Link} from "react-router-dom";
-import '../styles/thankYou.scss';
+import '../../styles/thankYou.scss';
 
 const ThankYou = () => {
     return (

@@ -40,6 +40,8 @@
 
 .profile {
   @include centerItemsAbsolute();
+  overflow-y: scroll;
+  max-height:100vh;
   padding: 2rem;
 
   p {

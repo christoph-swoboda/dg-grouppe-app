@@ -60,8 +60,8 @@ const Login = () => {
     };
 
     return (
-        <IonPage>
-            <IonContent className='login'>
+        <IonPage className='container'>
+            <div className='login'>
                 <IonImg src={image}/>
                 <IonCard className='login-box'>
                     <IonCardTitle>Login</IonCardTitle>
@@ -90,7 +90,7 @@ const Login = () => {
                         </IonButton>
                     </form>
                 </IonCard>
-            </IonContent>
+            </div>
         </IonPage>
     )
 }

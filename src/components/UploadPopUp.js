@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import '../styles/uploadPopUp.scss'
-import {IonButton, IonCard, IonContent, IonImg, IonModal, IonText} from "@ionic/react";
+import {IonButton} from "@ionic/react";
 import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 import {useStateValue} from "../states/StateProvider";
 import {useHistory} from "react-router-dom";
-import {checkmarkCircleOutline} from "ionicons/icons";
-import Api from "../api/api";
-import {toast} from "react-toastify";
 
 const UploadPopUp = ({title, responseId}) => {
 
@@ -43,7 +40,6 @@ const UploadPopUp = ({title, responseId}) => {
         history.push('/preview')
         dispatch({type: "SET_IMG", item: imageUrl})
         dispatch({type: "SET_RESID", item: responseId})
-
     }
 
     async function fileInput(e) {

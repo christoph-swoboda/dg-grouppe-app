@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {IonContent, IonModal} from "@ionic/react";
 import {close} from "ionicons/icons";
-import Notification from "../../components/card/notification";
-import {useStateValue} from "../../states/StateProvider";
+import Notification from "./card/notification";
+import {useStateValue} from "../states/StateProvider";
 
 const Notifications = ({notifications}) => {
 

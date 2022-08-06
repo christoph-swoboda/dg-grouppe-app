@@ -1,32 +1,30 @@
 import React, {useEffect, useState} from "react";
 import {
-    IonAvatar,
-    IonCard,
     IonCardSubtitle,
     IonCardTitle,
-    IonContent, IonLoading,
+    IonContent, IonHeader,
     IonModal,
-    IonPage, IonRefresher,
+    IonPage,
+    IonRefresher,
     IonRefresherContent,
-    IonText, IonToolbar
+    IonText, IonTitle, IonToolbar
 } from "@ionic/react";
 import '../../styles/dashboard.scss'
 import '../../styles/notification.scss'
-import {chevronDownCircleOutline, close, informationCircleOutline, notificationsOutline} from "ionicons/icons";
+import {chevronDownCircleOutline} from "ionicons/icons";
 import EmptyDashboard from "../../components/emptyDashboard";
-import {Link} from "react-router-dom";
-import Notification from "../../components/card/notification";
 import Request from "../../components/card/request";
 import Api from "../../api/api";
 import qs from "qs"
 import {BeatLoader} from "react-spinners";
 import {useStateValue} from "../../states/StateProvider";
-import Notifications from "../notifications/index";
+import Notifications from "../../components/notificationModal";
+import HeaderSection from "./partial/headerSection";
+import {useHistory} from "react-router-dom";
 
 const Dashboard = () => {
 
-    // const [showModal, setShowModal] = useState(false);
-    const [{filterIds,showModal, img}, dispatch] = useStateValue()
+    const [{filterIds, showModal, img, network}] = useStateValue()
     const [requests, setRequests] = useState([]);
     const [user, setUser] = useState([]);
     const [total, setTotal] = useState(0);
@@ -37,22 +35,19 @@ const Dashboard = () => {
     const backend = process.env.REACT_APP_BACKEND_URL
     const [filter, setFilter] = useState({page: 1})
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
+    const history=useHistory()
 
     async function getRequests() {
-        setLoading(true)
         await Api().get(`/requests/published?${query}`).then(res => {
             setRequests(filter.page === 1 ? res.data.open.data : [...requests, ...res.data.open.data])
             setTotal(res.data.open.total)
-            setLoading(false)
             setLastPage(res.data.open.last_page)
         })
     }
 
     async function getEmployee() {
-        setLoadingUser(true)
         Api().get('/employee').then(res => {
             setUser(res.data)
-            setLoadingUser(false)
         })
     }
 
@@ -63,28 +58,28 @@ const Dashboard = () => {
     }
 
     useEffect(async () => {
+        setLoading(true)
         await getRequests()
+        setLoading(false)
     }, [filter]);
 
 
     useEffect(async () => {
+        setLoadingUser(true)
         await getEmployee()
+        setLoadingUser(false)
     }, []);
 
     useEffect(async () => {
         await getNotifications()
     }, [filterIds, showModal, img]);
 
-    // async function closeModal() {
-    //     dispatch({type: "SET_SHOWMODAL", item: false})
-    // }
-
-    async function doRefresh(e) {
+    async function doRefresh(event) {
         await getNotifications()
         await getRequests()
         await getEmployee()
-        dispatch({type: "SET_SHOWMODAL", item: false})
-        e.detail.complete();
+        history.push('/dashboard')
+        event.detail.complete();
     }
 
     return (
@@ -92,9 +87,7 @@ const Dashboard = () => {
             <IonContent>
                 <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
                     <IonRefresherContent
-                        pullingIcon={chevronDownCircleOutline}
-                        pullingText="Pull to refresh"
-                        refreshingSpinner="circles">
+                        pullingIcon={chevronDownCircleOutline}>
                     </IonRefresherContent>
                     {/*notification modal*/}
                     <IonContent>
@@ -105,34 +98,12 @@ const Dashboard = () => {
                     {/*notification modal*/}
                 </IonRefresher>
 
-                <div className='header'>
-                    <div className='userInfo'>
-                        <Link to='/profile'>
-                            <IonAvatar>
-                                <img src={`${backend}/${user?.employees?.image}`} alt='avatar'/>
-                            </IonAvatar>
-                        </Link>
-                        <IonToolbar style={{paddingLeft: '10px'}}>
-                            {
-                                loadingUser && filter.page === 1 ?
-                                    <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
-                                    :
-                                    <IonText className={'ion-text-xl-left'}>{user?.employees?.first_name}</IonText>
-                            }
-                            <IonCardSubtitle>{user?.employees?.company}</IonCardSubtitle>
-                        </IonToolbar>
-                    </div>
-
-                    <div className='notification'>
-                        <IonCard hidden={notifications?.length < 1} className='ion-badge'
-                                 onClick={() =>dispatch({type: "SET_SHOWMODAL", item: true})}
-                                 color="dark">{notifications?.length}</IonCard>
-                        <ion-icon onClick={() => dispatch({type: "SET_SHOWMODAL", item: true})} icon={notificationsOutline}/>
-                        <Link to='/information'>
-                            <ion-icon icon={informationCircleOutline}/>
-                        </Link>
-                    </div>
-                </div>
+                <HeaderSection notifications={notifications}
+                               user={user}
+                               backend={backend}
+                               loadingUser={loadingUser}
+                               filter={filter}
+                />
                 {
                     requests?.length === 0 && !loading ?
                         <EmptyDashboard name={user?.employees?.first_name}/>
@@ -141,8 +112,8 @@ const Dashboard = () => {
                             <IonCardTitle style={{fontSize: '35px'}}>
                                 Hi {user?.employees?.first_name}
                             </IonCardTitle>
-                            <IonCardSubtitle>
-                                you have {total} requests for today
+                            <IonCardSubtitle style={{fontSize: '18px', marginTop:'5px'}}>
+                                you have {total} {total>1?'requests':'request'} for today
                             </IonCardSubtitle>
                             <hr/>
                             {
@@ -170,6 +141,13 @@ const Dashboard = () => {
                         </div>
                 }
             </IonContent>
+            <IonTitle hidden={network!=='offline'}>
+                You are offline at the moment!!
+            </IonTitle >
+
+            {/*<IonTitle style={{boxShadow:0, backgroundColor:'#eeeeee', fontSize:'25px', textAlign:'center'}} hidden= {network!=='loading'}>*/}
+            {/*    please wait...*/}
+            {/*</IonTitle>*/}
         </IonPage>
     )
 }

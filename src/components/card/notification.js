@@ -49,7 +49,7 @@ const Notification = ({title, status, type, updated,  month, year, id}) => {
                     </div>
                     <ion-icon onClick={toggleText} className='close' icon={close}/>
                     <div style={{marginLeft: '10vw'}}>
-                        <h2 style={{color:status==='1' || title==='1 Image Was Uploaded'?'black': status==='2'?'darkgreen':'darkred'}}>{title}</h2>
+                        <h2>{title}</h2>
                         <h3>Period: {period}</h3>
                         <p>Type: {type}</p>
                         <p>{status==='2'?'Date Approved: ':status==='3' && title!=='1 Image Was Uploaded'?'Date Rejected: ':'Uploaded: '} {updated}</p>

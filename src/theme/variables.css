@@ -242,7 +242,6 @@ a {
 }
 
 .containerNoPadding {
-    overflow: scroll;
     background-color: #eeeeee;
 }
 
@@ -276,7 +275,7 @@ ion-refresher {
 
 body {
     font-family: Roboto, serif;
-    --ion-background-color:'#eeeeee';
+    --ion-background-color: '#eeeeee';
     /*--ion-backdrop-color:'white';*/
 }
 
@@ -285,13 +284,34 @@ input {
 }
 
 .imageSection {
+    margin-top: 20px;
     height: 80%;
 }
+
 .sendOrCancelImage > ion-button {
     font-size: 2.5vh;
 }
-.ion-modal{
+
+.ion-modal {
     background-color: #eeeeee;
 }
 
+.faq {
+    /*line-break: anywhere;*/
+    /*white-space: pre-wrap;*/
+}
 
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none;
+}
+
+ion-content {
+    --offset-bottom: auto !important;
+    --overflow: hidden;
+    overflow: auto;
+}
+
+-webkit-scrollbar {
+    display: none;
+}

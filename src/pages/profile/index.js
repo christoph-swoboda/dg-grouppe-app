@@ -14,6 +14,7 @@ const UserProfile = () => {
 
     const history = useHistory()
     const [url, setUrl] = useState('')
+    const [imageSize, setImageSize] = useState(0)
     const [user, setUser] = useState([])
     const [Errors, setErrors] = useState('')
     const [showAlert, setShowAlert] = useState(false)
@@ -74,17 +75,27 @@ const UserProfile = () => {
             quality: 100,
         });
         const imageUrl = photo.dataUrl;
+        const stringLength = photo.dataUrl.length - 'data:image/png;base64,'.length;
+        const sizeInBytes = 4 * Math.ceil((stringLength / 3)) * 0.5624896334383812;
+        const sizeInKb = sizeInBytes / 1000;
+        let size = Math.floor(sizeInKb)
         setUrl(imageUrl)
+        setImageSize(size)
 
         let data = new FormData()
         data.append('image', imageUrl)
-        Api().post(`/employee/profileImage/${user?.employees?.id}`, data).then(res => {
-            if (res.status === 201) {
-                alert('Profile Image Updated')
-            } else {
-                alert('Something went wrong')
-            }
-        })
+
+        if (size > 1025) {
+            window.alert('Select an image under 1 MB')
+        } else {
+            Api().post(`/employee/profileImage/${user?.employees?.id}`, data).then(res => {
+                if (res.status === 201) {
+                    alert('Profile Image Updated')
+                } else {
+                    alert('Something went wrong')
+                }
+            })
+        }
     }
 
     async function logout() {
@@ -111,14 +122,6 @@ const UserProfile = () => {
 
     return (
         <IonPage className='containerNoPadding'>
-            {/*<IonAlert*/}
-            {/*    isOpen={showAlert}*/}
-            {/*    onDidDismiss={() => setShowAlert(false)}*/}
-            {/*    header={'Alert'}*/}
-            {/*    subHeader={'Subtitle'}*/}
-            {/*    message={'This is an alert message'}*/}
-            {/*    buttons={['OK']}*/}
-            {/*/>*/}
             <div className='profile'>
                 <div className='profileContainer'>
                     <ion-icon icon={cameraOutline} onClick={() => takePicture()}/>
@@ -128,7 +131,7 @@ const UserProfile = () => {
                               onClick={() => resetStates()}
                     />
                     <IonAvatar onClick={() => takePicture()}>
-                        <img src={url ? url : `${backend}/${user?.employees?.image}`} alt='avatar'/>
+                        <img src={url && imageSize < 1025 ? url : `${backend}/${user?.employees?.image}`} alt='avatar'/>
                     </IonAvatar>
                 </div>
                 <div className='userName'>

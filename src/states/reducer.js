@@ -1,8 +1,8 @@
 export const initialState = {
     user: {},
     modal:false,
-    deviceID:null,
-    img:'',
+    network:'online',
+    img:null,
     resId:'',
     showModal:false,
     filterIds:[],
@@ -29,15 +29,15 @@ const reducer = (state, action) => {
                 ...state,
                 resId: action.item
             }
+            case "SET_NETWORK":
+            return {
+                ...state,
+                network: action.item
+            }
             case "SET_SHOWMODAL":
             return {
                 ...state,
                 showModal: action.item
-            }
-            case "SET_DEVICEID":
-            return {
-                ...state,
-                deviceID: action.item
             }
             case "SET_NOTIFILTER":
             return {

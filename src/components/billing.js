@@ -50,13 +50,13 @@ const Billing = ({header}) => {
         getRequests().then(r => r)
     }, [getRequests]);
 
-    function approved() {
+    function approve() {
         setFilter({...filter, status: 2, page: 1})
         setRequests([])
         setPending(false)
     }
 
-    function rejected() {
+    function reject() {
         setFilter({...filter, status: 1, page: 1})
         setRequests([])
         setPending(true)
@@ -79,12 +79,12 @@ const Billing = ({header}) => {
             </IonRefresher>
 
             <IonCard >
-                <IonCardTitle>{header}</IonCardTitle>
+                <IonCardTitle style={{fontSize:'22px'}}>{header}</IonCardTitle>
                 <IonCard style={{display: 'flex'}}>
                     <IonText className={pending ? 'approved inActive' : 'active approved'}
-                             onClick={approved}>Approved Uploads</IonText>
+                             onClick={approve}>Approved Uploads</IonText>
                     <IonText className={pending ? 'active pending' : 'inActive pending'}
-                             onClick={rejected}>Pending Uploads</IonText>
+                             onClick={reject}>Pending Uploads</IonText>
                 </IonCard>
                 <IonCard className='requestsContainer'>
                     {
