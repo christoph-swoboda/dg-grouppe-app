@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {IonPage} from "@ionic/react";
 import {checkmarkCircleOutline} from "ionicons/icons";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import '../../styles/thankYou.scss';
 import {useStateValue} from "../../states/StateProvider";
 

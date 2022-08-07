@@ -2,12 +2,13 @@ import React, {useEffect, useState} from "react";
 import {
     IonCardSubtitle,
     IonCardTitle,
-    IonContent, IonHeader,
+    IonContent,
     IonModal,
     IonPage,
     IonRefresher,
     IonRefresherContent,
-    IonText, IonTitle, IonToolbar
+    IonText,
+    IonTitle
 } from "@ionic/react";
 import '../../styles/dashboard.scss'
 import '../../styles/notification.scss'
@@ -35,15 +36,31 @@ const Dashboard = () => {
     const backend = process.env.REACT_APP_BACKEND_URL
     const [filter, setFilter] = useState({page: 1})
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
-    const history=useHistory()
+    const history = useHistory()
+
+    useEffect(async () => {
+        setLoading(true)
+        await getRequests()
+        setLoading(false)
+    }, [filter, network]);
+
+    useEffect(async () => {
+        setLoadingUser(true)
+        await getEmployee()
+        setLoadingUser(false)
+    }, [network]);
+
+    useEffect(async () => {
+        await getNotifications()
+    }, [filterIds, showModal, img, network]);
 
     async function getRequests() {
         await Api().get(`/requests/published?${query}`).then(res => {
             setRequests(filter.page === 1 ? res.data.open.data : [...requests, ...res.data.open.data])
             setTotal(res.data.open.total)
             setLastPage(res.data.open.last_page)
-        }).catch(e=>{
-            if(e.response.status===401){
+        }).catch(e => {
+            if (e.response.status === 401) {
                 localStorage.removeItem('token')
                 localStorage.removeItem('user')
                 window.location.replace('/login')
@@ -63,23 +80,6 @@ const Dashboard = () => {
         })
     }
 
-    useEffect(async () => {
-        setLoading(true)
-        await getRequests()
-        setLoading(false)
-    }, [filter, network]);
-
-
-    useEffect(async () => {
-        setLoadingUser(true)
-        await getEmployee()
-        setLoadingUser(false)
-    }, [network]);
-
-    useEffect(async () => {
-        await getNotifications()
-    }, [filterIds, showModal, img, network]);
-
     async function doRefresh(event) {
         await getNotifications()
         await getRequests()
@@ -90,7 +90,7 @@ const Dashboard = () => {
 
     return (
         <IonPage className='container dashboard'>
-            <IonContent hidden={network==='offline'}>
+            <IonContent hidden={network === 'offline'}>
                 <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
                     <IonRefresherContent
                         pullingIcon={chevronDownCircleOutline}>
@@ -118,8 +118,8 @@ const Dashboard = () => {
                             <IonCardTitle style={{fontSize: '35px'}}>
                                 Hi {user?.employees?.first_name}
                             </IonCardTitle>
-                            <IonCardSubtitle style={{fontSize: '18px', marginTop:'5px'}}>
-                                you have {total} {total>1?'requests':'request'} for today
+                            <IonCardSubtitle style={{fontSize: '18px', marginTop: '5px'}}>
+                                you have {total} {total > 1 ? 'requests' : 'request'} for today
                             </IonCardSubtitle>
                             <hr/>
                             {
@@ -147,7 +147,7 @@ const Dashboard = () => {
                         </div>
                 }
             </IonContent>
-            <IonTitle hidden={network==='online'}>
+            <IonTitle hidden={network === 'online'}>
                 You are offline at the moment!!
             </IonTitle>
         </IonPage>

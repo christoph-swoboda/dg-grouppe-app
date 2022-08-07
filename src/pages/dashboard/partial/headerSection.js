@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {IonAvatar, IonCard, IonCardSubtitle, IonContent, IonText, IonToolbar} from "@ionic/react";
+import {IonAvatar, IonCard, IonCardSubtitle, IonText, IonToolbar} from "@ionic/react";
 import NotificationIcon from "../../../assets/icons/notificationIcon";
 import InfoIcon from "../../../assets/icons/infoIcon";
 import {useStateValue} from "../../../states/StateProvider";

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react"
 import '../../styles/userProfile.scss'
-import {IonAlert, IonAvatar, IonPage} from "@ionic/react";
-import image from "../../assets/a2.jpg";
+import {IonAvatar, IonPage} from "@ionic/react";
 import {cameraOutline, close} from "ionicons/icons";
 import {useHistory, useLocation} from "react-router-dom";
 import {Camera, CameraResultType} from "@capacitor/camera";
@@ -17,8 +16,6 @@ const UserProfile = () => {
     const [imageSize, setImageSize] = useState(0)
     const [user, setUser] = useState([])
     const [Errors, setErrors] = useState('')
-    const [showAlert, setShowAlert] = useState(false)
-    const [loadingData, setLoadingData] = useState(false)
     const [loading, setLoading] = useState(false)
     const [loadingLogout, setLoadingLogOut] = useState(false)
     const [showPass, setShowPass] = useState(true)
@@ -28,10 +25,9 @@ const UserProfile = () => {
     const backend = process.env.REACT_APP_BACKEND_URL
 
     const {
-        register, getValues, setValue, handleSubmit, formState, reset, formState: {errors, touchedFields},
+        register, getValues, setValue, handleSubmit, formState: {errors, touchedFields},
         control
     } = useForm({mode: "onChange"});
-    const {isValid} = formState;
 
     const onSubmit = async (data) => {
         setErrors('')
@@ -40,13 +36,11 @@ const UserProfile = () => {
         } else {
             setLoading(true)
             Api().post('/user/update', data).then(res => {
-                setShowAlert(true)
                 setShowNumber(true)
                 setShowPass(true)
                 window.alert('Information Updated Successfully')
                 setLoading(false)
             }).catch(err => {
-                setShowAlert(true)
                 window.alert('Something Went Wrong!')
                 setLoading(false)
             })
@@ -54,10 +48,8 @@ const UserProfile = () => {
     };
 
     useEffect(() => {
-        setLoadingData(true)
         Api().get('/employee').then(res => {
             setUser(res.data)
-            setLoadingData(false)
         })
     }, []);
 

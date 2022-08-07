@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {IonButton, IonImg, IonItem, IonPage} from "@ionic/react";
 import {useHistory} from "react-router-dom";
 import '../styles/thankYou.scss';
@@ -8,7 +8,7 @@ import Api from "../api/api";
 const Preview = () => {
     const [{img, resId}, dispatch] = useStateValue()
     const [loading, setLoading] = useState(false)
-    const [imageSize, setImageSize] = useState(0)
+    // const [imageSize, setImageSize] = useState(0)
     const history = useHistory()
 
     // async function getImageSize(url) {
@@ -41,7 +41,7 @@ const Preview = () => {
             } else {
                 window.alert('Something Went Wrong')
             }
-            setImageSize(0)
+            // setImageSize(0)
         })
         // }
     }

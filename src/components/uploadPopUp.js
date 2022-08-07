@@ -1,14 +1,13 @@
-import React, {useState} from "react"
+import React from "react"
 import '../styles/uploadPopUp.scss'
 import {IonButton} from "@ionic/react";
 import {Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 import {useStateValue} from "../states/StateProvider";
 import {useHistory} from "react-router-dom";
 
-const UploadPopUp = ({title, responseId}) => {
+const UploadPopUp = ({responseId}) => {
 
-    const [image, setImage] = useState('')
-    const [{}, dispatch] = useStateValue()
+    const [dispatch] = useStateValue()
     const history = useHistory()
     const hiddenFileInput = React.useRef(null);
 
@@ -46,7 +45,6 @@ const UploadPopUp = ({title, responseId}) => {
         const file = e.target.files[0];
         if (file) {
             let reader = new FileReader();
-            await setImage(file);
             reader.onloadend = () => {
                 dispatch({type: "SET_MODAL", item: false})
                 history.push('/preview')
