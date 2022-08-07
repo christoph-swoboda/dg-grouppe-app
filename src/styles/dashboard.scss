@@ -15,7 +15,7 @@
     z-index: 1111;
     width: 88vw;
     background-color: $body-bg1;
-    height: 6rem;
+    height: 7rem;
     margin-top: -1rem;
     justify-content: space-between;
 
@@ -45,6 +45,7 @@
     .notification {
       a {
         margin-left: .7rem;
+        margin-right: .6rem;
       }
 
       ion-content{
