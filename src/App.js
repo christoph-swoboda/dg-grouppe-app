@@ -85,12 +85,10 @@ const App = () => {
     }, [deviceID]);
 
     useEffect(() => {
-        if(user){
-            Api().get('/settings').then(res => {
-                setSettings(res.data)
-            })
-        }
-    }, [user]);
+        Api().get('/settings').then(res => {
+            setSettings(res.data)
+        })
+    }, []);
 
     const register = async () => {
 
@@ -113,7 +111,7 @@ const App = () => {
     return (
         <IonApp>
             <IonReactRouter>
-                <IonTabs >
+                <IonTabs>
                     <IonRouterOutlet>
                         <Route exact path="/">
                             {user ? <Redirect to="/dashboard"/> : <Redirect to="/login"/>}

@@ -6,18 +6,18 @@ import {
     IonCardTitle,
     IonContent,
     IonHeader,
-    IonToolbar,
-    IonTitle,
     IonRefresher,
     IonRefresherContent,
     IonText,
-    IonLoading
+    IonTitle,
+    IonToolbar
 } from "@ionic/react";
 import Api from "../api/api";
 import {useParams} from "react-router";
 import qs from "qs";
 import {BeatLoader} from "react-spinners";
 import {chevronDownCircleOutline} from "ionicons/icons";
+import {useStateValue} from "../states/StateProvider";
 
 const Billing = ({header}) => {
 
@@ -25,6 +25,7 @@ const Billing = ({header}) => {
     const [loading, setLoading] = useState(false)
     const [requests, setRequests] = useState([])
     const params = useParams()
+    const [{network}] = useStateValue()
     const [filter, setFilter] = useState({type: params.page, status: 1, page: 1})
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
     const [lastPage, setLastPage] = useState(0);
@@ -48,7 +49,7 @@ const Billing = ({header}) => {
 
     useEffect(() => {
         getRequests().then(r => r)
-    }, [getRequests]);
+    }, [getRequests, network]);
 
     function approve() {
         setFilter({...filter, status: 2, page: 1})
@@ -78,8 +79,8 @@ const Billing = ({header}) => {
                 </IonRefresherContent>
             </IonRefresher>
 
-            <IonCard >
-                <IonCardTitle style={{fontSize:'22px'}}>{header}</IonCardTitle>
+            <IonCard hidden={network !== 'online'}>
+                <IonCardTitle style={{fontSize: '22px'}}>{header}</IonCardTitle>
                 <IonCard style={{display: 'flex'}}>
                     <IonText className={pending ? 'approved inActive' : 'active approved'}
                              onClick={approve}>Approved Uploads</IonText>
@@ -120,6 +121,9 @@ const Billing = ({header}) => {
                     </button>
                 </IonCard>
             </IonCard>
+            <IonTitle hidden={network !== 'offline'}>
+                You are offline at the moment!!
+            </IonTitle>
         </IonContent>
     )
 }

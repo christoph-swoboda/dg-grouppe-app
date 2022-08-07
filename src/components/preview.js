@@ -37,6 +37,7 @@ const Preview = () => {
                 setLoading(false)
                 dispatch({type: "SET_IMG", item: null})
                 history.push('/uploaded')
+                dispatch({type: "SET_IMGUPPLOADED", item: true})
             } else {
                 window.alert('Something Went Wrong')
             }
@@ -49,12 +50,11 @@ const Preview = () => {
     //     await getImageSize(img)
     // }, [img]);
 
-
     return (
-        <IonPage className='container'>
+        <IonPage className='container' hidden={!img}>
             <IonImg src={img} className={'imageSection'}/>
             <IonItem className={'sendOrCancelImage'}>
-                <IonButton color={'tertiary'} onClick={send}>{loading ? 'Sending...' : 'Send'}</IonButton>
+                <IonButton disabled={!img} color={'tertiary'} onClick={send}>{loading ? 'Sending...' : 'Send'}</IonButton>
                 <IonButton color={'dark'} onClick={() => history.push('/')}>Cancel</IonButton>
             </IonItem>
         </IonPage>

@@ -61,18 +61,18 @@ const Dashboard = () => {
         setLoading(true)
         await getRequests()
         setLoading(false)
-    }, [filter]);
+    }, [filter, network]);
 
 
     useEffect(async () => {
         setLoadingUser(true)
         await getEmployee()
         setLoadingUser(false)
-    }, []);
+    }, [network]);
 
     useEffect(async () => {
         await getNotifications()
-    }, [filterIds, showModal, img]);
+    }, [filterIds, showModal, img, network]);
 
     async function doRefresh(event) {
         await getNotifications()
@@ -84,7 +84,7 @@ const Dashboard = () => {
 
     return (
         <IonPage className='container dashboard'>
-            <IonContent>
+            <IonContent hidden={network==='offline'}>
                 <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
                     <IonRefresherContent
                         pullingIcon={chevronDownCircleOutline}>
@@ -141,13 +141,9 @@ const Dashboard = () => {
                         </div>
                 }
             </IonContent>
-            <IonTitle hidden={network!=='offline'}>
+            <IonTitle hidden={network==='online'}>
                 You are offline at the moment!!
-            </IonTitle >
-
-            {/*<IonTitle style={{boxShadow:0, backgroundColor:'#eeeeee', fontSize:'25px', textAlign:'center'}} hidden= {network!=='loading'}>*/}
-            {/*    please wait...*/}
-            {/*</IonTitle>*/}
+            </IonTitle>
         </IonPage>
     )
 }

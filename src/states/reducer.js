@@ -5,6 +5,7 @@ export const initialState = {
     img:null,
     resId:'',
     showModal:false,
+    imgUploaded:false,
     filterIds:[],
 };
 const reducer = (state, action) => {
@@ -23,6 +24,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 img: action.item
+            }
+            case "SET_IMGUPPLOADED":
+            return {
+                ...state,
+                imgUploaded: action.item
             }
             case "SET_RESID":
             return {
