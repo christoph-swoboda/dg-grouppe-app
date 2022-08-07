@@ -88,7 +88,7 @@ const App = () => {
         Api().get('/settings').then(res => {
             setSettings(res.data)
         })
-    }, []);
+    }, [network]);
 
     const register = async () => {
 

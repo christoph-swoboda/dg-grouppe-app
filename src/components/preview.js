@@ -46,6 +46,11 @@ const Preview = () => {
         // }
     }
 
+    function cancel(){
+        history.push('/')
+        dispatch({type: "SET_IMG", item: null})
+    }
+
     // useEffect(async () => {
     //     await getImageSize(img)
     // }, [img]);
@@ -55,7 +60,7 @@ const Preview = () => {
             <IonImg src={img} className={'imageSection'}/>
             <IonItem className={'sendOrCancelImage'}>
                 <IonButton disabled={!img} color={'tertiary'} onClick={send}>{loading ? 'Sending...' : 'Send'}</IonButton>
-                <IonButton color={'dark'} onClick={() => history.push('/')}>Cancel</IonButton>
+                <IonButton color={'dark'} onClick={cancel}>Cancel</IonButton>
             </IonItem>
         </IonPage>
     )
