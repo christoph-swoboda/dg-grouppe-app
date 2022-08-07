@@ -1,0 +1,151 @@
+@import "variables";
+
+@mixin container() {
+  background-color: $body-bg1;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+@mixin flexEvenlyCentered() {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@mixin flexCenter() {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+@mixin flexEvenly() {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@mixin centerItems() {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin centerHorizontal() {
+  margin: 3vh auto;
+  padding: 10px;
+}
+
+@mixin centerItemsAbsolute() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin button($background,$color) {
+  border-color: $darkTheme;
+  border-style: solid;
+  border-width: thin;
+  width: 100%;
+  padding: 14px;
+  font-size: 1vw;
+  background: $background;
+  border-radius: 8px;
+  color: $color;
+  box-shadow: 0 8px 24px rgba(146, 136, 224, 0.3);
+}
+
+@mixin tableStyle($width,$mobileWidth) {
+  h1 {
+    margin: 0 0 1rem 0;
+    font-size: 3vh;
+    font-weight: 700;
+    color: #170303;
+  }
+
+  table {
+    width: $width;
+    @media screen and (max-width: $bp-mobile) {
+      width: $mobileWidth;
+    }
+
+    td, th {
+      padding: 1rem 2rem 1rem 2rem;
+      font-size: 2vh;
+    }
+
+    th {
+      color: grey;
+    }
+
+    .name {
+      color: $blue;
+      text-decoration: underline;
+    }
+  }
+
+  .listBottom {
+    margin: 2rem 0 2rem 0;
+
+    a {
+      padding: .4rem 1rem .4rem 1rem;
+      border: 1px solid $blue;
+      font-size: 2vh;
+      @include centerItems;
+      color: $blue;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+  }
+}
+
+@mixin formStyle($width, $padding) {
+  label {
+    color: grey;
+    margin: 0 1rem 0 0;
+    font-size: 2vh;
+  }
+  ion-input, input {
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto;
+    margin: 0 1.1rem 1.1rem 0;
+    width: $width;
+    padding: $padding;
+    font-size: 2.5vh;
+    border-radius: 10px;
+    border: 1px solid black;
+    color: black;
+    --color:black;
+    --placeholder-color: black;
+    --placeholder-opacity: 1;
+    --padding-bottom: -1px;
+    --placeholder-font-weight:bold;
+  }
+
+  ion-button, button {
+    background-color: #000000;
+    cursor: pointer;
+    color: white;
+    width: 82vw;
+    font-size: 2.6vh;
+    border-radius: 10px;
+    margin: 0 1.1rem 1.1rem 0;
+    padding: 1.2rem;
+  }
+  //
+  //.disabled {
+  //    width: 82vw;
+  //    background-color: #000000;
+  //    color: white;
+  //    cursor: none;
+  //    padding: 10px;
+  //    border-radius: 10px;
+  //    margin: 0 1.1rem 1.1rem 0;
+  //    border: 2px solid black;
+  //}
+}
+
+
+
+

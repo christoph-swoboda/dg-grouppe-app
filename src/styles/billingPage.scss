@@ -1,0 +1,56 @@
+@import "variables";
+@import "mixin";
+
+.billingContainer {
+  @include container;
+  text-align: center;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 1rem 0;
+
+  .requestsContainer {
+    margin-bottom: 5rem;
+    max-height: 73vh;
+    overflow-y: scroll;
+  }
+
+  ion-card-title, {
+    font-size: 18px;
+    color: black;
+    font-weight: 600;
+  }
+
+  .approved {
+    cursor: pointer;
+    padding: 1rem;
+    width: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+    border-radius: 15px 0 0 15px;
+  }
+
+  .pending {
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+    cursor: pointer;
+    width: 50%;
+    font-size: 14px;
+    padding: 1rem;
+    font-weight: 600;
+    border-radius: 0 15px 15px 0;
+  }
+
+  .active {
+    background-color: black;
+    color: white;
+  }
+
+  .inActive {
+    background-color: white;
+    color: black;
+  }
+}
