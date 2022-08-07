@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {IonAvatar, IonCard, IonCardSubtitle, IonText, IonToolbar} from "@ionic/react";
+import {IonAvatar, IonCard, IonCardSubtitle, IonContent, IonText, IonToolbar} from "@ionic/react";
 import NotificationIcon from "../../../assets/icons/notificationIcon";
 import InfoIcon from "../../../assets/icons/infoIcon";
 import {useStateValue} from "../../../states/StateProvider";
@@ -39,9 +39,9 @@ const HeaderSection = ({notifications, user, loadingUser, filter, backend}) => {
                         {notifications?.length}
                     </IonCardSubtitle>
                 </IonCard>
-                <ionContent onClick={() => dispatch({type: "SET_SHOWMODAL", item: true})}>
+                <span onClick={() => dispatch({type: "SET_SHOWMODAL", item: true})}>
                     <NotificationIcon/>
-                </ionContent>
+                </span>
                 <Link to='/information'>
                     <InfoIcon/>
                 </Link>

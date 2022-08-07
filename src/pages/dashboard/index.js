@@ -42,6 +42,12 @@ const Dashboard = () => {
             setRequests(filter.page === 1 ? res.data.open.data : [...requests, ...res.data.open.data])
             setTotal(res.data.open.total)
             setLastPage(res.data.open.last_page)
+        }).catch(e=>{
+            if(e.response.status===401){
+                localStorage.removeItem('token')
+                localStorage.removeItem('user')
+                window.location.replace('/login')
+            }
         })
     }
 

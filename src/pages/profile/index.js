@@ -196,7 +196,12 @@ const UserProfile = () => {
                            hidden={showPass}
                            type='password'
                            autoFocus
-                           {...register('newPassword', {required: !showPass})}
+                           {...register('newPassword', {
+                               required: !showPass,
+                               pattern: {
+                                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                                   message: 'Min eight characters, at least one uppercase, one lowercase letter and one number:',
+                               },})}
                            style={{border: errors.newPassword && '1px solid red'}}
                     />
                     {errors.newPassword && touchedFields && <p>{errors.newPassword.message}</p>}

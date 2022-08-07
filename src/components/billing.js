@@ -35,13 +35,16 @@ const Billing = ({header}) => {
         async () => {
             setLoading(true)
             Api().get(`/requests/categorized?${query}`).then(res => {
-                console.log('req', res.data?.total)
                 setRequests(filter.page === 1 ? res.data.data.filter(req => req.type !== null) : [...requests, ...res.data.data.filter(req => req.type !== null)])
                 setLastPage(res.data.last_page)
                 setTotal(res.data?.total)
                 setLoading(false)
-            }).catch(e => {
-                console.log('err', e)
+            }).catch(e=>{
+                if(e.response.status===401){
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('user')
+                    window.location.replace('/login')
+                }
             })
         },
         [filter]
