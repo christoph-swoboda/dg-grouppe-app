@@ -1,11 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
-
-    namespace 'DG.gruppe.app'
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "DG.gruppe.app"
+        applicationId "de.appvision.dggruppe"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

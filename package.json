@@ -1,5 +1,5 @@
 {
-  "name": "DG-gruppe-app",
+  "name": "de.appvision.dggruppe",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -87,5 +87,5 @@
     "sass": "^1.32.11",
     "sass-loader": "^11.0.1"
   },
-  "description": "An Ionic project"
+  "description": "An application for dg grouppe employees."
 }

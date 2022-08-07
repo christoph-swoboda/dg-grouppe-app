@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'DG.gruppe.app',
-  appName: 'DG.gruppe.app',
+  appId: 'de.appvision.dggruppe',
+  appName: 'DG Gruppe',
   plugins: {
     PushNotifications: {
       presentationOptions: ["badge", "sound", "alert"],

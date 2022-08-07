@@ -1,5 +1,5 @@
 {
-  "name": "DG-gruppe-app",
+  "name": "de.appvision.dggruppe",
   "integrations": {
     "capacitor": {}
   },
