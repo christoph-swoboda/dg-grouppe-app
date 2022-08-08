@@ -1,17 +1,10 @@
 import axios from "axios";
 
-// const api = 'https://jsonplaceholder.typicode.com';
 const api = process.env.REACT_APP_API_URL;
 // const api = 'http://localhost:8000/api';
 
 let BaseApi = axios.create({
     baseURL: api,
-    // headers: {
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Access-Control-Allow-Methods':'*',
-    //     'Access-Control-Allow-Headers': '*',
-    //     'Access-Control-Allow-Credentials': 'true'
-    // },
 });
 
 let Api = function() {

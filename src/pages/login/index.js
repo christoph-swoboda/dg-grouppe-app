@@ -3,21 +3,16 @@ import '../../styles/registration.scss'
 import {toast} from "react-toastify"
 import {useForm} from "react-hook-form"
 
-import {IonButton, IonCard, IonCardTitle, IonContent, IonImg, IonInput, IonPage} from "@ionic/react";
+import {IonButton, IonCard, IonCardTitle, IonImg, IonInput, IonPage} from "@ionic/react";
 import Api from "../../api/api";
-import {useHistory} from "react-router-dom";
 import image from '../../assets/bg.png';
 
 const Login = () => {
 
-    const [Errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(false)
-    const history = useHistory()
     const {
-        register, getValues, setValue, handleSubmit, formState, reset, formState: {errors, touchedFields},
-        control
+        register, handleSubmit, formState: {errors, touchedFields},
     } = useForm({mode: "onChange"});
-    const {isValid} = formState;
 
     const onSubmit = async (data) => {
         setLoading(true)
@@ -50,7 +45,6 @@ const Login = () => {
 
         let user = JSON.parse(window.localStorage.getItem('user'))
         if (user) {
-            setErrors(user?.errors)
             if (user?.role === '2') {
                 window.location.replace('/dashboard')
             } else {
@@ -67,25 +61,25 @@ const Login = () => {
                     <IonCardTitle>Login</IonCardTitle>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <IonInput placeholder='Username'
-                               {...register('email', {
-                                   required: 'Email is required',
-                                   pattern: {
-                                       value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                       message: 'Please enter a valid email',
-                                   },
-                               })}
-                               type="email"
-                               required
-                               style={{border: errors.email && '1px solid red'}}
+                                  {...register('email', {
+                                      required: 'Email is required',
+                                      pattern: {
+                                          value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                          message: 'Please enter a valid email',
+                                      },
+                                  })}
+                                  type="email"
+                                  required
+                                  style={{border: errors.email && '1px solid red'}}
                         />
                         {errors.email && touchedFields && <p>{errors.email?.message}</p>}
                         <IonInput placeholder='Password'
-                               type='password'
-                               {...register('password', {required: 'your password is required'})}
-                               style={{border: errors.password && '1px solid red'}}
+                                  type='password'
+                                  {...register('password', {required: 'your password is required'})}
+                                  style={{border: errors.password && '1px solid red'}}
                         />
                         {errors.password && touchedFields && <p>{errors.password?.message}</p>}
-                        <IonButton color={'black'} style={{padding:'0'}} type="submit">
+                        <IonButton color={'black'} style={{padding: '0'}} type="submit">
                             {(!loading) ? 'Log In' : 'Verifying...'}
                         </IonButton>
                     </form>

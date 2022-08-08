@@ -1,6 +1,6 @@
 {
-	"appId": "DG.gruppe.app",
-	"appName": "DG.gruppe.app",
+	"appId": "de.appvision.dggruppe",
+	"appName": "DG Gruppe",
 	"plugins": {
 		"PushNotifications": {
 			"presentationOptions": [

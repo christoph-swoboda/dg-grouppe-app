@@ -39,9 +39,9 @@ const HeaderSection = ({notifications, user, loadingUser, filter, backend}) => {
                         {notifications?.length}
                     </IonCardSubtitle>
                 </IonCard>
-                <ionContent onClick={() => dispatch({type: "SET_SHOWMODAL", item: true})}>
+                <span onClick={() => dispatch({type: "SET_SHOWMODAL", item: true})}>
                     <NotificationIcon/>
-                </ionContent>
+                </span>
                 <Link to='/information'>
                     <InfoIcon/>
                 </Link>

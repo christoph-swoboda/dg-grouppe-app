@@ -1,7 +1,7 @@
 import React from "react";
 import {useLocation} from "react-router-dom";
 
-const InternetIcon = () => {
+const PhoneIcon = () => {
     const location=useLocation()
     const color=location.pathname==='/phone/phone'?'#0B4EF9FF':'black'
 
@@ -29,4 +29,4 @@ const InternetIcon = () => {
     )
 }
 
-export default InternetIcon
+export default PhoneIcon
