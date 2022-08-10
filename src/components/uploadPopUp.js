@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 
 const UploadPopUp = ({responseId}) => {
 
-    const [dispatch] = useStateValue()
+    const [{},dispatch] = useStateValue()
     const history = useHistory()
     const hiddenFileInput = React.useRef(null);
 
