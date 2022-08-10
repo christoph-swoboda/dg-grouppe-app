@@ -87,7 +87,7 @@ const App = () => {
     }
 
     return (
-        <IonApp>
+        <IonApp className='ion-app'>
             <IonReactRouter>
                 <IonTabs>
                     <IonRouterOutlet>

@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import Request from "./card/request";
 import '../styles/billingPage.scss';
 import {
-    IonCard,
+    IonCard, IonCardSubtitle,
     IonCardTitle,
     IonContent,
     IonHeader,
@@ -82,7 +82,7 @@ const Billing = ({header}) => {
                 </IonRefresherContent>
             </IonRefresher>
 
-            <IonCard hidden={network !== 'online'}>
+            <IonCard hidden={network === 'offline'}>
                 <IonCardTitle style={{fontSize: '22px'}}>{header}</IonCardTitle>
                 <IonCard style={{display: 'flex'}}>
                     <IonText className={pending ? 'approved inActive' : 'active approved'}
@@ -97,9 +97,9 @@ const Billing = ({header}) => {
                             <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                             :
                             requests.length === 0 ?
-                                <IonHeader>
-                                    <IonToolbar>
-                                        <IonTitle>No Data Found</IonTitle>
+                                <IonHeader >
+                                    <IonToolbar >
+                                        <IonTitle className={'bgDefault'}>No Data Found</IonTitle>
                                     </IonToolbar>
                                 </IonHeader>
                                 :
@@ -124,9 +124,15 @@ const Billing = ({header}) => {
                     </button>
                 </IonCard>
             </IonCard>
-            <IonTitle hidden={network !== 'offline'}>
-                You are offline at the moment!!
-            </IonTitle>
+            <IonCard hidden={network === 'online'}>
+                <IonCardTitle>
+                    You are offline at the moment!!
+                </IonCardTitle>
+                <br/>
+                <IonCardSubtitle>
+                     Connect To The Internet
+                </IonCardSubtitle>
+            </IonCard>
         </IonContent>
     )
 }
