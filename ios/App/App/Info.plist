@@ -29,6 +29,10 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$PHOTO_LIBRARY_USAGE_DESCRIPTION</string>
+	<key>NSCameraUsageDescription</key>
+    <string>This app needs access to your Camera to allow you to take and upload a picture.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Here write description why you accessing photo library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
