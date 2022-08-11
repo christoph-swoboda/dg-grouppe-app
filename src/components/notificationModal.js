@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {IonContent, IonModal} from "@ionic/react";
 import {close} from "ionicons/icons";
 import Notification from "./card/notification";
@@ -13,8 +13,10 @@ const Notifications = ({notifications}) => {
     }
 
     useEffect(() => {
-        return () => {dispatch({type: "SET_SHOWMODAL", item: false})};
-    }, []);
+        return () => {
+            dispatch({type: "SET_SHOWMODAL", item: false})
+        };
+    }, [dispatch]);
 
     return (
         <IonContent>

@@ -8,6 +8,8 @@ import {Controller, useForm} from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css'
 import Api from "../../api/api";
+import {useStateValue} from "../../states/StateProvider";
+import image from "../../assets/avatar.png";
 
 const UserProfile = () => {
 
@@ -23,6 +25,7 @@ const UserProfile = () => {
     let keys = ''
     const location = useLocation()
     const backend = process.env.REACT_APP_BACKEND_URL
+    const [{},dispatch] = useStateValue()
 
     const {
         register, getValues, setValue, handleSubmit, formState: {errors, touchedFields},
@@ -72,6 +75,7 @@ const UserProfile = () => {
         const sizeInKb = sizeInBytes / 1000;
         let size = Math.floor(sizeInKb)
         setUrl(imageUrl)
+        dispatch({type: "SET_AVATAR", item: imageUrl})
         setImageSize(size)
 
         let data = new FormData()
@@ -85,6 +89,7 @@ const UserProfile = () => {
                     alert('Profile Image Updated')
                 } else {
                     alert('Something went wrong')
+                    setUrl(null)
                 }
             })
         }
@@ -122,9 +127,17 @@ const UserProfile = () => {
                               style={{padding: '6rem 2rem 0 0 ', cursor: 'pointer', backgroundColor: 'inherit'}}
                               onClick={() => resetStates()}
                     />
-                    <IonAvatar onClick={() => takePicture()}>
-                        <img src={url && imageSize < 1025 ? url : `${backend}/${user?.employees?.image}`} alt='avatar'/>
-                    </IonAvatar>
+                    {
+                        !url && imageSize < 1025 && !user?.employees?.image?
+                            <IonAvatar>
+                                <img src={image} alt='avatar'/>
+                            </IonAvatar>
+                            :
+                            <IonAvatar>
+                                <img src={ url && imageSize < 1025? url:`${backend}/${user?.employees?.image}`} alt='avatar'/>
+                            </IonAvatar>
+                    }
+
                 </div>
                 <div className='userName'>
                     <h2>{user?.employees?.first_name}</h2>
