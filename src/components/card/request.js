@@ -31,7 +31,7 @@ const Request = ({title, status, responseId, updated, month, year, type, publish
             <IonHeader className='request'
                        onClick={() => status !== '2' && published===1 && dispatch({type: "SET_MODAL", item: true})}
             >
-                <IonToolbar className={status !== '3' ? 'card' : 'cardError'}>
+                <IonToolbar className={status !== '3' && published===1 ? 'card' :status === '3' && published===1? 'cardError':published===0 && 'cardYellow'}>
                     {/*<div className='card' >*/}
                     {
                         status === '1' ?

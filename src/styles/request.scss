@@ -30,7 +30,7 @@
     border: 1px solid $borderColor;
   }
 
-  .cardError {
+  .cardError, .cardYellow {
     color: black;
     padding: 4px 4px 4px 15px;
     border-radius: 15px;
@@ -38,7 +38,12 @@
     border: 1px solid red;
   }
 
-  .card, .cardError {
+  .cardYellow{
+    background-color: rgba(255, 251, 0, .1);
+    border: 1px solid #fffb00;
+  }
+
+  .card, .cardError, .cardYellow {
     h2{
       font-weight: 600;
       font-size: 16px;
