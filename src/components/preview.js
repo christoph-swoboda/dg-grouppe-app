@@ -24,7 +24,7 @@ const Preview = () => {
             onUploadProgress: (progressEvent) => {
                 const {loaded, total} = progressEvent;
                 let percent = Math.floor( (loaded * 100) / total )
-                console.log( `${loaded}kb of ${total}kb | ${percent}%` );
+                // console.log( `${loaded}kb of ${total}kb | ${percent}%` );
 
                 if( percent < 100 ){
                     setPercentage(percent)
@@ -41,8 +41,8 @@ const Preview = () => {
                 dispatch({type: "SET_IMGUPPLOADED", item: true})
                 setPercentage(0)
             } else {
-                window.alert('Something Went Wrong')
                 setPercentage(0)
+                window.alert('Something Went Wrong')
             }
         })
     }

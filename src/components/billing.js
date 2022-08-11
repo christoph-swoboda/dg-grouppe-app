@@ -111,6 +111,7 @@ const Billing = ({header}) => {
                                         title={req.bill?.title}
                                         type={req.type?.title}
                                         period={req.period}
+                                        published={req.published}
                                         message={req.response?.message}
                                         month={new Date(req.bill?.created_at).getMonth() + 1}
                                         year={new Date(req.bill?.created_at).getFullYear()}

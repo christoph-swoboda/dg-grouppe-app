@@ -42,7 +42,7 @@ const Dashboard = () => {
         setLoading(true)
         await getRequests()
         setLoading(false)
-    }, [filter, network]);
+    }, [filter, network, img]);
 
     useEffect(async () => {
         setLoadingUser(true)
@@ -129,7 +129,7 @@ const Dashboard = () => {
                                     requests?.map((req, i) => (
                                         <Request
                                             key={req.id}
-                                            len={total}
+                                            published={req.published}
                                             responseId={req.response?.id}
                                             title={req.bill?.title}
                                             message={req?.response?.message}
