@@ -4,18 +4,26 @@ import {IonAvatar, IonCard, IonCardSubtitle, IonText, IonToolbar} from "@ionic/r
 import NotificationIcon from "../../../assets/icons/notificationIcon";
 import InfoIcon from "../../../assets/icons/infoIcon";
 import {useStateValue} from "../../../states/StateProvider";
+import image from '../../../assets/avatar.png'
 
 const HeaderSection = ({notifications, user, loadingUser, filter, backend}) => {
 
-    const [{}, dispatch] = useStateValue()
+    const [{avatar}, dispatch] = useStateValue()
 
     return (
         <IonCard className='header ion-no-margin'>
             <IonCard className='userInfo ion-no-margin'>
                 <Link to='/profile'>
-                    <IonAvatar>
-                        <img src={`${backend}/${user?.employees?.image}`} alt='avatar'/>
-                    </IonAvatar>
+                    {
+                        !avatar && !user?.employees?.image?
+                            <IonAvatar>
+                                <img src={image} alt='avatar'/>
+                            </IonAvatar>
+                            :
+                            <IonAvatar>
+                                <img src={ avatar? avatar:`${backend}/${user?.employees?.image}`} alt='avatar'/>
+                            </IonAvatar>
+                    }
                 </Link>
                 <IonCard style={{paddingLeft: '10px'}} className={'ion-no-margin ion-no-padding'}>
                     {

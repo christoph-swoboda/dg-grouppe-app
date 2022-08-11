@@ -4,6 +4,7 @@ export const initialState = {
     network:'online',
     img:null,
     resId:'',
+    avatar:null,
     showModal:false,
     imgUploaded:false,
     filterIds:[],
@@ -24,6 +25,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 img: action.item
+            }
+            case "SET_AVATAR":
+            return {
+                ...state,
+                avatar: action.item
             }
             case "SET_IMGUPPLOADED":
             return {

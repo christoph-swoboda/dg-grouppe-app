@@ -97,10 +97,8 @@ const Billing = ({header}) => {
                             <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                             :
                             requests.length === 0 ?
-                                <IonHeader >
-                                    <IonToolbar >
-                                        <IonTitle className={'bgDefault'}>No Data Found</IonTitle>
-                                    </IonToolbar>
+                                <IonHeader className={'bgDefault'}>
+                                    No Data Found
                                 </IonHeader>
                                 :
                                 requests?.map(req => (
