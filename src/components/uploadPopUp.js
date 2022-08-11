@@ -19,7 +19,7 @@ const UploadPopUp = ({responseId}) => {
         const photo = await Camera.getPhoto({
             resultType: CameraResultType.DataUrl,
             source: CameraSource.Camera,
-            quality: 100,
+            quality: 70,
         });
         const imageUrl = photo.dataUrl;
         dispatch({type: "SET_MODAL", item: false})
@@ -32,7 +32,7 @@ const UploadPopUp = ({responseId}) => {
         const photo = await Camera.getPhoto({
             resultType: CameraResultType.DataUrl,
             source: CameraSource.Photos,
-            quality: 100,
+            quality: 70,
         });
         const imageUrl = photo.dataUrl;
         dispatch({type: "SET_MODAL", item: false})

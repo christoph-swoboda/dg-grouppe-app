@@ -7,8 +7,10 @@
 
   ion-avatar {
     @include centerHorizontal;
-    width: 120px;
-    height: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    min-height: 120px;
+    max-height: 120px;
     margin-top: 2rem;
   }
 
@@ -24,6 +26,7 @@
 }
 
 .userName {
+  height: 60px;
   padding: 0 1rem;
   text-align: center;
 

@@ -4,21 +4,15 @@ import {useHistory} from "react-router-dom";
 import '../styles/thankYou.scss';
 import {useStateValue} from "../states/StateProvider";
 import Api from "../api/api";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 const Preview = () => {
     const [{img, resId}, dispatch] = useStateValue()
     const [loading, setLoading] = useState(false)
-    // const [imageSize, setImageSize] = useState(0)
+    const [percentage, setPercentage] = useState(0)
+
     const history = useHistory()
 
-    // async function getImageSize(url) {
-    //     const stringLength = url.length - 'data:image/png;base64,'.length;
-    //     const sizeInBytes = 4 * Math.ceil((stringLength / 3)) * 0.5624896334383812;
-    //     const sizeInKb = sizeInBytes / 1000;
-    //     let size = Math.floor(sizeInKb)
-    //     console.log('size', size)
-    //     setImageSize(size)
-    // }
 
     async function send() {
         setLoading(true)
@@ -26,24 +20,31 @@ const Preview = () => {
         data.append('image', img)
         data.append('id', resId)
 
-        // if(imageSize>1025){
-        //     window.alert('Select an image under 1 MB')
-        //     setLoading(false)
-        //     history.push('/')
-        // }
-        // else{
-        await Api().post('/response', data).then(res => {
+        const options = {
+            onUploadProgress: (progressEvent) => {
+                const {loaded, total} = progressEvent;
+                let percent = Math.floor( (loaded * 100) / total )
+                // console.log( `${loaded}kb of ${total}kb | ${percent}%` );
+
+                if( percent < 100 ){
+                    setPercentage(percent)
+                }
+            }
+        }
+
+        await Api().post('/response', data,options).then(res => {
             if (res.status === 200) {
                 setLoading(false)
+                setPercentage(100)
                 dispatch({type: "SET_IMG", item: null})
                 history.push('/uploaded')
                 dispatch({type: "SET_IMGUPPLOADED", item: true})
+                setPercentage(0)
             } else {
+                setPercentage(0)
                 window.alert('Something Went Wrong')
             }
-            // setImageSize(0)
         })
-        // }
     }
 
     function cancel(){
@@ -51,12 +52,16 @@ const Preview = () => {
         dispatch({type: "SET_IMG", item: null})
     }
 
-    // useEffect(async () => {
-    //     await getImageSize(img)
-    // }, [img]);
-
     return (
         <IonPage className='container' hidden={!img}>
+            {
+                percentage>0 &&
+                <ProgressBar completed={percentage}
+                             bgColor='black' baseBgColor='white'
+                             isLabelVisible={false}
+                             height={'5px'}
+                />
+            }
             <IonImg src={img} className={'imageSection'}/>
             <IonItem className={'sendOrCancelImage'}>
                 <IonButton disabled={!img} color={'tertiary'} onClick={send}>{loading ? 'Sending...' : 'Send'}</IonButton>

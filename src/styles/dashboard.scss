@@ -77,7 +77,11 @@
     }
   }
 
-  .dashboardTitle {
+  .emptyDashboardTitle{
+    height: 70vh;
+  }
+
+  .dashboardTitle, .emptyDashboardTitle {
     margin: 2rem 0 0 0;
 
 
@@ -90,7 +94,7 @@
     }
 
     ion-icon {
-      margin-top: 5rem;
+      margin-top: 2rem;
       font-size: 10vh;
       font-weight: 800;
       @include centerItemsAbsolute;
@@ -98,8 +102,9 @@
 
     .requestStatus {
       text-align: center;
-      @include centerItemsAbsolute;
-      margin-top: 10rem;
+      @include centerItems;
+      margin-top: 8rem;
+      margin-left: -.1rem;
 
       p {
         width: 100vw;

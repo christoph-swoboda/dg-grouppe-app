@@ -17,18 +17,18 @@ const HeaderSection = ({notifications, user, loadingUser, filter, backend}) => {
                         <img src={`${backend}/${user?.employees?.image}`} alt='avatar'/>
                     </IonAvatar>
                 </Link>
-                <IonToolbar style={{paddingLeft: '10px'}}>
+                <IonCard style={{paddingLeft: '10px'}} className={'ion-no-margin ion-no-padding'}>
                     {
                         loadingUser && filter.page === 1 ?
                             <IonToolbar style={{textAlign: 'center'}}>
                                 Username
                             </IonToolbar>
                             :
-                            <IonText style={{fontSize: '20px'}}
-                                     className={'ion-text-xl-left'}>{user?.employees?.first_name}</IonText>
+                            <IonText style={{fontSize: '21px'}}
+                                     className={'ion-text-xl-left '}>{user?.employees?.first_name}</IonText>
                     }
-                    <IonCardSubtitle style={{fontSize: '12px'}}>{user?.employees?.company}</IonCardSubtitle>
-                </IonToolbar>
+                    <IonCardSubtitle>{user?.employees?.company}</IonCardSubtitle>
+                </IonCard>
             </IonCard>
 
             <div className='notification'>

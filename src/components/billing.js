@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import Request from "./card/request";
 import '../styles/billingPage.scss';
 import {
-    IonCard,
+    IonCard, IonCardSubtitle,
     IonCardTitle,
     IonContent,
     IonHeader,
@@ -25,7 +25,7 @@ const Billing = ({header}) => {
     const [loading, setLoading] = useState(false)
     const [requests, setRequests] = useState([])
     const params = useParams()
-    const [{network}] = useStateValue()
+    const [{network, img}] = useStateValue()
     const [filter, setFilter] = useState({type: params.page, status: 1, page: 1})
     const query = qs.stringify(filter, {encode: false, skipNulls: true})
     const [lastPage, setLastPage] = useState(0);
@@ -52,7 +52,7 @@ const Billing = ({header}) => {
 
     useEffect(() => {
         getRequests().then(r => r)
-    }, [getRequests, network]);
+    }, [getRequests, network, img]);
 
     function approve() {
         setFilter({...filter, status: 2, page: 1})
@@ -82,7 +82,7 @@ const Billing = ({header}) => {
                 </IonRefresherContent>
             </IonRefresher>
 
-            <IonCard hidden={network !== 'online'}>
+            <IonCard hidden={network === 'offline'}>
                 <IonCardTitle style={{fontSize: '22px'}}>{header}</IonCardTitle>
                 <IonCard style={{display: 'flex'}}>
                     <IonText className={pending ? 'approved inActive' : 'active approved'}
@@ -97,9 +97,9 @@ const Billing = ({header}) => {
                             <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                             :
                             requests.length === 0 ?
-                                <IonHeader>
-                                    <IonToolbar>
-                                        <IonTitle>No Data Found</IonTitle>
+                                <IonHeader >
+                                    <IonToolbar >
+                                        <IonTitle className={'bgDefault'}>No Data Found</IonTitle>
                                     </IonToolbar>
                                 </IonHeader>
                                 :
@@ -111,6 +111,7 @@ const Billing = ({header}) => {
                                         title={req.bill?.title}
                                         type={req.type?.title}
                                         period={req.period}
+                                        published={req.published}
                                         message={req.response?.message}
                                         month={new Date(req.bill?.created_at).getMonth() + 1}
                                         year={new Date(req.bill?.created_at).getFullYear()}
@@ -124,9 +125,15 @@ const Billing = ({header}) => {
                     </button>
                 </IonCard>
             </IonCard>
-            <IonTitle hidden={network !== 'offline'}>
-                You are offline at the moment!!
-            </IonTitle>
+            <IonCard hidden={network === 'online'}>
+                <IonCardTitle>
+                    You are offline at the moment!!
+                </IonCardTitle>
+                <br/>
+                <IonCardSubtitle>
+                     Connect To The Internet
+                </IonCardSubtitle>
+            </IonCard>
         </IonContent>
     )
 }

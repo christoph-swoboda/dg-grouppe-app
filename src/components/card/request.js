@@ -6,7 +6,7 @@ import UploadPopUp from "../uploadPopUp";
 import {useStateValue} from "../../states/StateProvider";
 import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
 
-const Request = ({title, status, responseId, updated, month, year, type, message, len}) => {
+const Request = ({title, status, responseId, updated, month, year, type, published}) => {
 
     const [{modal}, dispatch] = useStateValue()
     const [period, setPeriod] = useState('')
@@ -29,9 +29,9 @@ const Request = ({title, status, responseId, updated, month, year, type, message
             </IonContent>
 
             <IonHeader className='request'
-                       onClick={() => status !== '2' && dispatch({type: "SET_MODAL", item: true})}
+                       onClick={() => status !== '2' && published===1 && dispatch({type: "SET_MODAL", item: true})}
             >
-                <IonToolbar className={status !== '3' ? 'card' : 'cardError'}>
+                <IonToolbar className={status !== '3' && published===1 ? 'card' :status === '3' && published===1? 'cardError':published===0 && 'cardYellow'}>
                     {/*<div className='card' >*/}
                     {
                         status === '1' ?
@@ -47,7 +47,8 @@ const Request = ({title, status, responseId, updated, month, year, type, message
                     <h3>Period: {period}</h3>
                     {/*<p hidden={status !== '3'}>Reason: {message}</p>*/}
                     <p>{status!=='1' && 'Updated: '+ updated}</p>
-                    <p>Status: {status === '1' ? 'Pending' : status === '2' ? 'Approved' : 'Rejected'}</p>
+                    <p hidden={published===0}>Status: {status === '1' ? 'Pending' : status === '2' ? 'Approved' : 'Rejected'}</p>
+                    <p hidden={published===1}>Status: Awaiting Approval</p>
                 </IonToolbar>
             </IonHeader>
         </IonCard>
