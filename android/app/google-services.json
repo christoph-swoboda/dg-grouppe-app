@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:866006221251:android:0b61dcc7d512631dee7d76",
+        "mobilesdk_app_id": "1:866006221251:android:a83ca76130939e26ee7d76",
         "android_client_info": {
-          "package_name": "de.appvision.dggruppe"
+          "package_name": "de.appvision.dggruppeapp"
         }
       },
       "oauth_client": [
@@ -29,6 +29,14 @@
             {
               "client_id": "866006221251-7aoorrp5tsrm1qo3o574aj2uqgij4p33.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "866006221251-lijp7p6gs30909h4umuugoj53hq3vjpf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.appvision.dggruppeapp",
+                "app_store_id": "376771144"
+              }
             }
           ]
         }

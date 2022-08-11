@@ -1,6 +1,6 @@
 {
-	"appId": "DG.gruppe.app",
-	"appName": "DG.gruppe.app",
+	"appId": "de.appvision.dggruppeapp",
+	"appName": "DG Gruppe",
 	"webDir": "build",
 	"plugins": {
 		"PushNotifications": {

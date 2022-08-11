@@ -1,4 +1,4 @@
-package de.appvision.dggruppe;
+package de.appvision.dggruppeapp;
 
 import com.getcapacitor.BridgeActivity;
 

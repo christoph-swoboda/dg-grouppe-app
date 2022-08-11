@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="de.appvision.dggruppe">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="de.appvision.dggruppeapp">
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
 
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-            android:name="de.appvision.dggruppe.MainActivity"
+            android:name="de.appvision.dggruppeapp.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
             android:launchMode="singleTask">
