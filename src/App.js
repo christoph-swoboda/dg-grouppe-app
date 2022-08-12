@@ -67,7 +67,7 @@ const App = () => {
         if (deviceID) {
             Api().post(`/save-device-id/${deviceID}`).then(res => {
                 // window.alert('Registered for push notification')
-            }).catch(e=>{
+            }).catch(e => {
                 // if(e)
             })
         }
@@ -84,12 +84,18 @@ const App = () => {
                 window.alert('Error on registration: ' + JSON.stringify(error));
             }
         );
+
+        await PushNotifications.addListener('pushNotificationActionPerformed',
+            (notification) => {
+                dispatch({type: "SET_PUSHOPENED", item: true})
+            }
+        );
     }
 
     return (
         <IonApp className='ion-app'>
             <IonReactRouter>
-                <IonTabs>
+                <IonTabs style={{padding:'2rem'}}>
                     <IonRouterOutlet>
                         <Route exact path="/"><Redirect to="/dashboard"/></Route>
                         {

@@ -25,7 +25,7 @@ import {useHistory} from "react-router-dom";
 
 const Dashboard = () => {
 
-    const [{filterIds, showModal, img, network}] = useStateValue()
+    const [{filterIds, showModal, img, network, pushOpened}] = useStateValue()
     const [requests, setRequests] = useState([]);
     const [user, setUser] = useState([]);
     const [total, setTotal] = useState(0);
@@ -42,7 +42,7 @@ const Dashboard = () => {
         setLoading(true)
         await getRequests()
         setLoading(false)
-    }, [filter, network, img]);
+    }, [filter, network, img, pushOpened]);
 
     useEffect(async () => {
         setLoadingUser(true)
@@ -52,10 +52,11 @@ const Dashboard = () => {
 
     useEffect(async () => {
         await getNotifications()
-    }, [filterIds, showModal, img, network]);
+    }, [filterIds, showModal, img, network, pushOpened]);
 
     async function getRequests() {
         await Api().get(`/requests/published?${query}`).then(res => {
+            // console.log('req', res.data)
             setRequests(filter.page === 1 ? res.data.open.data : [...requests, ...res.data.open.data])
             setTotal(res.data.open.total)
             setLastPage(res.data.open.last_page)
@@ -85,7 +86,7 @@ const Dashboard = () => {
         await getRequests()
         await getEmployee()
         history.push('/dashboard')
-        event.detail.complete();
+        event.detail.complete()
     }
 
     return (
