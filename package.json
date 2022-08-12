@@ -1,6 +1,6 @@
 {
   "name": "de.appvision.dggruppeapp",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@awesome-cordova-plugins/photo-library": "^5.43.0",
@@ -63,6 +63,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "run-ios": "ionic capacitor run ios -l --external",
+    "build-ios": "ionic capacitor copy ios && ionic capacitor build ios",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
     "eject": "react-scripts eject"
   },
