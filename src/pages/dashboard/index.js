@@ -8,7 +8,6 @@ import {
     IonPage,
     IonRefresher,
     IonRefresherContent,
-    IonText,
     IonTitle
 } from "@ionic/react";
 import '../../styles/dashboard.scss'
@@ -160,4 +159,5 @@ const Dashboard = () => {
     )
 }
 
+// @ts-ignore
 export default Dashboard

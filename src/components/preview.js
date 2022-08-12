@@ -44,10 +44,6 @@ const Preview = () => {
                 setPercentage(0)
                 window.alert('Something Went Wrong')
             }
-        }).catch(e=>{
-            setLoading(false)
-            window.alert('Something Went Wrong')
-            setPercentage(0)
         })
     }
 
@@ -58,21 +54,22 @@ const Preview = () => {
 
     return (
         <IonPage className='container' hidden={!img}>
-            <IonImg src={img} className={'imageSection'}/>
             {
                 percentage>0 &&
                 <ProgressBar completed={percentage}
                              bgColor='black' baseBgColor='white'
                              isLabelVisible={false}
-                             height={'8px'}
+                             height={'5px'}
                 />
             }
+            <IonImg src={img} className={'imageSection'}/>
             <IonItem className={'sendOrCancelImage'}>
-                <IonButton disabled={!img} color={'tertiary'} onClick={send}>{loading ? 'Sending...' : 'Send'}</IonButton>
+                <IonButton disabled={!img} color={'tertiary'} onClick={send}>{loading ? `Sending...${percentage}%` : 'Send'}</IonButton>
                 <IonButton color={'dark'} onClick={cancel}>Cancel</IonButton>
             </IonItem>
         </IonPage>
     )
 }
 
+// @ts-ignore
 export default Preview
