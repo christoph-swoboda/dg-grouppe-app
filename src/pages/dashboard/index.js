@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {
+    IonButton,
     IonCardSubtitle,
     IonCardTitle,
     IonContent,
@@ -142,9 +143,13 @@ const Dashboard = () => {
                                         />
                                     ))
                             }
-                            <IonText className='loadMore' hidden={lastPage <= filter.page}
-                                     onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
-                            </IonText>
+
+                            {
+                                !(lastPage <= filter.page || requests.length === 0) &&
+                                <IonButton expand="full" onClick={() => setFilter({...filter, page: filter.page + 1})}>
+                                    See more
+                                </IonButton>
+                            }
                         </div>
                 }
             </IonContent>

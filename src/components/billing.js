@@ -2,15 +2,15 @@ import React, {useCallback, useEffect, useState} from "react";
 import Request from "./card/request";
 import '../styles/billingPage.scss';
 import {
-    IonCard, IonCardSubtitle,
+    IonButton,
+    IonCard,
+    IonCardSubtitle,
     IonCardTitle,
     IonContent,
     IonHeader,
     IonRefresher,
     IonRefresherContent,
-    IonText,
-    IonTitle,
-    IonToolbar
+    IonText
 } from "@ionic/react";
 import Api from "../api/api";
 import {useParams} from "react-router";
@@ -39,8 +39,8 @@ const Billing = ({header}) => {
                 setLastPage(res.data.last_page)
                 setTotal(res.data?.total)
                 setLoading(false)
-            }).catch(e=>{
-                if(e.response.status===401){
+            }).catch(e => {
+                if (e.response.status === 401) {
                     localStorage.removeItem('token')
                     localStorage.removeItem('user')
                     window.location.replace('/login')
@@ -118,9 +118,13 @@ const Billing = ({header}) => {
                                     />
                                 ))
                     }
-                    <button hidden={lastPage <= filter.page || requests.length === 0}
-                            onClick={() => setFilter({...filter, page: filter.page + 1})}>Load More
-                    </button>
+
+                    {
+                        !(lastPage <= filter.page || requests.length === 0) &&
+                        <IonButton expand="full" onClick={() => setFilter({...filter, page: filter.page + 1})}>
+                            See more
+                        </IonButton>
+                    }
                 </IonCard>
             </IonCard>
             <IonCard hidden={network === 'online'}>
@@ -129,7 +133,7 @@ const Billing = ({header}) => {
                 </IonCardTitle>
                 <br/>
                 <IonCardSubtitle>
-                     Connect To The Internet
+                    Connect To The Internet
                 </IonCardSubtitle>
             </IonCard>
         </IonContent>

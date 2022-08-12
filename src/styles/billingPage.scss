@@ -9,9 +9,9 @@
   padding: 1rem 0;
 
   .requestsContainer {
-    margin-bottom: 5rem;
     max-height: 73vh;
     overflow-y: scroll;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
   }
 
   ion-card-title, {
