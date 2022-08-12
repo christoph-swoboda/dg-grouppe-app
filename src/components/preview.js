@@ -64,7 +64,6 @@ const Preview = () => {
                 <ProgressBar completed={percentage}
                              bgColor='black' baseBgColor='white'
                              isLabelVisible={false}
-                             height={'5px'}
                 />
             }
             <IonItem className={'sendOrCancelImage'}>
