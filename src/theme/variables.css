@@ -327,3 +327,11 @@ ion-content {
 .bgDefault {
     background-color: #eeeeee;
 }
+
+ion-tab-bar {
+    padding: 15px 0 20px 0;
+    position: relative;
+    border-radius: 16px;
+    width: 92%;
+    margin: 0 auto;
+}

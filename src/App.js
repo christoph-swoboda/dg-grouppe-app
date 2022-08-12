@@ -95,7 +95,7 @@ const App = () => {
     return (
         <IonApp className='ion-app'>
             <IonReactRouter>
-                <IonTabs>
+                <IonTabs style={{padding:'2rem'}}>
                     <IonRouterOutlet>
                         <Route exact path="/"><Redirect to="/dashboard"/></Route>
                         {
