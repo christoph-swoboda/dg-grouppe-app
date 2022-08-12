@@ -6,6 +6,7 @@ export const initialState = {
     resId:'',
     avatar:null,
     showModal:false,
+    pushOpened:false,
     imgUploaded:false,
     filterIds:[],
 };
@@ -40,6 +41,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 resId: action.item
+            }
+            case "SET_PUSHOPENED":
+            return {
+                ...state,
+                pushOpened: action.item
             }
             case "SET_NETWORK":
             return {

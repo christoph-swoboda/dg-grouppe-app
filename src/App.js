@@ -67,7 +67,7 @@ const App = () => {
         if (deviceID) {
             Api().post(`/save-device-id/${deviceID}`).then(res => {
                 // window.alert('Registered for push notification')
-            }).catch(e=>{
+            }).catch(e => {
                 // if(e)
             })
         }
@@ -82,6 +82,12 @@ const App = () => {
         await PushNotifications.addListener('registrationError',
             (error) => {
                 window.alert('Error on registration: ' + JSON.stringify(error));
+            }
+        );
+
+        await PushNotifications.addListener('pushNotificationActionPerformed',
+            (notification) => {
+                dispatch({type: "SET_PUSHOPENED", item: true})
             }
         );
     }

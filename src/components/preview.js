@@ -44,6 +44,10 @@ const Preview = () => {
                 setPercentage(0)
                 window.alert('Something Went Wrong')
             }
+        }).catch(e=>{
+            setLoading(false)
+            window.alert('Something Went Wrong')
+            setPercentage(0)
         })
     }
 

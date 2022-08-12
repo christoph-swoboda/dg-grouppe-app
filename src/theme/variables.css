@@ -302,6 +302,7 @@ input {
 
 .sendOrCancelImage > ion-button {
     font-size: 2.5vh;
+    margin-bottom: 5rem;
 }
 
 .ion-modal {

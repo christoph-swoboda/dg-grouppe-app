@@ -6,7 +6,7 @@ import UploadPopUp from "../uploadPopUp";
 import {useStateValue} from "../../states/StateProvider";
 import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
 
-const Request = ({title, status, responseId, updated, month, year, type, published}) => {
+const Request = ({title, status, responseId, updated, month, year, type, published, message}) => {
 
     const [{modal}, dispatch] = useStateValue()
     const [period, setPeriod] = useState('')
@@ -45,9 +45,9 @@ const Request = ({title, status, responseId, updated, month, year, type, publish
                     }
                     <h2>{title} {type} Bill</h2>
                     <h3>Period: {period}</h3>
-                    {/*<p hidden={status !== '3'}>Reason: {message}</p>*/}
-                    <p>{status!=='1' && 'Updated: '+ updated}</p>
                     <p hidden={published===0}>Status: {status === '1' ? 'Pending' : status === '2' ? 'Approved' : 'Rejected'}</p>
+                    <p hidden={status !== '3' || published===0}>{message}</p>
+                    <p>{status!=='1' && 'Updated: '+ updated}</p>
                     <p hidden={published===1}>Status: Awaiting Approval</p>
                 </IonToolbar>
             </IonHeader>
