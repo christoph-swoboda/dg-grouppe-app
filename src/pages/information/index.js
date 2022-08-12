@@ -30,6 +30,7 @@ const Information = () => {
                     </IonToolbar>
                     :
                     <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
+                    // 'loading...'
             }
         </IonPage>
     )
