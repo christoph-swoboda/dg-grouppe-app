@@ -25,10 +25,7 @@ const Preview = () => {
                 const {loaded, total} = progressEvent;
                 let percent = Math.floor( (loaded * 100) / total )
                 // console.log( `${loaded}kb of ${total}kb | ${percent}%` );
-
-                if( percent < 100 ){
-                    setPercentage(percent)
-                }
+                setPercentage(percent) 
             }
         }
 
@@ -44,6 +41,8 @@ const Preview = () => {
                 setPercentage(0)
                 window.alert('Something Went Wrong')
             }
+        }).catch(e=>{
+            window.alert('Something went wrong...')
         })
     }
 
@@ -54,6 +53,7 @@ const Preview = () => {
 
     return (
         <IonPage className='container' hidden={!img}>
+            <IonImg src={img} className={'imageSection'}/>
             {
                 percentage>0 &&
                 <ProgressBar completed={percentage}
@@ -62,7 +62,6 @@ const Preview = () => {
                              height={'5px'}
                 />
             }
-            <IonImg src={img} className={'imageSection'}/>
             <IonItem className={'sendOrCancelImage'}>
                 <IonButton disabled={!img} color={'tertiary'} onClick={send}>{loading ? `Sending...${percentage}%` : 'Send'}</IonButton>
                 <IonButton color={'dark'} onClick={cancel}>Cancel</IonButton>

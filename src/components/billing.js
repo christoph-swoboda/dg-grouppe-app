@@ -10,7 +10,9 @@ import {
     IonHeader,
     IonRefresher,
     IonRefresherContent,
-    IonText
+    IonText,
+    IonTitle,
+    IonToolbar
 } from "@ionic/react";
 import Api from "../api/api";
 import {useParams} from "react-router";
@@ -97,9 +99,9 @@ const Billing = ({header}) => {
                             <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                             :
                             requests.length === 0 ?
-                                <IonHeader className={'bgDefault'}>
+                                <IonTitle className={'bgDefault'}>
                                     No Data Found
-                                </IonHeader>
+                                </IonTitle>
                                 :
                                 requests?.map(req => (
                                     <Request
@@ -127,15 +129,15 @@ const Billing = ({header}) => {
                     }
                 </IonCard>
             </IonCard>
-            <IonCard hidden={network === 'online'}>
-                <IonCardTitle>
+            <IonToolbar hidden={network === 'online'}>
+                <IonTitle>
                     You are offline at the moment!!
-                </IonCardTitle>
-                <br/>
+                </IonTitle>
+                {/* <br/>
                 <IonCardSubtitle>
                     Connect To The Internet
-                </IonCardSubtitle>
-            </IonCard>
+                </IonCardSubtitle> */}
+            </IonToolbar>
         </IonContent>
     )
 }
