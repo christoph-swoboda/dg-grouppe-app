@@ -5,7 +5,7 @@ import Billing from "../../components/billing";
 const Phone = () => {
     return (
         <IonPage>
-            <Billing header={'Phone Bills'}/>
+            <Billing header={'Telefon Rechnungen'}/>
         </IonPage>
     )
 }

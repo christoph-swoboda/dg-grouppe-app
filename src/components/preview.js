@@ -39,10 +39,10 @@ const Preview = () => {
                 setPercentage(0)
             } else {
                 setPercentage(0)
-                window.alert('Something Went Wrong')
+                window.alert('Etwas ist schief gelaufen')
             }
         }).catch(e=>{
-            window.alert('Something went wrong...')
+            window.alert('Etwas ist schief gelaufen...')
         })
     }
 
@@ -63,12 +63,10 @@ const Preview = () => {
                 />
             }
             <IonItem className={'sendOrCancelImage'}>
-                <IonButton disabled={!img} color={'tertiary'} onClick={send}>{loading ? `Sending...${percentage}%` : 'Send'}</IonButton>
-                <IonButton color={'dark'} onClick={cancel}>Cancel</IonButton>
+                <IonButton disabled={!img} color={'tertiary'} onClick={send}>{loading ? `jetzt senden...${percentage}%` : 'Senden'}</IonButton>
+                <IonButton color={'dark'} onClick={cancel}>Abbrechen</IonButton>
             </IonItem>
         </IonPage>
     )
 }
-
-// @ts-ignore
 export default Preview

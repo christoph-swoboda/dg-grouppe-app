@@ -117,10 +117,10 @@ const Dashboard = () => {
                         :
                         <div style={{paddingTop: '6rem', backgroundColor: '#eeeeee', minHeight: '90vh'}}>
                             <IonCardTitle style={{fontSize: '35px'}}>
-                                Hi {user?.employees?.first_name}
+                                Hallo {user?.employees?.first_name}
                             </IonCardTitle>
-                            <IonCardSubtitle style={{fontSize: '18px', marginTop: '5px'}}>
-                                you have {total} {total > 1 ? 'requests' : 'request'} for today
+                            <IonCardSubtitle style={{fontSize: '17px', marginTop: '5px'}}>
+                                Sie haben {total} {total > 1 ? 'anfragen' : 'anfrage'} für heute
                             </IonCardSubtitle>
                             <hr/>
                             {
@@ -146,14 +146,14 @@ const Dashboard = () => {
                             {
                                 !(lastPage <= filter.page || requests.length === 0) &&
                                 <IonButton expand="full" onClick={() => setFilter({...filter, page: filter.page + 1})}>
-                                    See more
+                                    Mehr sehen
                                 </IonButton>
                             }
                         </div>
                 }
             </IonContent>
             <IonTitle hidden={network === 'online'}>
-                You are offline at the moment!!
+                Sie sind im Moment offline!!
             </IonTitle>
         </IonPage>
     )
