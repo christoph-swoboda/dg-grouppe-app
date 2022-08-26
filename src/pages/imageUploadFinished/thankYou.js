@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {IonPage} from "@ionic/react";
 import {checkmarkCircleOutline} from "ionicons/icons";
 import {Link} from "react-router-dom";
@@ -7,7 +7,13 @@ import {useStateValue} from "../../states/StateProvider";
 
 const ThankYou = () => {
 
-    const [{imgUploaded}] = useStateValue()
+    const [{imgUploaded}, dispatch] = useStateValue()
+
+    useEffect(() => {
+        return () => {
+            dispatch({type: "SET_RESID", item: null})
+        };
+    }, []);
 
     return (
         <IonPage>
