@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "866006221251",
+    "project_id": "de-grouppe-app",
+    "storage_bucket": "de-grouppe-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866006221251:android:0b61dcc7d512631dee7d76",
+        "android_client_info": {
+          "package_name": "de.appvision.dggruppe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866006221251-7aoorrp5tsrm1qo3o574aj2uqgij4p33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_dwSQDApvmwTmnOurd0xXrn5K_TsPo6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "866006221251-7aoorrp5tsrm1qo3o574aj2uqgij4p33.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

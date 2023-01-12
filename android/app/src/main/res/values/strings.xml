@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DG Gruppe</string>
+    <string name="title_activity_main">DG Gruppe</string>
+    <string name="package_name">de.appvision.dggruppeapp</string>
+    <string name="custom_url_scheme">de.appvision.dggruppeapp</string>
+</resources>

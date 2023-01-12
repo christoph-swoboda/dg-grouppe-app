@@ -1,0 +1,29 @@
+@import "variables";
+@import "mixin";
+
+
+.thankYou {
+  @include container;
+  text-align: center;
+  padding-top: 40%;
+
+  .contents {
+    color: black;
+
+    a {
+      text-decoration: none;
+    }
+
+    h3 {
+      padding: .5rem;
+      border: 1px solid $borderColor;
+      border-radius: 15px;
+      width: 50%;
+      margin: auto;
+    }
+
+    ion-icon {
+      font-size: 80px;
+    }
+  }
+}

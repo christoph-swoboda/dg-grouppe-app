@@ -1,0 +1,71 @@
+@import "variables";
+@import "mixin";
+
+.profileContainer {
+  text-align: center;
+  margin-bottom: -1rem;
+
+  ion-avatar {
+    @include centerHorizontal;
+    min-width: 120px;
+    max-width: 120px;
+    min-height: 120px;
+    max-height: 120px;
+    margin-top: 2rem;
+  }
+
+  ion-icon {
+    font-size: 45px;
+    position: relative;
+    margin-bottom: -9rem;
+    margin-left: 5rem;
+    z-index: 100;
+    background-color: white;
+    border-radius: 50%;
+  }
+}
+
+.userName {
+  height: 60px;
+  padding: 0 1rem;
+  text-align: center;
+
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-top: -.5rem;
+  }
+}
+
+.profile {
+  @include centerItemsAbsolute();
+  overflow-y: scroll;
+  max-height:100vh;
+  padding: 2rem;
+
+  p {
+    font-size: 1.7vh;
+    line-height: 1;
+    color: $theme;
+    margin-bottom: 1vh;
+    width: 90vw;
+  }
+
+  form {
+    @include formStyle(82vw, .7rem);
+    margin-left: 2rem;
+    .update {
+      background-color: white;
+      cursor: pointer;
+      color: black;
+      width: 82vw;
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 0 1.1rem 1.1rem 0;
+    }
+  }
+}

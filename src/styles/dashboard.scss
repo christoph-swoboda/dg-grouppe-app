@@ -1,0 +1,114 @@
+@import "mixin";
+@import "variables";
+
+.dashboard {
+  overflow: scroll;
+  --ion-background-color: '#eeeeee';
+
+  .loadMore {
+    margin: auto 35%;
+  }
+
+  .header {
+    @include flexCenter;
+    position: fixed;
+    z-index: 1111;
+    width: 88vw;
+    background-color: $body-bg1;
+    height: 7rem;
+    margin-top: -1rem;
+    justify-content: space-between;
+
+    .userInfo {
+      @include flexCenter;
+
+      ion-avatar {
+        width: 80px;
+        height: 80px;
+      }
+
+      ion-card {
+        display: flex;
+        flex-direction: column;
+        font-size: 17px;
+      }
+
+      ion-text {
+        max-width: 140px;
+      }
+
+      ion-card-subtitle {
+        font-size: 13px;
+      }
+    }
+
+    .notification {
+      a {
+        margin-left: .7rem;
+        margin-right: .8rem;
+      }
+
+      ion-content {
+        background-color: red;
+      }
+
+      .ion-badge {
+        position: relative;
+        z-index: 100;
+        padding: .5rem;
+        font-size: 12px;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin-bottom: -1.3rem;
+        margin-left: -.7rem;
+        background-color: black;
+        color: white;
+
+        ion-card-subtitle {
+          margin-top: -4px;
+          margin-left: 1px;
+        }
+      }
+
+      ion-icon {
+        font-size: 45px;
+      }
+    }
+  }
+
+  .emptyDashboardTitle{
+    height: 70vh;
+  }
+
+  .dashboardTitle, .emptyDashboardTitle {
+    margin: 2rem 0 0 0;
+
+
+    Ion-card-title {
+      font-size: 40px;
+    }
+
+    Ion-card-subtitle {
+      text-transform: capitalize;
+    }
+
+    ion-icon {
+      margin-top: 2rem;
+      font-size: 10vh;
+      font-weight: 800;
+      @include centerItemsAbsolute;
+    }
+
+    .requestStatus {
+      text-align: center;
+      @include centerItems;
+      margin-top: 8rem;
+      margin-left: -.1rem;
+
+      p {
+        width: 100vw;
+      }
+    }
+  }
+}
