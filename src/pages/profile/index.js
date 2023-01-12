@@ -82,13 +82,13 @@ const UserProfile = () => {
         data.append('image', imageUrl)
 
         if (size > 1025) {
-            window.alert('Select an image under 1 MB')
+            window.alert('Wählen Sie ein Bild unter 1 MB aus')
         } else {
             Api().post(`/employee/profileImage/${user?.employees?.id}`, data).then(res => {
                 if (res.status === 201) {
-                    alert('Profile Image Updated')
+                    alert('Profilbild aktualisiert')
                 } else {
-                    alert('Something went wrong')
+                    alert('Etwas ist schief gelaufen!!')
                     setUrl(null)
                 }
             })
@@ -156,14 +156,13 @@ const UserProfile = () => {
                     {/*       type='text'*/}
                     {/*       {...register('company')}*/}
                     {/*/>*/}
-                    <input placeholder='Change Email'
-                           {...register('email')}
+                    <input {...register('email')}
                            disabled
                            type="email"
                            required
                            style={{border: errors.email && '1px solid red'}}
                     />
-                    <input placeholder='Change Phone Number  >'
+                    <input placeholder='Telefonnummer ändern  >'
                            onClick={() => setShowNumber(false)}
                            hidden={!showNumber}
                     />
@@ -185,11 +184,11 @@ const UserProfile = () => {
                         {errors.phone && <p>Invalid Phone Number</p>}
                     </div>
                     {/*<ion-icon icon={arrowForward}/>*/}
-                    <input placeholder='Change Password  >'
+                    <input placeholder='Passwort ändern  >'
                            onClick={() => setShowPass(false)}
                            hidden={!showPass}
                     />
-                    <input placeholder='Enter Old Password'
+                    <input placeholder='Altes Passwort eingeben'
                            hidden={showPass}
                            type='password'
                            autoFocus
@@ -197,7 +196,7 @@ const UserProfile = () => {
                            style={{border: errors.currentPassword && '1px solid red'}}
                     />
                     {errors.currentPassword && touchedFields && <p>{errors.currentPassword.message}</p>}
-                    <input placeholder='Enter New Password'
+                    <input placeholder='Neues Passwort eingeben'
                            hidden={showPass}
                            type='password'
                            autoFocus
@@ -205,12 +204,12 @@ const UserProfile = () => {
                                required: !showPass,
                                pattern: {
                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                                   message: 'Min eight characters, at least one uppercase, one lowercase letter and one number:',
+                                   message: 'Mindestens acht Zeichen, mindestens ein Großbuchstabe, ein Kleinbuchstabe und eine Zahl',
                                },})}
                            style={{border: errors.newPassword && '1px solid red'}}
                     />
                     {errors.newPassword && touchedFields && <p>{errors.newPassword.message}</p>}
-                    <input placeholder='Repeat New Password'
+                    <input placeholder='Neues Passwort wiederholen'
                            hidden={showPass}
                            type='password'
                            {...register('repeatPassword', {required: !showPass})}
@@ -219,10 +218,10 @@ const UserProfile = () => {
                     {errors.repeatPassword && touchedFields && <p>{errors.repeatPassword.message}</p>}
                     <p>{Errors}</p>
                     <button hidden={showPass && showNumber} className='update' onClick={handleSubmit(onSubmit)}>
-                        {(!loading) ? 'Change' : 'Updating...'}
+                        {(!loading) ? 'Ändern Sie' : 'Aktualisierung von...'}
                     </button>
                     <button onClick={logout}>
-                        {(!loadingLogout) ? 'Log Out' : 'Logging Out...'}
+                        {(!loadingLogout) ? 'Abmelden' : 'Abmeldung...'}
                     </button>
                 </form>
 

@@ -25,7 +25,7 @@ const Information = () => {
             {
                 settings.length > 0 ?
                     <IonToolbar className="faq"
-                                dangerouslySetInnerHTML={{__html: settings?.map(d => d.keyword === 'faq' && d.value)}}
+                                dangerouslySetInnerHTML={{__html: settings?.filter(d => d.keyword === 'faq')[0].value}}
                     >
                     </IonToolbar>
                     :

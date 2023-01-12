@@ -58,14 +58,14 @@ const Login = () => {
             <div className='login'>
                 <IonImg src={image}/>
                 <IonCard className='login-box'>
-                    <IonCardTitle>Login</IonCardTitle>
+                    <IonCardTitle>Einloggen</IonCardTitle>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <IonInput placeholder='Username'
                                   {...register('email', {
-                                      required: 'Email is required',
+                                      required: 'E-Mail ist erforderlich',
                                       pattern: {
                                           value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                          message: 'Please enter a valid email',
+                                          message: 'Bitte geben Sie eine gültige E-Mail ein',
                                       },
                                   })}
                                   type="email"
@@ -75,12 +75,12 @@ const Login = () => {
                         {errors.email && touchedFields && <p>{errors.email?.message}</p>}
                         <IonInput placeholder='Password'
                                   type='password'
-                                  {...register('password', {required: 'your password is required'})}
+                                  {...register('password', {required: 'Passwort ist erforderlich'})}
                                   style={{border: errors.password && '1px solid red'}}
                         />
                         {errors.password && touchedFields && <p>{errors.password?.message}</p>}
                         <IonButton color={'black'} style={{padding: '0'}} type="submit">
-                            {(!loading) ? 'Log In' : 'Verifying...'}
+                            {(!loading) ? 'Einloggen' : 'Überprüfen Sie...'}
                         </IonButton>
                     </form>
                 </IonCard>

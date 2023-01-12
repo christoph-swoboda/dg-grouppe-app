@@ -23,7 +23,7 @@ const Request = ({title, status, responseId, updated, month, year, type, publish
                     <IonButton color={'light'} style={{padding:0}} className='cancelUpload'
                              onClick={() => dispatch({type: "SET_MODAL", item: false})}
                     >
-                        Cancel
+                        Abbrechen
                     </IonButton>
                 </IonModal>
             </IonContent>
@@ -44,11 +44,11 @@ const Request = ({title, status, responseId, updated, month, year, type, publish
 
                     }
                     <h2>{title} {type} Bill</h2>
-                    <h3>Period: {period}</h3>
-                    <p hidden={published===0}>Status: {status === '1' ? 'Pending' : status === '2' ? 'Approved' : 'Rejected'}</p>
+                    <h3>Zeitraum: {period}</h3>
+                    <p hidden={published===0}>Status: {status === '1' ? 'Anhängig' : status === '2' ? 'Genehmigt' : 'Abgelehnt'}</p>
                     <p hidden={status !== '3' || published===0}>{message}</p>
-                    <p>{status!=='1' && 'Updated: '+ updated}</p>
-                    <p hidden={published===1}>Status: Awaiting Approval</p>
+                    <p>{status!=='1' && 'Aktualisiert: '+ updated}</p>
+                    <p hidden={published===1}>Status: Zur Genehmigung anstehend</p>
                 </IonToolbar>
             </IonHeader>
         </IonCard>

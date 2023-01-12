@@ -23,7 +23,7 @@ const Notifications = ({notifications}) => {
             <IonModal isOpen={showModal} className={'ion-modal'}>
                 <div className='notificationContainer'>
                     <div className='notificationHeader'>
-                        <h1>Notifications</h1>
+                        <h1>Benachrichtigungen</h1>
                         <ion-icon icon={close} onClick={() => closeModal()}/>
                     </div>
                     {
