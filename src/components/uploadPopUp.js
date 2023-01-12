@@ -54,7 +54,7 @@ const UploadPopUp = ({responseId}) => {
 
             reader.readAsDataURL(file);
         } else {
-            window.alert('Something Went Wrong!');
+            window.alert('Etwas ist schief gelaufen!!');
         }
     }
 

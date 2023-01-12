@@ -37,7 +37,7 @@ const Notification = ({title, status, type, updated,  month, year, id}) => {
                 <IonCard className={status === 'rejected' ? 'notifications rejected' : 'notifications'}>
                     <div className='hourGlass'>
                         {
-                            status === '1' || title==='1 Image Was Uploaded'?
+                            status === '1' || title==='1 Bild wurde hochgeladen'?
                                 <ion-icon icon={hourglassOutline}/>
                                 :
                                 status === '2' ?
@@ -50,9 +50,9 @@ const Notification = ({title, status, type, updated,  month, year, id}) => {
                     <ion-icon onClick={toggleText} className='close' icon={close}/>
                     <div style={{marginLeft: '10vw'}}>
                         <h2>{title}</h2>
-                        <h3>Period: {period}</h3>
-                        <p>Type: {type}</p>
-                        <p>{status==='2'?'Date Approved: ':status==='3' && title!=='1 Image Was Uploaded'?'Date Rejected: ':'Uploaded: '} {updated}</p>
+                        <h3>Zeitraum: {period}</h3>
+                        <p>Typen: {type}</p>
+                        <p>{status==='2'?'Datum Genehmigt: ':status==='3' && title!=='1 Bild wurde hochgeladen'?'Datum Abgelehnt: ':'Hochgeladen: '} {updated}</p>
                     </div>
                 </IonCard>
             }

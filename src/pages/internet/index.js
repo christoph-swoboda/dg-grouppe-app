@@ -7,7 +7,7 @@ const Internet = () => {
 
     return (
         <IonPage>
-            <Billing header={'Internet Bills'}/>
+            <Billing header={'Internet Rechnungen'}/>
         </IonPage>
     )
 }

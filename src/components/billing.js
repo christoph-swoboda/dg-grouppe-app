@@ -10,7 +10,9 @@ import {
     IonHeader,
     IonRefresher,
     IonRefresherContent,
-    IonText
+    IonText,
+    IonTitle,
+    IonToolbar
 } from "@ionic/react";
 import Api from "../api/api";
 import {useParams} from "react-router";
@@ -86,9 +88,9 @@ const Billing = ({header}) => {
                 <IonCardTitle style={{fontSize: '22px'}}>{header}</IonCardTitle>
                 <IonCard style={{display: 'flex'}}>
                     <IonText className={pending ? 'approved inActive' : 'active approved'}
-                             onClick={approve}>Approved Uploads</IonText>
+                             onClick={approve}>Genehmigte Uploads</IonText>
                     <IonText className={pending ? 'active pending' : 'inActive pending'}
-                             onClick={reject}>Pending Uploads</IonText>
+                             onClick={reject}>Ausstehende Uploads</IonText>
                 </IonCard>
                 <IonCard className='requestsContainer'>
                     {
@@ -97,9 +99,9 @@ const Billing = ({header}) => {
                             <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                             :
                             requests.length === 0 ?
-                                <IonHeader className={'bgDefault'}>
-                                    No Data Found
-                                </IonHeader>
+                                <IonTitle className={'bgDefault'}>
+                                    keine Uploads
+                                </IonTitle>
                                 :
                                 requests?.map(req => (
                                     <Request
@@ -122,20 +124,20 @@ const Billing = ({header}) => {
                     {
                         !(lastPage <= filter.page || requests.length === 0) &&
                         <IonButton expand="full" onClick={() => setFilter({...filter, page: filter.page + 1})}>
-                            See more
+                            Mehr sehen
                         </IonButton>
                     }
                 </IonCard>
             </IonCard>
-            <IonCard hidden={network === 'online'}>
-                <IonCardTitle>
-                    You are offline at the moment!!
-                </IonCardTitle>
-                <br/>
+            <IonToolbar hidden={network === 'online'}>
+                <IonTitle>
+                    Sie sind im Moment offline!!
+                </IonTitle>
+                {/* <br/>
                 <IonCardSubtitle>
                     Connect To The Internet
-                </IonCardSubtitle>
-            </IonCard>
+                </IonCardSubtitle> */}
+            </IonToolbar>
         </IonContent>
     )
 }
