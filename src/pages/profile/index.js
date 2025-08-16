@@ -118,7 +118,7 @@ const UserProfile = () => {
 
 
     return (
-        <IonPage className='containerNoPadding'>
+        <IonPage className='containerNoPadding' style={{color: 'black'}}>
             <div className='profile'>
                 <div className='profileContainer'>
                     <ion-icon icon={cameraOutline} onClick={() => takePicture()}/>
@@ -160,13 +160,14 @@ const UserProfile = () => {
                            disabled
                            type="email"
                            required
-                           style={{border: errors.email && '1px solid red'}}
+                           style={{border: errors.email && '1px solid red',color:'white'}}
                     />
                     <input placeholder='Telefonnummer ändern  >'
                            onClick={() => setShowNumber(false)}
+                           style={{color:'white'}}
                            hidden={!showNumber}
                     />
-                    <div style={{marginLeft: '1rem'}} hidden={showNumber}>
+                    <div style={{marginLeft: '1rem', color:'white'}} hidden={showNumber}>
                         <Controller
                             name="phone-input"
                             control={control}
@@ -186,6 +187,7 @@ const UserProfile = () => {
                     {/*<ion-icon icon={arrowForward}/>*/}
                     <input placeholder='Passwort ändern  >'
                            onClick={() => setShowPass(false)}
+                           style={{color:'white'}}
                            hidden={!showPass}
                     />
                     <input placeholder='Altes Passwort eingeben'
@@ -193,7 +195,7 @@ const UserProfile = () => {
                            type='password'
                            autoFocus
                            {...register('currentPassword', {required: !showPass})}
-                           style={{border: errors.currentPassword && '1px solid red'}}
+                           style={{border: errors.currentPassword && '1px solid red', color:'white'}}
                     />
                     {errors.currentPassword && touchedFields && <p>{errors.currentPassword.message}</p>}
                     <input placeholder='Neues Passwort eingeben'
@@ -206,14 +208,14 @@ const UserProfile = () => {
                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
                                    message: 'Mindestens acht Zeichen, mindestens ein Großbuchstabe, ein Kleinbuchstabe und eine Zahl',
                                },})}
-                           style={{border: errors.newPassword && '1px solid red'}}
+                           style={{border: errors.newPassword && '1px solid red', color:'white'}}
                     />
                     {errors.newPassword && touchedFields && <p>{errors.newPassword.message}</p>}
                     <input placeholder='Neues Passwort wiederholen'
                            hidden={showPass}
                            type='password'
                            {...register('repeatPassword', {required: !showPass})}
-                           style={{border: errors.repeatPassword && '1px solid red'}}
+                           style={{border: errors.repeatPassword && '1px solid red', color:'white'}}
                     />
                     {errors.repeatPassword && touchedFields && <p>{errors.repeatPassword.message}</p>}
                     <p>{Errors}</p>
