@@ -25,32 +25,35 @@ const HeaderSection = ({notifications, user, loadingUser, filter, backend}) => {
                             </IonAvatar>
                     }
                 </Link>
-                <IonCard style={{paddingLeft: '10px'}} className={'ion-no-margin ion-no-padding'}>
+                <IonCard className={'ion-no-margin ion-no-padding userInfo-card'}>
                     {
                         loadingUser && filter.page === 1 ?
-                            <IonToolbar style={{textAlign: 'center'}}>
+                            <IonToolbar className={'username-toolbar'}>
                                 Username
                             </IonToolbar>
                             :
-                            <IonText style={{fontSize: '21px'}}
-                                     className={'ion-text-xl-left '}>{user?.employees?.first_name}</IonText>
+                            <IonText
+                                     className={'ion-text-xl-left username-text'}>{user?.employees?.first_name}</IonText>
                     }
                     <IonCardSubtitle>{user?.employees?.company}</IonCardSubtitle>
                 </IonCard>
             </IonCard>
 
             <div className='notification'>
-                <IonCard hidden={notifications?.length < 1} className='ion-badge'
-                         onClick={() => dispatch({type: "SET_SHOWMODAL", item: true})}
-                         color="dark">
-                    <IonCardSubtitle>
-                        {notifications?.length}
-                    </IonCardSubtitle>
-                </IonCard>
+                {
+                    notifications?.length > 0 &&
+                    <IonCard className='ion-badge'
+                             onClick={() => dispatch({type: "SET_SHOWMODAL", item: true})}
+                             color="dark">
+                        <IonCardSubtitle>
+                            {notifications?.length}
+                        </IonCardSubtitle>
+                    </IonCard>
+                }
                 <span onClick={() => dispatch({type: "SET_SHOWMODAL", item: true})}>
                     <NotificationIcon/>
                 </span>
-                <Link to='/information'>
+                <Link to='/information' className='info-icon-link'>
                     <InfoIcon/>
                 </Link>
             </div>

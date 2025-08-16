@@ -92,15 +92,15 @@ const Billing = ({header}) => {
                     <IonText className={pending ? 'active pending' : 'inActive pending'}
                              onClick={reject}>Ausstehende Uploads</IonText>
                 </IonCard>
-                <IonCard className='requestsContainer'>
+                <IonCard className='requestsContainer' style={{minHeight: '10vh'}}>
                     {
 
                         loading && filter.page === 1 ?
                             <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                             :
                             requests.length === 0 ?
-                                <IonTitle className={'bgDefault'}>
-                                    keine Uploads
+                                <IonTitle >
+                                    <span style={{ whiteSpace: 'normal' }}>keine Uploads</span>
                                 </IonTitle>
                                 :
                                 requests?.map(req => (
@@ -129,15 +129,18 @@ const Billing = ({header}) => {
                     }
                 </IonCard>
             </IonCard>
-            <IonToolbar hidden={network === 'online'}>
-                <IonTitle>
-                    Sie sind im Moment offline!!
-                </IonTitle>
-                {/* <br/>
-                <IonCardSubtitle>
-                    Connect To The Internet
-                </IonCardSubtitle> */}
-            </IonToolbar>
+            {
+                network === 'offline' &&
+                <IonToolbar>
+                    <IonTitle>
+                        Sie sind im Moment offline!!
+                    </IonTitle>
+                    {/* <br/>
+                    <IonCardSubtitle>
+                        Connect To The Internet
+                    </IonCardSubtitle> */}
+                </IonToolbar>
+            }
         </IonContent>
     )
 }

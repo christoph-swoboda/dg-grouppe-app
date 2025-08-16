@@ -91,7 +91,7 @@ const Dashboard = () => {
 
     return (
         <IonPage className='container dashboard'>
-            <IonContent hidden={network === 'offline'}>
+            <IonContent hidden={network === 'offline'} style={{scrollbarWidth: 'none'}}>
                 <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
                     <IonRefresherContent
                         pullingIcon={chevronDownCircleOutline}>
@@ -152,9 +152,12 @@ const Dashboard = () => {
                         </div>
                 }
             </IonContent>
-            <IonTitle hidden={network === 'online'}>
-                Sie sind im Moment offline!!
-            </IonTitle>
+            {
+                network === 'offline' &&
+                <IonTitle>
+                    Sie sind im Moment offline!!
+                </IonTitle>
+            }
         </IonPage>
     )
 }
