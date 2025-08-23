@@ -88,9 +88,9 @@ const Billing = ({header}) => {
                 <IonCardTitle style={{fontSize: '22px'}}>{header}</IonCardTitle>
                 <IonCard style={{display: 'flex'}}>
                     <IonText className={pending ? 'approved inActive' : 'active approved'}
-                             onClick={approve}>Genehmigte Uploads</IonText>
+                             onClick={approve}>Genehmigte Rechnungen</IonText>
                     <IonText className={pending ? 'active pending' : 'inActive pending'}
-                             onClick={reject}>Ausstehende Uploads</IonText>
+                             onClick={reject}>Ausstehende Rechnungen</IonText>
                 </IonCard>
                 <IonCard className='requestsContainer' style={{minHeight: '10vh'}}>
                     {

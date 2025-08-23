@@ -58,9 +58,9 @@ const Login = () => {
             <div className='login'>
                 <IonImg src={image}/>
                 <IonCard className='login-box'>
-                    <IonCardTitle>Einloggen</IonCardTitle>
+                    <IonCardTitle>Anmeldung</IonCardTitle>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <IonInput placeholder='Username'
+                        <IonInput placeholder='Benutzername'
                                   {...register('email', {
                                       required: 'E-Mail ist erforderlich',
                                       pattern: {
@@ -73,14 +73,14 @@ const Login = () => {
                                   style={{border: errors.email && '1px solid red'}}
                         />
                         {errors.email && touchedFields && <p>{errors.email?.message}</p>}
-                        <IonInput placeholder='Password'
+                        <IonInput placeholder='Passwort'
                                   type='password'
                                   {...register('password', {required: 'Passwort ist erforderlich'})}
                                   style={{border: errors.password && '1px solid red'}}
                         />
                         {errors.password && touchedFields && <p>{errors.password?.message}</p>}
                         <IonButton color={'black'} style={{padding: '0'}} type="submit">
-                            {(!loading) ? 'Einloggen' : 'Überprüfen Sie...'}
+                            {(!loading) ? 'Anmelden' : 'Überprüfen Sie...'}
                         </IonButton>
                     </form>
                 </IonCard>

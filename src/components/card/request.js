@@ -47,7 +47,7 @@ const Request = ({title, status, responseId, updated, month, year, type, publish
                     <h3>Zeitraum: {period}</h3>
                     <p hidden={published===0}>Status: {status === '1' ? 'Anhängig' : status === '2' ? 'Genehmigt' : 'Abgelehnt'}</p>
                     <p hidden={status !== '3' || published===0}>{message}</p>
-                    <p>{status!=='1' && 'Aktualisiert: '+ updated}</p>
+                    <p>{status!=='1' && 'Aktualisiert: '+ new Date(updated).toLocaleDateString('en-GB').replace(/\//g, '.')}</p>
                     <p hidden={published===1}>Status: Zur Genehmigung anstehend</p>
                 </IonToolbar>
             </IonHeader>

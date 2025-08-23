@@ -236,7 +236,7 @@ a {
 }
 
 .container {
-    overflow: scroll;
+    overflow: auto;
     padding: 1.2rem 1.7rem;
     background-color: #eeeeee;
 }

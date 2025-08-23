@@ -120,7 +120,7 @@ const Dashboard = () => {
                                 Hallo {user?.employees?.first_name}
                             </IonCardTitle>
                             <IonCardSubtitle style={{fontSize: '17px', marginTop: '5px'}}>
-                                Sie haben {total} {total > 1 ? 'anfragen' : 'anfrage'} für heute
+                                Es liegt {total} Rechnung zur Prüfung vor:
                             </IonCardSubtitle>
                             <hr/>
                             {

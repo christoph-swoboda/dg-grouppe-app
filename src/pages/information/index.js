@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {IonHeader, IonPage, IonToolbar} from "@ionic/react";
+import {IonPage, IonToolbar} from "@ionic/react";
 import Api from "../../api/api";
 import {useStateValue} from "../../states/StateProvider";
 import {BeatLoader} from "react-spinners";
