@@ -25,8 +25,8 @@ const Information = () => {
             {
                 settings.length > 0 ?
                     <IonToolbar className="faq"
-                                dangerouslySetInnerHTML={{__html: settings?.filter(d => d.keyword === 'faq')[0].value}}
                     >
+                        {settings?.filter(d => d.keyword === 'faq')[0].value}
                     </IonToolbar>
                     :
                     <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
