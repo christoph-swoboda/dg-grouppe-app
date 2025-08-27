@@ -29,7 +29,7 @@ const Login = () => {
                         localStorage.setItem('token', token)
                         localStorage.setItem('user', JSON.stringify(user))
                     } else {
-                        window.alert('something_went_wrong')
+                        window.alert('Etwas ist schiefgelaufen')
                     }
 
                 }
@@ -38,7 +38,7 @@ const Login = () => {
                 if (e.response?.status === 401) {
                     window.alert(e.response?.data?.message)
                 } else {
-                    window.alert('something went wrong!!')
+                    window.alert('Etwas ist schiefgelaufen.')
                 }
                 setLoading(false)
             })

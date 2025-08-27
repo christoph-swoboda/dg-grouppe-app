@@ -11,10 +11,11 @@ const config: CapacitorConfig = {
   server: {
     // androidScheme: "http",
     allowNavigation: [
-      "https://dg-gruppe-app.christoph-swoboda.com/api"
+      "http://168.119.157.18/api"
     ]
   },
   webDir: 'build',
+// @ts-ignore
   bundledWebRuntime: false
 };
 
