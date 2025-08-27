@@ -31,7 +31,8 @@ const Login = () => {
                     } else {
                         window.alert('Etwas ist schiefgelaufen')
                     }
-
+                }else {
+                    window.alert('Etwas ist schiefgelaufen')
                 }
             })
             .catch(e => {
@@ -45,7 +46,7 @@ const Login = () => {
 
         let user = JSON.parse(window.localStorage.getItem('user'))
         if (user) {
-            if (user?.role === '2') {
+            if (user?.role === 2) {
                 window.location.replace('/dashboard')
             } else {
                 toast.error('No Access')

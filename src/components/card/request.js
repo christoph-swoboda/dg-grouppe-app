@@ -29,15 +29,15 @@ const Request = ({title, status, responseId, updated, month, year, type, publish
             </IonContent>
 
             <IonHeader className='request'
-                       onClick={() => status !== '2' && published===1 && dispatch({type: "SET_MODAL", item: true})}
+                       onClick={() => status !== 2 && published===1 && dispatch({type: "SET_MODAL", item: true})}
             >
-                <IonToolbar className={status !== '3' && published===1 ? 'card' :status === '3' && published===1? 'cardError':published===0 && 'cardYellow'}>
+                <IonToolbar className={status !== 3 && published===1 ? 'card' :status === 3 && published===1? 'cardError':published===0 && 'cardYellow'}>
                     {/*<div className='card' >*/}
                     {
-                        status === '1' ?
+                        status === 1 ?
                             <ion-icon icon={hourglassOutline}/>
                             :
-                            status === '2' ?
+                            status === 2 ?
                                 <ion-icon icon={checkmarkCircleOutline}/>
                                 :
                                 <ion-icon icon={warningOutline}/>
@@ -45,9 +45,9 @@ const Request = ({title, status, responseId, updated, month, year, type, publish
                     }
                     <h2>{title} {type} Bill</h2>
                     <h3>Zeitraum: {period}</h3>
-                    <p hidden={published===0}>Status: {status === '1' ? 'Anhängig' : status === '2' ? 'Genehmigt' : 'Abgelehnt'}</p>
+                    <p hidden={published===0}>Status: {status === 1 ? 'Anhängig' : status === 2 ? 'Genehmigt' : 'Abgelehnt'}</p>
                     <p hidden={status !== '3' || published===0}>{message}</p>
-                    <p>{status!=='1' && 'Aktualisiert: '+ new Date(updated).toLocaleDateString('en-GB').replace(/\//g, '.')}</p>
+                    <p>{status!==1 && 'Aktualisiert: '+ new Date(updated).toLocaleDateString('en-GB').replace(/\//g, '.')}</p>
                     <p hidden={published===1}>Status: Zur Genehmigung anstehend</p>
                 </IonToolbar>
             </IonHeader>
