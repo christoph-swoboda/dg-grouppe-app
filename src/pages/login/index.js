@@ -22,7 +22,7 @@ const Login = () => {
                 const Data = res.data
                 const role = Data.user?.role
 
-                if (role === '2') {
+                if (role === 2) {
                     if (Data.access_token) {
                         const token = `${Data.token_type} ${Data.access_token}`
                         const user = Data.user
