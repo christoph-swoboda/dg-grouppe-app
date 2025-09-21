@@ -24,9 +24,12 @@ const Information = () => {
             <ion-icon onClick={() => history.push('/dashboard')} className='back' icon={arrowBack}/>
             {
                 settings.length > 0 ?
-                    <IonToolbar className="faq"
-                    >
-                        {settings?.filter(d => d.keyword === 'faq')[0].value}
+                    <IonToolbar className="faq">
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: settings.find(d => d.keyword === 'faq')?.value || ''
+                            }}
+                        />
                     </IonToolbar>
                     :
                     <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
