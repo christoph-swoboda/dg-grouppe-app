@@ -42,6 +42,7 @@ const Preview = () => {
                 window.alert('Etwas ist schief gelaufen')
             }
         }).catch(e=>{
+            console.error(e)
             window.alert('Etwas ist schief gelaufen...')
         })
     }
