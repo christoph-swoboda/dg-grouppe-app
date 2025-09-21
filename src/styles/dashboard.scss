@@ -2,7 +2,6 @@
 @import "variables";
 
 .dashboard {
-  overflow: scroll;
   --ion-background-color: '#eeeeee';
 
   .loadMore {
@@ -13,7 +12,9 @@
     @include flexCenter;
     position: fixed;
     z-index: 1111;
-    width: 88vw;
+    width: 90%;
+    padding: 0 1rem 0 0;
+    box-sizing: border-box;
     background-color: $body-bg1;
     height: 7rem;
     margin-top: -1rem;
@@ -21,10 +22,11 @@
 
     .userInfo {
       @include flexCenter;
+      flex-grow: 1;
 
       ion-avatar {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
       }
 
       ion-card {
@@ -34,11 +36,23 @@
       }
 
       ion-text {
-        max-width: 140px;
+        max-width: 100%;
       }
 
       ion-card-subtitle {
         font-size: 13px;
+      }
+
+      .userInfo-card {
+        padding-left: 10px;
+      }
+
+      .username-toolbar {
+        text-align: center;
+      }
+
+      .username-text {
+        font-size: 21px;
       }
     }
 
@@ -73,6 +87,10 @@
 
       ion-icon {
         font-size: 45px;
+      }
+
+      .info-icon-link {
+        margin: 0 0.5rem;
       }
     }
   }

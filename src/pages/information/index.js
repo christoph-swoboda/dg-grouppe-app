@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {IonHeader, IonPage, IonToolbar} from "@ionic/react";
+import {IonPage, IonToolbar} from "@ionic/react";
 import Api from "../../api/api";
 import {useStateValue} from "../../states/StateProvider";
 import {BeatLoader} from "react-spinners";
@@ -25,8 +25,8 @@ const Information = () => {
             {
                 settings.length > 0 ?
                     <IonToolbar className="faq"
-                                dangerouslySetInnerHTML={{__html: settings?.filter(d => d.keyword === 'faq')[0].value}}
                     >
+                        {settings?.filter(d => d.keyword === 'faq')[0].value}
                     </IonToolbar>
                     :
                     <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>

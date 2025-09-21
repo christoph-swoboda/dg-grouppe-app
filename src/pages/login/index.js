@@ -22,30 +22,31 @@ const Login = () => {
                 const Data = res.data
                 const role = Data.user?.role
 
-                if (role === '2') {
+                if (role === 2) {
                     if (Data.access_token) {
                         const token = `${Data.token_type} ${Data.access_token}`
                         const user = Data.user
                         localStorage.setItem('token', token)
                         localStorage.setItem('user', JSON.stringify(user))
                     } else {
-                        window.alert('something_went_wrong')
+                        window.alert('Etwas ist schiefgelaufen')
                     }
-
+                }else {
+                    window.alert('Etwas ist schiefgelaufen')
                 }
             })
             .catch(e => {
                 if (e.response?.status === 401) {
                     window.alert(e.response?.data?.message)
                 } else {
-                    window.alert('something went wrong!!')
+                    window.alert('Etwas ist schiefgelaufen.')
                 }
                 setLoading(false)
             })
 
         let user = JSON.parse(window.localStorage.getItem('user'))
         if (user) {
-            if (user?.role === '2') {
+            if (user?.role === 2) {
                 window.location.replace('/dashboard')
             } else {
                 toast.error('No Access')
@@ -58,9 +59,9 @@ const Login = () => {
             <div className='login'>
                 <IonImg src={image}/>
                 <IonCard className='login-box'>
-                    <IonCardTitle>Einloggen</IonCardTitle>
+                    <IonCardTitle>Anmeldung</IonCardTitle>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <IonInput placeholder='Username'
+                        <IonInput placeholder='Benutzername'
                                   {...register('email', {
                                       required: 'E-Mail ist erforderlich',
                                       pattern: {
@@ -73,14 +74,14 @@ const Login = () => {
                                   style={{border: errors.email && '1px solid red'}}
                         />
                         {errors.email && touchedFields && <p>{errors.email?.message}</p>}
-                        <IonInput placeholder='Password'
+                        <IonInput placeholder='Passwort'
                                   type='password'
                                   {...register('password', {required: 'Passwort ist erforderlich'})}
                                   style={{border: errors.password && '1px solid red'}}
                         />
                         {errors.password && touchedFields && <p>{errors.password?.message}</p>}
                         <IonButton color={'black'} style={{padding: '0'}} type="submit">
-                            {(!loading) ? 'Einloggen' : 'Überprüfen Sie...'}
+                            {(!loading) ? 'Anmelden' : 'Überprüfen Sie...'}
                         </IonButton>
                     </form>
                 </IonCard>

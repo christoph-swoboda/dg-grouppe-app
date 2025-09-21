@@ -18,13 +18,13 @@ export const Routes=[
     },
     {
         id:1,
-        path:'/phone/:page',
+        path:'/Telefon/:page',
         name:'phone',
         component:<Phone/>
     },
     {
         id:2,
-        path:'/car/:page',
+        path:'/PKW/:page',
         name:'car',
         component:<Car/>
     },
@@ -36,7 +36,7 @@ export const Routes=[
     },
     {
         id:4,
-        path:'/train/:page',
+        path:'/bahn/:page',
         name:'train',
         component:<Train/>
     },

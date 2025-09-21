@@ -91,7 +91,7 @@ const Dashboard = () => {
 
     return (
         <IonPage className='container dashboard'>
-            <IonContent hidden={network === 'offline'}>
+            <IonContent hidden={network === 'offline'} style={{scrollbarWidth: 'none'}}>
                 <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
                     <IonRefresherContent
                         pullingIcon={chevronDownCircleOutline}>
@@ -120,7 +120,7 @@ const Dashboard = () => {
                                 Hallo {user?.employees?.first_name}
                             </IonCardTitle>
                             <IonCardSubtitle style={{fontSize: '17px', marginTop: '5px'}}>
-                                Sie haben {total} {total > 1 ? 'anfragen' : 'anfrage'} für heute
+                                Es liegt {total} Rechnung zur Prüfung vor:
                             </IonCardSubtitle>
                             <hr/>
                             {
@@ -152,9 +152,12 @@ const Dashboard = () => {
                         </div>
                 }
             </IonContent>
-            <IonTitle hidden={network === 'online'}>
-                Sie sind im Moment offline!!
-            </IonTitle>
+            {
+                network === 'offline' &&
+                <IonTitle>
+                    Sie sind im Moment offline!!
+                </IonTitle>
+            }
         </IonPage>
     )
 }

@@ -8,7 +8,7 @@ export const NavLinks=[
     {
         id:0,
         path:'/dashboard',
-        name:'armaturenbrett',
+        name:'Übersicht',
         icon:<DashboardIcon/>
     },
     {
@@ -19,20 +19,20 @@ export const NavLinks=[
     },
     {
         id:2,
-        path:'/phone/phone',
-        name:'telefono',
+        path:'/Telefon/Telefon',
+        name:'Telefon',
         icon:<PhoneIcon/>
     },
     {
         id:3,
-        path:'/car/car',
-        name:'wagen',
+        path:'/PKW/PKW',
+        name:'PKW',
         icon:<CarIcon/>
     },
     {
         id:4,
-        path:'/train/train',
-        name:'zug',
+        path:'/bahn/bahn',
+        name:'Bahn',
         icon:<TrainIcon/>
     }
 ]

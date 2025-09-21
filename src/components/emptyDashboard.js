@@ -8,7 +8,7 @@ const EmptyDashboard = ({name}) => {
             <ion-icon icon={checkmarkCircleOutline}/>
             <IonCard className='requestStatus'>
                 <IonCardTitle>Hallo {name}</IonCardTitle>
-                <IonCardSubtitle>Alles ist gut, Sie haben 0 Anfragen für heute</IonCardSubtitle>
+                <IonCardSubtitle>Alles ist gut, Sie haben 0 Rechnung für heute</IonCardSubtitle>
                 {/* <IonCardSubtitle >You Dont Have Any Requests </IonCardSubtitle> */}
             </IonCard>
         </IonCard>

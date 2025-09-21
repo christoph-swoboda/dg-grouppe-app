@@ -16,5 +16,16 @@
 		]
 	},
 	"webDir": "build",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"packageClassList": [
+		"AppPlugin",
+		"CAPCameraPlugin",
+		"FilesystemPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"PushNotificationsPlugin",
+		"StatusBarPlugin",
+		"StoragePlugin",
+		"CDVPlugin"
+	]
 }
