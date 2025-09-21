@@ -15,7 +15,7 @@ const config: CapacitorConfig = {
   server: {
     // androidScheme: "http",
     allowNavigation: [
-      "http://168.119.157.18/api"
+      "https://code-proof.de/api"
     ]
   },
   webDir: 'build',

@@ -9,7 +9,7 @@
 	},
 	"server": {
 		"allowNavigation": [
-			"https://dg-gruppe-app.christoph-swoboda.com/"
+			"https://code-proof.de/"
 		]
 	},
 	"bundledWebRuntime": false
