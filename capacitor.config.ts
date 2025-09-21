@@ -7,6 +7,10 @@ const config: CapacitorConfig = {
     PushNotifications: {
       presentationOptions: ["badge", "sound", "alert"],
     },
+    Keyboard: {
+      resize: "ionic",
+      resizeOnFullScreen: true
+    }
   },
   server: {
     // androidScheme: "http",

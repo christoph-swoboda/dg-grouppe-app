@@ -59,7 +59,7 @@ const Login = () => {
     };
 
     return (
-        <IonPage className='container'>
+        <IonPage className='container' fullscreen>
             <div className='login'>
                 <IonImg src={image}/>
                 <IonCard className='login-box'>

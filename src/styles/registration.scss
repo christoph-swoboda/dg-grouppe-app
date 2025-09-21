@@ -2,21 +2,22 @@
 @import "mixin";
 
 .login {
-  //min-height: 100vh;
-  //max-height: 300vh;
-  //overflow-y: scroll;
-  //background-color: $body-bg1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  margin: auto 0;
+  box-sizing: border-box; /* Ensure padding doesn't cause overflow */
 
   ion-img{
-    position: absolute;
     width: 300px;
     height: 76px;
-    left: 53px;
-    top: 100px;
+    margin-bottom: 20px; /* Add some space below the image */
   }
 
   ion-card-title {
-    position: relative;
     margin: 6% 1%;
     font-size: 2rem;
     font-weight: 700;
@@ -24,7 +25,7 @@
 }
 
 .login-box {
-  @include centerItemsAbsolute();
+  /* Remove absolute positioning and let flexbox handle centering */
 
 
   p {
