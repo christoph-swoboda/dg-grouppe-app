@@ -6,6 +6,7 @@ import {useForm} from "react-hook-form"
 import {IonButton, IonCard, IonCardTitle, IonImg, IonInput, IonPage} from "@ionic/react";
 import Api from "../../api/api";
 import image from '../../assets/bg.png';
+import { useIonRouter } from '@ionic/react';
 
 const Login = () => {
 
@@ -13,6 +14,7 @@ const Login = () => {
     const {
         register, handleSubmit, formState: {errors, touchedFields},
     } = useForm({mode: "onChange"});
+    const router = useIonRouter();
 
     const onSubmit = async (data) => {
         setLoading(true)
@@ -47,7 +49,9 @@ const Login = () => {
         let user = JSON.parse(window.localStorage.getItem('user'))
         if (user) {
             if (user?.role === 2) {
-                window.location.replace('/dashboard')
+                router.push('/dashboard', 'root')
+                console.log('reload manually')
+                window.location.reload();
             } else {
                 toast.error('No Access')
             }
