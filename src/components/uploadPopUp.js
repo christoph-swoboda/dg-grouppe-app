@@ -17,11 +17,11 @@ const UploadPopUp = ({responseId}) => {
 
     async function takePicture() {
         const photo = await Camera.getPhoto({
-            resultType: CameraResultType.Uri,
+            resultType: CameraResultType.DataUrl,
             source: CameraSource.Camera,
             quality: 70,
         });
-        const imageUrl = photo.webPath;
+        const imageUrl = photo.dataUrl;
         dispatch({type: "SET_MODAL", item: false})
         history.push('/preview')
         dispatch({type: "SET_IMG", item: imageUrl})
@@ -30,11 +30,11 @@ const UploadPopUp = ({responseId}) => {
 
     async function uploadPicture() {
         const photo = await Camera.getPhoto({
-            resultType: CameraResultType.Uri,
+            resultType: CameraResultType.DataUrl,
             source: CameraSource.Photos,
             quality: 70,
         });
-        const imageUrl = photo.webPath;
+        const imageUrl = photo.dataUrl;
         dispatch({type: "SET_MODAL", item: false})
         history.push('/preview')
         dispatch({type: "SET_IMG", item: imageUrl})
