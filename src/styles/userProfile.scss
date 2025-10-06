@@ -42,22 +42,41 @@
 }
 
 .profile {
-  @include centerItemsAbsolute();
-  overflow-y: scroll;
-  max-height:100vh;
-  padding: 2rem;
+  // Safe area padding for iPhones (and other notched devices)
+  padding-top: calc(env(safe-area-inset-top, 0px) + 1rem);
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  padding-bottom: 2rem;
+
+  // Scrolling behavior
+  overflow-y: auto;
+  max-height: 100vh;
+  -webkit-overflow-scrolling: touch; // smoother iOS scroll
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  // Optional: maintain consistent spacing
+  gap: 1.5rem;
 
   p {
     font-size: 1.7vh;
-    line-height: 1;
+    line-height: 1.4;
     color: $theme;
-    margin-bottom: 1vh;
+    margin: 0;
     width: 90vw;
+    text-align: left;
   }
 
   form {
-    @include formStyle(82vw, .7rem);
-    margin-left: 2rem;
+    @include formStyle(82vw, 0.7rem);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
     .update {
       background-color: white;
       cursor: pointer;
@@ -65,7 +84,18 @@
       width: 82vw;
       padding: 1rem;
       border-radius: 10px;
-      margin: 0 1.1rem 1.1rem 0;
+      margin: 0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+
+      &:hover {
+        background-color: #f3f3f3;
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
     }
   }
 }
