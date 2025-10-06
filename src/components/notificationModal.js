@@ -34,9 +34,9 @@ const Notifications = ({notifications}) => {
                                 type={not?.request?.type?.title}
                                 title={not?.request?.response?.message}
                                 status={not.request?.status}
-                                month={new Date(not.request?.bill?.created_at).getMonth() + 1}
-                                year={new Date(not.request?.bill?.created_at).getFullYear()}
-                                updated={new Date(not.request?.response?.updated_at).toLocaleDateString()}
+                                month={not.month}
+                                year={not.year}
+                                updated={not.updated}
                             />
                         ))
                     }

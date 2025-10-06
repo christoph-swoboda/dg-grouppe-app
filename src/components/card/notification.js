@@ -52,7 +52,8 @@ const Notification = ({title, status, type, updated,  month, year, id}) => {
                         <h2>{title}</h2>
                         <h3>Zeitraum: {period}</h3>
                         <p>Rechnungsart: {type}</p>
-                        <p>{status==='2'?'Datum der Genehmigung: ':status==='3' && title!=='1 Bild wurde hochgeladen'?'Datum der Abgelehnt: ':'Hochgeladen: '} {new Date(updated).toLocaleDateString('en-GB').replace(/\//g, '.')}</p>
+                        <p>{status==='2'?'Datum der Genehmigung: ':status==='3' && title!=='1 Bild wurde hochgeladen'?'Datum der Abgelehnt: ':'Hochgeladen: '}
+                            {updated??'N/A'}</p>
                     </div>
                 </IonCard>
             }
