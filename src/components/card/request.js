@@ -15,11 +15,12 @@ const Request = ({title, status, responseId, updated, month, year, type, publish
             setPeriod(getPeriod(month, year))
         }, [type]);
     
-        function openModal() {
-            dispatch({type: "SET_MODAL", item: true})
-            dispatch({type: "SET_RESID", item: responseId})
-        }
-    
+            function openModal() {
+                if (status !== 2 && published === 1) {
+                    dispatch({type: "SET_MODAL", item: true})
+                    dispatch({type: "SET_RESID", item: responseId})
+                }
+            }    
         return (
             <IonCard className='ion-no-margin' style={{marginBottom:'10px'}}>
                 <IonContent>
@@ -37,7 +38,7 @@ const Request = ({title, status, responseId, updated, month, year, type, publish
                            onClick={openModal}
                 >
                     <IonToolbar className={status !== 3 && published===1 ? 'card' :status === 3 && published===1? 'cardError':published===0 && 'cardYellow'}>
-                        {/*<div className='card' >*/}                    {
+                    {
                         status === 1 ?
                             <ion-icon icon={hourglassOutline}/>
                             :
