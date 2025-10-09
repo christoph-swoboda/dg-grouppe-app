@@ -4,10 +4,8 @@ import '../styles/billingPage.scss';
 import {
     IonButton,
     IonCard,
-    IonCardSubtitle,
     IonCardTitle,
     IonContent,
-    IonHeader,
     IonRefresher,
     IonRefresherContent,
     IonText,
@@ -37,7 +35,7 @@ const Billing = ({header}) => {
         async () => {
             setLoading(true)
             Api().get(`/requests/categorized?${query}`).then(res => {
-                setRequests(filter.page === 1 ? res.data.data.filter(req => req.type !== null) : [...requests, ...res.data.data.filter(req => req.type !== null)])
+                setRequests(filter.page === 1 ? res.data.data : [...requests, ...res.data.data])
                 setLastPage(res.data.last_page)
                 setTotal(res.data?.total)
                 setLoading(false)
@@ -92,15 +90,15 @@ const Billing = ({header}) => {
                     <IonText className={pending ? 'active pending' : 'inActive pending'}
                              onClick={reject}>Ausstehende Rechnungen</IonText>
                 </IonCard>
-                <IonCard className='requestsContainer' style={{minHeight: '10vh'}}>
+                <IonCard className='requestsContainer' style={{minHeight: '10vh', paddingBottom: '100px'}}>
                     {
 
                         loading && filter.page === 1 ?
                             <BeatLoader size={'10px'} style={{height: '40vh'}} color={'black'}/>
                             :
                             requests.length === 0 ?
-                                <IonTitle >
-                                    <span style={{ whiteSpace: 'normal' }}>keine Uploads</span>
+                                <IonTitle>
+                                    <span style={{whiteSpace: 'normal'}}>keine Uploads</span>
                                 </IonTitle>
                                 :
                                 requests?.map(req => (
