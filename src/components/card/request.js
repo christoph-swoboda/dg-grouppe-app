@@ -8,32 +8,36 @@ import {getPeriod} from "../../helpers/calculatePeriod&Deadline";
 
 const Request = ({title, status, responseId, updated, month, year, type, published, message}) => {
 
-    const [{modal}, dispatch] = useStateValue()
-    const [period, setPeriod] = useState('')
-
-    useEffect(() => {
-        setPeriod(getPeriod(month, year))
-    }, [type]);
-
-    return (
-        <IonCard className='ion-no-margin' style={{marginBottom:'10px'}}>
-            <IonContent>
-                <IonModal isOpen={modal} className='modal'>
-                    <UploadPopUp title={title} responseId={responseId}/>
-                    <IonButton color={'light'} style={{padding:0}} className='cancelUpload'
-                             onClick={() => dispatch({type: "SET_MODAL", item: false})}
-                    >
-                        Abbrechen
-                    </IonButton>
-                </IonModal>
-            </IonContent>
-
-            <IonHeader className='request'
-                       onClick={() => status !== 2 && published===1 && dispatch({type: "SET_MODAL", item: true})}
-            >
-                <IonToolbar className={status !== 3 && published===1 ? 'card' :status === 3 && published===1? 'cardError':published===0 && 'cardYellow'}>
-                    {/*<div className='card' >*/}
-                    {
+        const [{modal, resId}, dispatch] = useStateValue()
+        const [period, setPeriod] = useState('')
+    
+        useEffect(() => {
+            setPeriod(getPeriod(month, year))
+        }, [type]);
+    
+        function openModal() {
+            dispatch({type: "SET_MODAL", item: true})
+            dispatch({type: "SET_RESID", item: responseId})
+        }
+    
+        return (
+            <IonCard className='ion-no-margin' style={{marginBottom:'10px'}}>
+                <IonContent>
+                    <IonModal isOpen={modal} className='modal'>
+                        <UploadPopUp title={title} responseId={resId}/>
+                        <IonButton color={'light'} style={{padding:0}} className='cancelUpload'
+                                 onClick={() => dispatch({type: "SET_MODAL", item: false})}
+                        >
+                            Abbrechen
+                        </IonButton>
+                    </IonModal>
+                </IonContent>
+    
+                <IonHeader className='request'
+                           onClick={openModal}
+                >
+                    <IonToolbar className={status !== 3 && published===1 ? 'card' :status === 3 && published===1? 'cardError':published===0 && 'cardYellow'}>
+                        {/*<div className='card' >*/}                    {
                         status === 1 ?
                             <ion-icon icon={hourglassOutline}/>
                             :
